@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import DS from 'ember-data';
 
 export default Ember.Controller.extend({
     allPrefsSet: function() {
@@ -12,7 +13,13 @@ export default Ember.Controller.extend({
     actions: {
     	sessionDropped: function (session, ops) {
 
-            function saveThenLog() {}
+            function saveThenLog(pref) {
+                pref.save().then(function () {
+                    console.log('saved!');
+                }, function (reason) {
+                    console.log('failure: ' + reason);// handle the error
+                }); 
+            }
 
             var oldPrefs = this.get('model.preferences');
             
@@ -26,9 +33,7 @@ export default Ember.Controller.extend({
             }
 
             var student = this.get('model');
-            var self = this;
             var dropSession = session.content;
-            var oldPrefs = this.get('model.preferences');
             var targetPrefRank = ops.target.get('rank');            
             
             //if the dropped session is in the preferences...
@@ -43,9 +48,7 @@ export default Ember.Controller.extend({
                         return;
                     }
 
-                    var oldPrefSessionName = oldPref.get('session.sessionName');
                     var oldPrefRank = oldPref.get('rank');
-                    var newPrefSessionName = oldPrefs.filterBy('rank', targetPrefRank).get('session.sessionName');
                     var targetPref = oldPrefs.filterBy('rank', targetPrefRank).objectAt(0);
                     
                     //check to see if preferences should be switched
@@ -53,58 +56,31 @@ export default Ember.Controller.extend({
 
                         //switch them
                         targetPref.set('rank', oldPrefRank);
-                        targetPref.save().then(function () {
-                            console.log('saved!');
-                        }, function (reason) {
-                            console.log('failure: ' + reason);// handle the error
-                        }); 
-
+                        saveThenLog(targetPref);
                         oldPref.set('rank', targetPrefRank);
-                        oldPref.save().then(function () {
-                            console.log('saved!');
-                        }, function (reason) {
-                            console.log('failure: ' + reason);// handle the error
-                        }); 
+                        saveThenLog(oldPref);
 
                         exit = true;
                         return; 
                     }
                 });
             } 
-
-            console.log(session);
             if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {
                 var droppedPref = oldPrefs.filterBy('session.sessionName', dropSession.get('sessionName')).objectAt(0);
                 droppedPref.set('rank', targetPrefRank);
-                droppedPref.save().then(function () {
-                    console.log('saved!');
-                }, function (reason) {
-                    console.log('failure: ' + reason);// handle the error
-                }); 
+                saveThenLog(droppedPref);
             } else {
-
                 if (oldPrefs.filterBy('rank', targetPrefRank).length) {
                     var replacedPref = oldPrefs.filterBy('rank', targetPrefRank).objectAt(0);
                     replacedPref.set('session', session);
-
-                    replacedPref.save().then(function () {
-                        console.log('saved!');
-                    }, function (reason) {
-                        console.log('failure: ' + reason);// handle the error
-                    }); 
+                    saveThenLog(replacedPref);
                 } else {
-
                     var newPref = this.store.createRecord('preference', {
                         rank: targetPrefRank,
                         student: student,
                         session: session
                     });
-
-                    newPref.save().then(function () {
-                        console.log('saved!');
-                    }, function (reason) {
-                        console.log('failure: ' + reason);// handle the error
-                    }); 
+                    saveThenLog(newPref);
                 }
             }
     	},
@@ -143,11 +119,10 @@ export default Ember.Controller.extend({
         return rankedOrNullArray;
     }.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
 
-    sessions: function (key, value, oldValue) {
+    sessions: function () {
         var prefs = this.get('model.preferences');
         var unavailableSessionNames = [];
         var availableSessions = [];
-        var self = this;
 
         prefs.forEach(function (pref) {
             unavailableSessionNames.pushObject(pref.get('session.sessionName'));
@@ -158,9 +133,9 @@ export default Ember.Controller.extend({
                 if (!unavailableSessionNames.contains(session.get('sessionName'))) {
                     availableSessions.pushObject(session);
                 }
-            })
+            });
             return availableSessions;    
-        })
+        });
 
         return DS.PromiseArray.create({
             promise: promise
