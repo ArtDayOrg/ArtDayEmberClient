@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'art-day',
     environment: environment,
-    baseURL: './',
+    baseURL: '../',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
