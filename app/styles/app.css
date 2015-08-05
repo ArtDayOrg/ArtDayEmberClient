@@ -1,0 +1,56 @@
+table, th, td {
+   border: 1px solid black;   
+}
+
+.exampleImport {
+    font-family: "Courier New";
+    font-size: 16px;
+    margin-left: 20px;
+}
+
+.studentName {
+    font-family: Helvetica;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sessionName {
+    font-family: Helvetica;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 18px;
+    margin-top: 6px;
+}
+
+.instructions {
+    font-family: Helvetica;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.droptarget {
+    font-family: Helvetica;
+    font-size: 18px;
+    width:170px;
+    height:100px;
+    border:3px dashed black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+.session-tile {
+    padding:0px;
+    border:px black;
+    cursor: pointer;
+
+}
+.image {
+    align-items: center;
+    border-radius: 20px; 
+    width: 140px;
+    height: 100px;    
+}

@@ -1,0 +1,11 @@
+{{#if isAdmin}}
+  {{#link-to 'admin.import'}}Import{{/link-to}}
+  {{#link-to 'admin.students'}}Students{{/link-to}}
+  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}
+{{else}}
+  Password: {{input placeholder='Enter Password' id='pw'}} <button {{action 'login'}}>Login</button>
+  <div id='message' style='display:none;'>Wrong password.</div>
+{{/if}}
+<div>
+{{outlet}}
+</div>

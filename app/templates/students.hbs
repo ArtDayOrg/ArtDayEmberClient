@@ -1,0 +1,6 @@
+<p>Students Template</p>
+Enter Name: {{input key-up="processKeyUp"}}<br/><br/>
+
+{{#each filteredStudents as |item|}}
+  {{#link-to 'student' item}}{{item.firstname}} {{item.lastname}} {{item.grade}}{{/link-to}}<br />  
+{{/each}} 

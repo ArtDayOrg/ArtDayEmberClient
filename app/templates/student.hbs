@@ -1,0 +1,140 @@
+
+<div class="studentName" draggable="false">{{model.firstname}} {{model.lastname}} ({{model.grade}})</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div class=>
+                {{#draggable-object-target action="sessionDropped" rank=1}}
+                    {{#with this.rankedOrNullArray.0.session as |session|}}
+                        {{#unless model.locked}}
+                            {{#draggable-object content=this.rankedOrNullArray.0.session}}
+                                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
+                            {{/draggable-object}}
+                        {{/unless}}
+                    {{else}}
+                    <div class="droptarget">
+                        <h3>1</h3>
+                    </div>
+                    {{/with}}
+                {{/draggable-object-target}}
+            </div>
+        </div>    
+        <div class="col-md-2">
+            <div class=>
+                {{#draggable-object-target action="sessionDropped" rank=2}}
+                    {{#with this.rankedOrNullArray.1.session as |session|}}
+                        {{#unless model.locked}}
+                            {{#draggable-object content=this.rankedOrNullArray.1.session}}
+                                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}} 
+                            {{/draggable-object}}
+                        {{/unless}} 
+                    {{else}}
+                        <div class="droptarget">
+                            <h3>2</h3>
+                        </div>
+                    {{/with}}
+                {{/draggable-object-target}}
+            </div>
+        </div>     
+        <div class="col-md-2">
+            <div class=>
+                {{#draggable-object-target action="sessionDropped" rank=3}}
+                    {{#with this.rankedOrNullArray.2.session as |session|}}
+                        {{#unless model.locked}}
+                            {{#draggable-object content=this.rankedOrNullArray.2.session}}
+                                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}
+                            {{/draggable-object}}
+                        {{/unless}}  
+                    {{else}}
+                        <div class="droptarget">
+                            <h3>3</h3>
+                        </div>
+                    {{/with}}
+                {{/draggable-object-target}}
+            </div>
+        </div>     
+        <div class="col-md-2">
+            <div class=>
+                {{#draggable-object-target action="sessionDropped" rank=4}}
+                    {{#with this.rankedOrNullArray.3.session as |session|}}
+                        {{#unless model.locked}}
+                            {{#draggable-object content=this.rankedOrNullArray.3.session}}
+                                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
+                            {{/draggable-object}}
+                        {{/unless}}
+                    {{else}}
+                        <div class="droptarget">
+                            <h3>4</h3>
+                        </div>
+                    {{/with}}
+                {{/draggable-object-target}}
+            </div>
+        </div>     
+        <div class="col-md-2">
+            <div class=>
+                {{#draggable-object-target action="sessionDropped" rank=5}}
+                    {{#with this.rankedOrNullArray.4.session as |session|}}
+                        {{#unless model.locked}}
+                            {{#draggable-object content=this.rankedOrNullArray.4.session}}
+                                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
+                            {{/draggable-object}}
+                        {{/unless}}
+                    {{else}}
+                        <div class="droptarget">
+                            <h3>5</h3>
+                        </div>
+                    {{/with}}
+                {{/draggable-object-target}}
+            </div>
+        </div> 
+        <div class="col-md-2">
+            <div class=>
+                {{#draggable-object-target action="sessionDropped" rank=6}}
+                    {{#with this.rankedOrNullArray.5.session as |session|}}
+                        {{#unless model.locked}}
+                            {{#draggable-object content=this.rankedOrNullArray.5.session}}
+                                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
+                            {{/draggable-object}}
+                        {{/unless}}
+                    {{else}}
+                        <div class="droptarget">
+                            <h3>6</h3>
+                        </div>
+                    {{/with}}
+                {{/draggable-object-target}}
+            </div>
+        </div> 
+    </div>
+</div>
+
+
+
+{{#if model.locked}}
+  <div style='text-align:center; font-size:24px;'>Your preferences are locked.</div>
+{{else}}
+    {{#if allPrefsSet}}
+    <div  style='margin: 0 auto; width:100%'>
+        <button {{action 'lockPrefs'}} style='display:block;width:250px;margin:10px auto;'>
+            Lock in Preferences
+        </button>
+    </div>
+{{/if}}
+    <div class="instructions" draggable="false">Drag and Drop from the available sessions below to set your preferences.</div>
+    {{#draggable-object-target action="sessionDropped" rank=0}}
+        <div class="container-fluid">
+            <div class="row">
+                {{#each sessions as |notPrefSession|}}
+                    <div class="col-md-2">
+                        {{#draggable-object content=notPrefSession}}
+                            <div class="tile">
+                                {{#session-tile imageUrl=notPrefSession.imageUrl sessionName=notPrefSession.sessionName}}{{/session-tile}}
+                            </div>
+                        {{/draggable-object}}
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    {{/draggable-object-target}}
+{{/if}}
+
