@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'art-day',
     environment: environment,
     baseURL: '/',
-    locationType: 'hash',
+    locationType: 'history',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
