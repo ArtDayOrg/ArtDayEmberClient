@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 
 export default DS.RESTAdapter.extend({
-	host: 'http://localhost:51773',    
+	host: 'http://artday.azurewebsites.net',    
 	namespace: 'api',
     shouldReloadAll: function() { return false; }
 });
