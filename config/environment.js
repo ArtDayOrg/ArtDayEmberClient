@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'art-day',
     environment: environment,
-    baseURL: '../',
+    baseURL: '/',
     locationType: 'auto',
     EmberENV: {
       FEATURES: {
@@ -18,10 +18,7 @@ module.exports = function(environment) {
       // when it is created
     }
   };
-  console.log('Environment: ');
-  console.log(environment);
-
-
+  
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -46,6 +43,5 @@ module.exports = function(environment) {
 
   }
   
-  console.log('baseURL: ' + baseURL);
   return ENV;
 };
