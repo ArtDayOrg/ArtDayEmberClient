@@ -6,7 +6,7 @@
     {{#if model.locked}}
         <div class="col-md-2">
             <div class=>
-                    {{#with this.rankedOrNullArray.0.session as |session|}}
+                    {{#with this.rankedOrNullPrefsArray.0.session as |session|}}
                             {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                     {{else}}
                     <div class="droptarget">
@@ -17,7 +17,7 @@
         </div>    
         <div class="col-md-2">
             <div class=>
-                    {{#with this.rankedOrNullArray.1.session as |session|}}
+                    {{#with this.rankedOrNullPrefsArray.1.session as |session|}}
                            {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}} 
                     {{else}}
                         <div class="droptarget">
@@ -28,7 +28,7 @@
         </div>     
         <div class="col-md-2">
             <div class=>
-                    {{#with this.rankedOrNullArray.2.session as |session|}}
+                    {{#with this.rankedOrNullPrefsArray.2.session as |session|}}
                              {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}
                     {{else}}
                         <div class="droptarget">
@@ -39,7 +39,7 @@
         </div>     
         <div class="col-md-2">
             <div class=>
-                    {{#with this.rankedOrNullArray.3.session as |session|}}
+                    {{#with this.rankedOrNullPrefsArray.3.session as |session|}}
                             {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                     {{else}}
                         <div class="droptarget">
@@ -50,7 +50,7 @@
         </div>     
         <div class="col-md-2">
             <div class=>
-                    {{#with this.rankedOrNullArray.4.session as |session|}}
+                    {{#with this.rankedOrNullPrefsArray.4.session as |session|}}
                         {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                     {{else}}
                         <div class="droptarget">
@@ -61,7 +61,7 @@
         </div> 
         <div class="col-md-2">
             <div class=>
-                    {{#with this.rankedOrNullArray.5.session as |session|}}
+                    {{#with this.rankedOrNullPrefsArray.5.session as |session|}}
                                 {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                     {{else}}
                         <div class="droptarget">
@@ -74,8 +74,8 @@
         <div class="col-md-2">
             <div class=>
                 {{#draggable-object-target action="sessionDropped" rank=1}}
-                    {{#with this.rankedOrNullArray.0.session as |session|}}
-                        {{#draggable-object content=this.rankedOrNullArray.0.session}}
+                    {{#with this.rankedOrNullPrefsArray.0.session as |session|}}
+                        {{#draggable-object content=this.rankedOrNullPrefsArray.0.session}}
                             {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                         {{/draggable-object}}
                     {{else}}
@@ -89,8 +89,8 @@
         <div class="col-md-2">
             <div class=>
                 {{#draggable-object-target action="sessionDropped" rank=2}}
-                    {{#with this.rankedOrNullArray.1.session as |session|}}
-                        {{#draggable-object content=this.rankedOrNullArray.1.session}}
+                    {{#with this.rankedOrNullPrefsArray.1.session as |session|}}
+                        {{#draggable-object content=this.rankedOrNullPrefsArray.1.session}}
                            {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}} 
                         {{/draggable-object}}
                     {{else}}
@@ -104,8 +104,8 @@
         <div class="col-md-2">
             <div class=>
                 {{#draggable-object-target action="sessionDropped" rank=3}}
-                    {{#with this.rankedOrNullArray.2.session as |session|}}
-                        {{#draggable-object content=this.rankedOrNullArray.2.session}}
+                    {{#with this.rankedOrNullPrefsArray.2.session as |session|}}
+                        {{#draggable-object content=this.rankedOrNullPrefsArray.2.session}}
                              {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}
                         {{/draggable-object}}
                     {{else}}
@@ -119,8 +119,8 @@
         <div class="col-md-2">
             <div class=>
                 {{#draggable-object-target action="sessionDropped" rank=4}}
-                    {{#with this.rankedOrNullArray.3.session as |session|}}
-                        {{#draggable-object content=this.rankedOrNullArray.3.session}}
+                    {{#with this.rankedOrNullPrefsArray.3.session as |session|}}
+                        {{#draggable-object content=this.rankedOrNullPrefsArray.3.session}}
                             {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                         {{/draggable-object}}
                     {{else}}
@@ -134,8 +134,8 @@
         <div class="col-md-2">
             <div class=>
                 {{#draggable-object-target action="sessionDropped" rank=5}}
-                    {{#with this.rankedOrNullArray.4.session as |session|}}
-                            {{#draggable-object content=this.rankedOrNullArray.4.session}}
+                    {{#with this.rankedOrNullPrefsArray.4.session as |session|}}
+                            {{#draggable-object content=this.rankedOrNullPrefsArray.4.session}}
                                 {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                             {{/draggable-object}}
                     {{else}}
@@ -149,8 +149,8 @@
         <div class="col-md-2">
             <div class=>
                 {{#draggable-object-target action="sessionDropped" rank=6}}
-                    {{#with this.rankedOrNullArray.5.session as |session|}}
-                            {{#draggable-object content=this.rankedOrNullArray.5.session}}
+                    {{#with this.rankedOrNullPrefsArray.5.session as |session|}}
+                            {{#draggable-object content=this.rankedOrNullPrefsArray.5.session}}
                                 {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
                             {{/draggable-object}}
                     {{else}}
@@ -181,11 +181,11 @@
     {{#draggable-object-target action="sessionDropped" rank=0}}
         <div class="container-fluid">
             <div class="row">
-                {{#each sessions as |notPrefSession|}}
+                {{#each availableSessions as |availableSession|}}
                     <div class="col-md-2">
-                        {{#draggable-object content=notPrefSession}}
+                        {{#draggable-object content=availableSession}}
                             <div class="tile">
-                                {{#session-tile imageUrl=notPrefSession.imageUrl sessionName=notPrefSession.sessionName}}{{/session-tile}}
+                                {{#session-tile imageUrl=availableSession.imageUrl sessionName=availableSession.sessionName}}{{/session-tile}}
                             </div>
                         {{/draggable-object}}
                     </div>

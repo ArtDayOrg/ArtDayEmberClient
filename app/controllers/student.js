@@ -126,9 +126,9 @@ export default Ember.Controller.extend({
     by a null element in the array.  rankedOrNullArray[0] is the preference with rank 1 or null.
     Our template wants to cycle through this and display prefs or an empty box when null.
     */
-    rankedOrNullArray: function() {
+    rankedOrNullPrefsArray: function() {
         var array = this.get('model.preferences');
-        var rankedOrNullArray = [];
+        var rankedOrNullPrefsArray = [];
         function sortByRank(pref) {
                 if (pref.get('rank') === i) {
                     tempPref = pref;
@@ -138,15 +138,15 @@ export default Ember.Controller.extend({
             var tempPref = 0;
             array.forEach(sortByRank);
             if (tempPref !== 0) {
-                rankedOrNullArray.pushObject(tempPref);
+                rankedOrNullPrefsArray.pushObject(tempPref);
             } else {
-                rankedOrNullArray.pushObject(null);
+                rankedOrNullPrefsArray.pushObject(null);
             }
         }
-        return rankedOrNullArray;
+        return rankedOrNullPrefsArray;
     }.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
 
-    sessions: function () {
+    availableSessions: function () {
         var prefs = this.get('model.preferences');
         var unavailableSessionNames = [];
         var availableSessions = [];
@@ -154,18 +154,18 @@ export default Ember.Controller.extend({
         prefs.forEach(function (pref) {
             unavailableSessionNames.pushObject(pref.get('session.sessionName'));
         });
+
+
         
-        var promise = this.store.findAll('session').then(function (result) {
-            result.forEach(function (session) {
-                if (!unavailableSessionNames.contains(session.get('sessionName'))) {
+        console.log('findAll sessions')
+        this.store.peekAll('session').forEach(function (session) {
+            if (!unavailableSessionNames.contains(session.get('sessionName'))) {
                     availableSessions.pushObject(session);
                 }
-            });
-            return availableSessions;    
+            console.log(availableSessions)
         });
-
-        return DS.PromiseArray.create({
-            promise: promise
-        });
+        console.log(availableSessions)
+        return availableSessions;
+        
     }.property('model.preferences.@each.rank', 'model.preferences.@each.session')
 }); 
