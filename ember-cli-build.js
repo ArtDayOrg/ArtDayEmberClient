@@ -6,5 +6,13 @@ module.exports = function (defaults) {
 	app.import('bower_components/bootstrap/dist/js/bootstrap.js');
 	app.import('bower_components/bootstrap/dist/css/bootstrap.css');
 
+    minifyCSS: {
+        enabled: false
+    }
+
+    minifyJS: {
+        enabled: false
+    }
+
 	return app.toTree();
 };
