@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import DS from 'ember-data';
 
 export default Ember.Controller.extend({
 
@@ -14,26 +13,18 @@ export default Ember.Controller.extend({
     actions: {
     	sessionDropped: function (session, ops) {
 
-            function saveThenLog(pref, student) {
-                console.log('saving:')
-                console.log(pref);
+            function saveThenLog(pref) {
                 pref.save().then(function () {
                     console.log('saved!');
                 }, function (reason) {
                     console.log('failure: ' + reason);// handle the error
                 }); 
-                student.save().then(function () {
-                    console.log('saved This');
-                }, function () {
-                    console.log('this failed: ' + reason);
-                })}
+            }
 
             var oldPrefs = this.get('model.preferences');
-
-            
+         
             //Dragging a preferred section back to availabale sessions
             if (ops.target.get('rank') === 0) {
-                console.log("0: if (ops.target.get('rank') === 0)")
                 if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {
                     var prefToDelete = oldPrefs.filterBy('session.sessionName', session.get('sessionName')).objectAt(0);
                     prefToDelete.destroyRecord();
@@ -44,11 +35,9 @@ export default Ember.Controller.extend({
             var student = this.get('model');
             var dropSession = session.content;
             var targetPrefRank = ops.target.get('rank');            
-            
+            var newPref;
             //if the session is dragged to a preference that is already set...
             if (oldPrefs.filterBy('rank', targetPrefRank).length) {
-
-                console.log("1: oldPrefs.filterBy('rank', targetPrefRank).length")
 
                 var exit = false;
 
@@ -62,14 +51,13 @@ export default Ember.Controller.extend({
                     //check to see if preferences should be switched
                     if (oldPref.get('session.sessionName') === session.get('sessionName')) {
 
-                        console.log("2: oldPref.get('session.sessionName') === session.get('sessionName')")
                         var targetPref = oldPrefs.filterBy('rank', targetPrefRank).objectAt(0);
 
                         //switch them
                         targetPref.set('rank', oldPrefRank);
-                        saveThenLog(targetPref, student);
+                        saveThenLog(targetPref);
                         oldPref.set('rank', targetPrefRank);
-                        saveThenLog(oldPref, student);
+                        saveThenLog(oldPref);
 
                         exit = true;
                         return; 
@@ -79,44 +67,42 @@ export default Ember.Controller.extend({
                 if (exit) { return; }
 
                 //otherwise they dragged from the bottom to the top, so replace the target session with the dragged session
-                console.log("4: oldPrefs.filterBy('rank', targetPrefRank).length fell through forEach")
                 var replacedPref = oldPrefs.filterBy('rank', targetPrefRank).objectAt(0);
                 replacedPref.destroyRecord();
 
-                var newPref = this.store.createRecord('preference', {
+                newPref = this.store.createRecord('preference', {
                     rank: targetPrefRank,
                     student: student,
                     session: session
                 });
-                saveThenLog(newPref, student);
+                saveThenLog(newPref);
 
 
             } 
             if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {
 
-                console.log("3: oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length")
                 var droppedPref = oldPrefs.filterBy('session.sessionName', dropSession.get('sessionName')).objectAt(0);
                 droppedPref.set('rank', targetPrefRank);
-                saveThenLog(droppedPref, student);
+                saveThenLog(droppedPref);
             } else {
                 if (oldPrefs.filterBy('rank', targetPrefRank).length) {
 
                 } else {
 
-                    console.log("5: lastElse")
-                    var newPref = this.store.createRecord('preference', {
+                    newPref = this.store.createRecord('preference', {
                         rank: targetPrefRank,
                         student: student,
                         session: session
                     });
-                    saveThenLog(newPref, student);
+                    saveThenLog(newPref);
                 }
             }},
         
         lockPrefs: function() {
             var thisStudent = this.get('model');
             thisStudent.set('locked', true);
-            thisStudent.save();}
+            thisStudent.save();
+        }
     },
 
 
@@ -155,16 +141,11 @@ export default Ember.Controller.extend({
             unavailableSessionNames.pushObject(pref.get('session.sessionName'));
         });
 
-
-        
-        console.log('findAll sessions')
         this.store.peekAll('session').forEach(function (session) {
             if (!unavailableSessionNames.contains(session.get('sessionName'))) {
                     availableSessions.pushObject(session);
                 }
-            console.log(availableSessions)
         });
-        console.log(availableSessions)
         return availableSessions;
         
     }.property('model.preferences.@each.rank', 'model.preferences.@each.session')
