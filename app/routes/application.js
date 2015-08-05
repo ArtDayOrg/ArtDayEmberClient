@@ -2,6 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 	model: function() {
-		this.store.find('session');
+		this.store.findAll('session');
 	}
 })

@@ -8,18 +8,19 @@ export default Ember.Controller.extend({
             return true;
         } else {
             return false;
-        }}.property('model.preferences.length'),
+        }
+    }.property('model.preferences.length'),
 
     actions: {
+
     	sessionDropped: function (session, ops) {
 
             function saveThenLog(pref) {
                 pref.save().then(function () {
                     console.log('saved!');
                 }, function (reason) {
-                    console.log('failure: ' + reason);// handle the error
-                }); 
-            }
+                    console.log('failure: ' + reason);
+                }); }
 
             var oldPrefs = this.get('model.preferences');
          
@@ -36,12 +37,14 @@ export default Ember.Controller.extend({
             var dropSession = session.content;
             var targetPrefRank = ops.target.get('rank');            
             var newPref;
+
+
             //if the session is dragged to a preference that is already set...
             if (oldPrefs.filterBy('rank', targetPrefRank).length) {
 
                 var exit = false;
 
-                //cycle through the set preferences (if they reordered the set prefs by dragging one to a different rank)
+                //cycle through the set preferences (they reordered the set prefs by dragging one to a different rank)
                 oldPrefs.forEach(function (oldPref) {
 
                     if (exit) { return; }
@@ -76,19 +79,18 @@ export default Ember.Controller.extend({
                     session: session
                 });
                 saveThenLog(newPref);
-
-
+                return;
             } 
+
+            //dragging a preferred session to an empty preference rank
             if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {
 
-                var droppedPref = oldPrefs.filterBy('session.sessionName', dropSession.get('sessionName')).objectAt(0);
-                droppedPref.set('rank', targetPrefRank);
-                saveThenLog(droppedPref);
+                var reRankedPref = oldPrefs.filterBy('session.sessionName', dropSession.get('sessionName')).objectAt(0);
+                reRankedPref.set('rank', targetPrefRank);
+                saveThenLog(reRankedPref);
+
+            //dragging from the bottom to the empty preference target
             } else {
-                if (oldPrefs.filterBy('rank', targetPrefRank).length) {
-
-                } else {
-
                     newPref = this.store.createRecord('preference', {
                         rank: targetPrefRank,
                         student: student,
@@ -96,7 +98,7 @@ export default Ember.Controller.extend({
                     });
                     saveThenLog(newPref);
                 }
-            }},
+            },
         
         lockPrefs: function() {
             var thisStudent = this.get('model');
@@ -104,8 +106,6 @@ export default Ember.Controller.extend({
             thisStudent.save();
         }
     },
-
-
 
     /*
     this property is an array in ranked order where unset preferences are represented 
@@ -129,8 +129,7 @@ export default Ember.Controller.extend({
                 rankedOrNullPrefsArray.pushObject(null);
             }
         }
-        return rankedOrNullPrefsArray;
-    }.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
+        return rankedOrNullPrefsArray;}.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
 
     availableSessions: function () {
         var prefs = this.get('model.preferences');
@@ -146,7 +145,5 @@ export default Ember.Controller.extend({
                     availableSessions.pushObject(session);
                 }
         });
-        return availableSessions;
-        
-    }.property('model.preferences.@each.rank', 'model.preferences.@each.session')
+        return availableSessions;}.property('model.preferences.@each.rank', 'model.preferences.@each.session')
 }); 
