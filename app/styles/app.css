@@ -19,7 +19,7 @@ table, th, td {
     font-family: Helvetica;
     font-size: 12px;
     text-align: center;
-    margin-bottom: 18px;
+    margin-bottom: 12px;
     margin-top: 6px;
 }
 
@@ -34,7 +34,7 @@ table, th, td {
 .droptarget {
     font-family: Helvetica;
     font-size: 18px;
-    width:170px;
+    width:140px;
     height:100px;
     border:3px dashed black;
     display: flex;
