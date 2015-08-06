@@ -3,7 +3,7 @@ table, th, td {
 }
 
 .exampleImport {
-    font-family: "Courier New";
+    font-family: Helvetica;
     font-size: 16px;
     margin-left: 20px;
 }
@@ -40,21 +40,22 @@ table, th, td {
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 15px;
+    border-radius: 20px;
 }
+
 .session-tile {
     padding:0px;
     border:px black;
     cursor: pointer;
-
 }
+
 .school-logo {
     align-items: center;
-    border-radius: 20px; 
     width: 70px;
     height: 50px;
     margin-right: 10px;   
 }
+
 .image {
     align-items: center;
     border-radius: 20px; 

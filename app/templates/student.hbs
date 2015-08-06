@@ -3,15 +3,21 @@
 {{model.firstname}} 
 {{model.lastname}} 
 ({{model.grade}})
-    {{#if allPrefsSet}}
-        {{#unless model.locked}}
-            <div class="instructions" style='margin: 0 auto; width:100%'>
-                <button {{action 'lockPrefs'}} style='display:block;width:250px;margin:10px auto;'>
-                    Lock in Preferences
-                </button>
-            </div>
-        {{/unless}}
-    {{/if}}
+{{#if allPrefsSet}}
+    {{#unless model.locked}}
+    <div class="instructions" style='margin: 0 auto; width:100%'>
+        <button {{action 'lockPrefs'}} style='display:block;width:250px;margin:10px auto;'>
+            Lock in Preferences
+        </button>
+    </div>
+    {{/unless}}
+{{else}}
+    <div class="instructions" style='margin: 0 auto; width:100%'>
+        <button {{action 'lockPrefs'}} style='display:block;width:50px;margin:10px auto;' disabled=disabled>
+            Set
+        </button>
+    </div>
+{{/if}}
 </div>
 
 <div class="container-fluid">
