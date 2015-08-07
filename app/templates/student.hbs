@@ -9,7 +9,9 @@
         <div class="col-md-8">
             {{#if allPrefsSet}}
                 {{#if model.locked}}
-                     <div class="instructions" style='text-align:center; font-size:24px;'>Your preferences are locked.</div>
+                     <div class="instructions">
+                        Your preferences are locked.
+                    </div>
                 {{else}}
                     <div class="instructions" style='margin: 0 auto; width:100%'>
                         <button {{action 'lockPrefs'}} style='display:block;width:250px;margin:10px auto;'>
@@ -26,90 +28,21 @@
     </div>
 </div>
 
-
-
-
-
 <div class="container-fluid">
     <div class="row">
-    {{#if model.locked}}
-        <div class="col-md-2">
-            <div class=>
-                    {{#with this.rankedOrNullPrefsArray.0.session as |session|}}
-                            {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
-                    {{else}}
-                    <div class="droptarget">
-                        <h3>1</h3>
-                    </div>
-                    {{/with}}
-            </div>
-        </div>    
-        <div class="col-md-2">
-            <div class=>
-                    {{#with this.rankedOrNullPrefsArray.1.session as |session|}}
-                           {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}} 
-                    {{else}}
-                        <div class="droptarget">
-                            <h3>2</h3>
-                        </div>
-                    {{/with}}
-            </div>
-        </div>     
-        <div class="col-md-2">
-            <div class=>
-                    {{#with this.rankedOrNullPrefsArray.2.session as |session|}}
-                             {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}
-                    {{else}}
-                        <div class="droptarget">
-                            <h3>3</h3>
-                        </div>
-                    {{/with}}
-            </div>
-        </div>     
-        <div class="col-md-2">
-            <div class=>
-                    {{#with this.rankedOrNullPrefsArray.3.session as |session|}}
-                            {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
-                    {{else}}
-                        <div class="droptarget">
-                            <h3>4</h3>
-                        </div>
-                    {{/with}}
-            </div>
-        </div>     
-        <div class="col-md-2">
-            <div class=>
-                    {{#with this.rankedOrNullPrefsArray.4.session as |session|}}
-                        {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
-                    {{else}}
-                        <div class="droptarget">
-                            <h3>5</h3>
-                        </div>
-                    {{/with}}
-            </div>
-        </div> 
-        <div class="col-md-2">
-            <div class=>
-                    {{#with this.rankedOrNullPrefsArray.5.session as |session|}}
-                                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
-                    {{else}}
-                        <div class="droptarget">
-                            <h3>6</h3>
-                        </div>
-                    {{/with}}
-            </div>
-        </div>
-    {{else}}\
-    <div class="container-fluid">
-        <div class="row">
+        {{#if model.locked}}
+            {{#each rankedOrNullPrefsArray as |pref|}}
+                <div class="col-md-2">
+                    {{#session-tile imageUrl=pref.session.imageUrl sessionName=pref.session.sessionName}}{{/session-tile}}  
+                </div>
+            {{/each}}
+        {{else}}
             {{#each rankedOrNullPrefsArray as |item index|}}
                 <div class="col-md-2">
                     {{pref-tile item=item index=index sessionDropped="sessionDropped"}}
                 </div>    
             {{/each}}
-        </div>
-    </div>
-    {{/if}}
+        {{/if}}
     </div>
 </div>
 
@@ -122,9 +55,7 @@
                 {{#each availableSessions as |availableSession|}}
                     <div class="col-md-2">
                         {{#draggable-object content=availableSession}}
-                            <div class="tile">
                                 {{#session-tile imageUrl=availableSession.imageUrl sessionName=availableSession.sessionName}}{{/session-tile}}
-                            </div>
                         {{/draggable-object}}
                     </div>
                 {{/each}}
