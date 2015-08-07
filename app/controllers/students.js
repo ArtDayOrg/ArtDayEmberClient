@@ -2,10 +2,11 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
     filteredStudents: Ember.computed.filter('model', function(student) {
-        var filterString = this.get('searchFilter');
-        
+        var filterString = this.get('searchFilter').toUpperCase();
 
-        //TO DO:  Chinese names have 2 characters eg: Mi Li/Xu Yi/etc.
+        if ((student.get('firstname') === filterString) || (student.get('lastname') === filterString)) {
+            return true;
+        }
         if (filterString.length < 3) {
             return false; 
         }
