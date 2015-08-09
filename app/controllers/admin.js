@@ -1,15 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    isAdmin: false,
+    // will add auth later
+    isAdmin: true,
     actions: {
-        login: function () {
-            Ember.$("#message").hide();
-            if (Ember.$('#pw').val() === 'password') {
-                this.set('isAdmin', true);                
-            } else {
-                Ember.$("#message").show();
-            }
-        }
+        
     }
 });

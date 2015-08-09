@@ -13,6 +13,7 @@ export default Router.map(function() {
     this.route('students');
     this.route('sessions', function() {
       this.route('session', {path: '/:session_id'});
+      this.route('add');
     });
   });
 }); 

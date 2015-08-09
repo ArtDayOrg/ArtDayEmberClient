@@ -16,6 +16,8 @@ export default Ember.ObjectController.extend({
             var self = this;
             this.get('model').destroyRecord().then(function() {
                 self.transitionToRoute('admin.sessions');
+            }, function(err) {
+                console.log(err);
             });
         },
         add: function() {
