@@ -2,14 +2,15 @@
   {{#link-to 'admin.import'}}Import{{/link-to}}
   {{#link-to 'admin.students'}}Students{{/link-to}}
   {{#link-to 'admin.sessions'}}Sessions{{/link-to}}
+  <div>
+	<button {{action 'mesh'}}>Mesh</button>
+  </div>
 {{else}}
 {{!--  add auth later --}}
- {{/if}}
+{{/if}}
 
 
-<div>
-<button {{action 'mesh'}}>Mesh</button>
-</div>
+
 <div>
 {{outlet}}
 </div>

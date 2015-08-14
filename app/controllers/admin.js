@@ -1,25 +1,14 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
     isAdmin: true,
 
     meshIsAvailable: true,
 
-    filteredStudents: Ember.computed.filter('model', function(student) {
-        var filterString = this.get('searchFilter').toUpperCase();
-
-        if ((student.get('firstname') === filterString) || (student.get('lastname') === filterString)) {
-            return true;
-        }
-        if (filterString.length < 3) {
-            return false; 
-        }
-        
-        var regex = new RegExp(filterString, 'i');
-        return student.get('firstname').match(regex) || student.get('lastname').match(regex);
-    }).property('model','searchFilter'),
-
     actions: {
+
+        //facebook auth
         login: function() {
             Ember.$("#message").hide();
             if (Ember.$('#pw').val() === 'password') {
@@ -29,7 +18,7 @@ export default Ember.Controller.extend({
             }
         },
 
-
+        //mesh
         mesh: function() {
 
                 // TO-DO: check capacity of all sessions >= studentsFromModel.length 

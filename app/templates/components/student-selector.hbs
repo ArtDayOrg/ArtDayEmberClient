@@ -1,5 +1,4 @@
 <div class="instructions">
-<p>Students Template</p>
 Enter Name: {{input key-up="processKeyUp"}}<br/><br/>
 </div>
 
@@ -7,7 +6,7 @@ Enter Name: {{input key-up="processKeyUp"}}<br/><br/>
   	{{#link-to 'student' item}}{{item.firstname}} {{item.lastname}} {{item.grade}}{{/link-to}}
   	{{#if isAdmin}}
   		{{#if item.locked}}
-   			<button {{action 'unlock'}}>unlock</button>
+   			<button {{action 'unlock' item}}>unlock</button>
    		{{/if}}
   	{{/if}}
   	<br />  

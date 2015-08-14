@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"filt",
+				"filteredStudents"
+			],
+			[
 				"nextSt",
 				"nextStudents"
 			],
@@ -67,27 +71,32 @@
 	[
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/sessions"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components"
 	],
 	"file_history":
 	[
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-selector.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/application.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/algotemplate",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-tile.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/pref-tile.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile-BAD",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
