@@ -23,41 +23,33 @@ export default Ember.Controller.extend({
 
                 // TO-DO: check capacity of all sessions >= studentsFromModel.length 
                 // (DO THIS ON MAIN ADMIN PAGE BIG WARNING)
-            
+            var outerSelf = this;
             function loadStudents() {
                 
                 function Student(emberStudent) {
 
-                    function rankSortedPrefsArray(preferences) {
-                        var array = preferences.sorted('rank');
-                        console.log(array);
-                        for (var pref in array) {
-                            console.log(pref);
-                        }
-                        return array;
-                    }
                     
-                    this.emberStudent = emberStudent
+                    this.emberStudent = emberStudent;
                     this.firstname = emberStudent.get('firstname');
                     this.lastname = emberStudent.get('lastname');
                     this.grade = emberStudent.get('grade');
                     
                     //TO-DO: sorted rather than nulled array
-                    this.preferences = rankSortedPrefsArray(preferences);
-                    this.bumpedGrade = grade;
+                    this.preferences = emberStudent.get('preferences').sortBy('rank');
+                    this.bumpedGrade = this.grade;
                     this.bumpcount = 0;
-                    this.enrollment = null;
-                    this.oldEnrollments = [];            
+                    this.proposedEnrollment = null;
+                    this.deniedEnrollments = [];            
                 }
 
                 var students = [];
-                var studentsFromModel = this.get('students');
+                var studentsFromModel = outerSelf.get('students');
                 studentsFromModel.forEach(function (s) {
-                    var newStudent = new Student(s, s.get('firstname'), s.get('lastname'), s.get('preferences'), s.get('grade'));
+                    var newStudent = new Student(s);
                     students.push(newStudent);
                 });
 
-                return students
+                return students;
             }
 
             function loadSessions() {
@@ -65,13 +57,13 @@ export default Ember.Controller.extend({
                     this.emberSession = emberSession;
                     this.sessionName = emberSession.get('sessionName');
                     this.capacity = emberSession.get('capacity');
-                    this.proposedEnrollments = new Array(capacity);
+                    this.proposedEnrollments = new Array(this.capacity);
                 } 
 
                 var sessions = [];
-                var sessionsFromModel = this.get('sessions');
+                var sessionsFromModel = outerSelf.get('sessions');
                 sessionsFromModel.forEach(function (s) {
-                    var newSession = new Session(s, s.get('sessionName'), s.get('capacity'))
+                    var newSession = new Session(s);
                     sessions.push(newSession);
                 });
 
@@ -88,18 +80,23 @@ export default Ember.Controller.extend({
             var students = loadStudents();
             var sessions = loadSessions();
 
-            console.log(students);
-            console.log(sessions);
+
 
 
             function enroll(sessions, students) {
 
+
+                
+
                 function freeStudent(students, sessions) {
-                    for (var student in students) {
-                        if (student.enrollment === null && student.oldEnrollments.length !== sessions.length) {
+
+                    for (var i = 0; i < students.length; i++) {
+                        var student = students.objectAt(i)
+                        if (student.proposedEnrollment === null && student.deniedEnrollments.length !== sessions.length) {
                             return student;
                         }
                     }
+
                     return null;
                 }
 
@@ -112,7 +109,7 @@ export default Ember.Controller.extend({
 
                     var bestSession = null;
                     for (var i = 0; i<nextStudent.preferences.count; i++) {
-                        if (nextStudent.oldEnrollments.contains(nextStudent.preferences[i])) {
+                        if (nextStudent.deniedEnrollments.contains(nextStudent.preferences[i])) {
                             bestSession=nextStudent.preferences[i];
                             break;
                         }
@@ -120,35 +117,47 @@ export default Ember.Controller.extend({
                     return bestSession;
                 }
 
-                //while there is a man m who is free and hasn't proposed to every woman
-                //choose such a man m (datingMan)
-                while (stillEnrolling()) {
-                    var nextStudent = freeStudent(students, sessions);
-                    if (nextStudent) {
-                        //let w (hisWoman) be the highest-ranked Woman in m's preference list to whom m has not proposed
-                        var nextStudentsSession = bestSessionForStudent(nextStudent);
-                    }
-                    //if w is free
-                    if (nextStudentsSession.proposedEnrollments < nextStudentsSession.capacity) {
-                        //m and w become engaged
-                        nextStudentsSession.proposedEnrollments.push(nextStudent);
-                        nextStudent.enrollment = nextStudentsSession;
-                        nextStudent.oldEnrollments.push(nextStudentsSession);
-                    }
-                }
-            }
-        }
-    }
-});
-        
-    //     if (hisWoman.engaged == nil) {
-            
+                //while there is a student nextStudent who is free and hasn't attempted enrollment in every class
+                //choose such a student(nextStudent)
 
-            
-    //     //else w is currently engaged to m' (fiance)
-    //     } else {
-            
-    //         //if w prefers m' (datingMan) to m (fiance) then m remains free
+                var counter = 0;
+                while (stillEnrolling()) {
+                    
+                    counter++;
+
+                    var nextStudent = freeStudent(students, sessions);
+                    console.log(nextStudent)
+                    var nextStudentsSession;
+                    if (nextStudent) {
+                        //let nextStudentsSession be the highest-ranked session in nextStudents preference list to whom nextStudent has not attempted enrollment
+                        nextStudentsSession = bestSessionForStudent(nextStudent);
+                    } else {
+                        console.log('no nextStudent :(')
+                        console.log('cycles: ' + counter)
+                        break;
+                    }
+
+                    // console.log(nextStudent + '-' + nextStudentsSession);
+                    //if there is such a session and there is space in that session
+                    if (nextStudentsSession && nextStudentsSession.proposedEnrollments < nextStudentsSession.capacity) {
+                        //that student attempts to enroll in that session
+                        nextStudentsSession.proposedEnrollments.push(nextStudent);
+                        nextStudent.proposedEnrollment = nextStudentsSession;
+                        nextStudent.deniedEnrollments.push(nextStudentsSession);
+                    //else the session is currently full
+                    } else if (nextStudentsSession) {
+                        //if that session prefers it's lowest bumpedGrade to nextStudent's bumpedGrade nextStudent remains unenrolled
+                        nextStudentsSession.proposedEnrollments.sort(function (a, b) {
+                            return a.bumpedGrade - b.bumpedGrade
+                        });
+                        // console.log('arraysort ' + nextStudentsSession.proposedEnrollments.objectAt(0));
+
+
+
+
+
+
+
     //         var datingManRank = hisWoman.preferences.count
     //         var fianceRank = hisWoman.preferences.count
     //         for (rank, man) in enumerate(hisWoman.preferences) {
@@ -168,3 +177,22 @@ export default Ember.Controller.extend({
     //             hisWoman.engaged = datingMan
     //         }
     //     }
+
+
+                    } else {
+                        console.log('no nextStudentsSession :(')
+                        break;
+                    }
+                }
+            }
+
+            var enrollments = enroll(sessions, students);
+            console.log('enrollments: ' + ' - ' + enrollments);
+        }
+    }
+});
+        
+            
+
+            
+
