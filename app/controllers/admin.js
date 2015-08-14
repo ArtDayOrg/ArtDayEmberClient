@@ -136,7 +136,10 @@ export default Ember.Controller.extend({
                         nextStudent.oldEnrollments.push(nextStudentsSession);
                     }
                 }
-        
+            }
+        }
+    }
+});
         
     //     if (hisWoman.engaged == nil) {
             
@@ -165,8 +168,3 @@ export default Ember.Controller.extend({
     //             hisWoman.engaged = datingMan
     //         }
     //     }
-
-            }
-        }
-    }
-});

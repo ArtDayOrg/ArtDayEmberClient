@@ -1,1 +1,12 @@
-Admin Sessions Template
+<div class="row">
+    <div class="col-xs-4">
+        {{#each model as |item|}}
+        {{#link-to 'admin.sessions.session' item}}{{item.sessionName}}{{/link-to}}<br />
+        {{/each}}
+        <br />
+        {{#link-to 'admin.sessions.add'}}Add New Session{{/link-to}}        
+    </div>    
+    <div class="col-xs-8">
+        {{outlet}}
+    </div>    
+</div> 
