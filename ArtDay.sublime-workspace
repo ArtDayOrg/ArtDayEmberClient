@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"nextSt",
+				"nextStudents"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"rankedSe",
+				"rankedSessionNameOrNullArray"
+			],
+			[
+				"student",
+				"studentsFromModel"
+			],
+			[
 				"pref",
 				"preferences"
 			]
@@ -11,41 +27,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "app/templates/student.hbs",
-			"settings":
-			{
-				"buffer_size": 216,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/routes/students.js",
-			"settings":
-			{
-				"buffer_size": 177,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "import Ember from 'ember';\n\nexport default Ember.Controller.extend({\n    prefSessions: [],\n    hasPreferences: function() {\n        if (this.prefSessions.length === 6) {\n            return true;\n        } else {\n            return false;\n        }\n    }.property(),\n    modelObserver: function() {\n        var prefs = [];\n\n        var self = this;        \n        // iterate through preference list.\n\n        this.store.find('preference', prefId).then(function(resultPref) {\n            resultPref.get('sessionId');\n            var id = Math.floor((Math.random() * 10) + 1);\n            this.store.find('session', id).then(function(result) {\n                prefs.push(result);\n            });\n            this.set('prefSessions', prefs);\n        });\n        \n    }.observes('model')\n});",
-			"file": "app/controllers/student.js",
-			"file_size": 652,
-			"file_write_time": 130825650408922139,
-			"settings":
-			{
-				"buffer_size": 787,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/routes/student.js",
-			"settings":
-			{
-				"buffer_size": 157,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -84,15 +65,39 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client",
-		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app",
-		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/models",
-		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/routes",
-		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/sessions",
-		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/templates"
+		"/Users/Dev/Dev/ArtDayEmberClient",
+		"/Users/Dev/Dev/ArtDayEmberClient/app",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/sessions"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-selector.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/application.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/algotemplate",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-tile.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components/pref-tile.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile-BAD",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile-BAD.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/sessions.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
+		"/Users/Dev/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/student.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/adapters/application.js",
 		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/models/preference.js",
 		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/app.js",
 		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/config/environment.js",
@@ -152,7 +157,7 @@
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 35.0
 	},
 	"find_in_files":
 	{
@@ -167,6 +172,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"    </div>\n</div>",
+			"find",
 			";",
 			"access",
 			"isAdding",
@@ -190,7 +197,7 @@
 			"<tr onclick=\"window.location.href='",
 			"^.*a=kill_detail.*$"
 		],
-		"highlight": true,
+		"highlight": false,
 		"in_selection": false,
 		"preserve_case": false,
 		"regex": true,
@@ -214,125 +221,8 @@
 	"groups":
 	[
 		{
-			"selected": 1,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "app/templates/student.hbs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 216,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								216,
-								216
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Handlebars/grammars/Handlebars.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/routes/students.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 177,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								177,
-								177
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/controllers/student.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 787,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								783,
-								266
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "app/routes/student.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 157,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								153,
-								64
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],

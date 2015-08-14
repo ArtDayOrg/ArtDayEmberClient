@@ -1,0 +1,161 @@
+import UIKit
+
+var str = "Hello, playground"
+
+func ==(lhs: Person, rhs: Person) -> Bool {
+    return lhs.hashValue == rhs.hashValue
+}
+
+class Person: Printable, Hashable, Equatable {
+
+    var name: String
+    
+    //MARK: - Hashable
+    var hashValue: Int {
+        get {
+            return self.name.hashValue
+        }
+    }
+    
+    //MARK: - Printable
+    var description: String {
+        return self.name
+    }
+    
+    //MARK: - Man
+    init(name: String) {
+        self.name = name
+    }
+}
+
+class Man: Person {
+    var preferences = Array<Woman>()
+    var proposed = Set<Woman>()
+    var engaged: Woman?
+}
+
+class Woman: Person {
+    var preferences = Array<Man>()
+    var engaged: Man?
+}
+
+let adam = Man(name: "Adam")
+let bob = Man(name: "Bob")
+let chris = Man(name: "Chris")
+let gio = Man(name: "Gio")
+let han = Man(name: "Han")
+let iggy = Man(name: "Iggy")
+
+let delphine = Woman(name: "Delphine")
+let elie = Woman(name: "Elie")
+let fatima = Woman(name: "Fatima")
+let jia = Woman(name: "Jia")
+let kim = Woman(name: "Kim")
+let lisa = Woman(name: "Lisa")
+
+adam.preferences = [lisa, fatima, jia, kim, elie, delphine]
+bob.preferences = [lisa, elie, jia, delphine, fatima, kim]
+chris.preferences = [kim, fatima, lisa, jia, elie, delphine]
+gio.preferences = [kim, fatima, lisa, jia, elie, delphine]
+han.preferences = [fatima, kim, lisa, jia, elie, delphine]
+iggy.preferences = [kim, elie, lisa, jia, fatima, delphine]
+
+delphine.preferences = [adam, bob, chris, gio, han, iggy]
+elie.preferences = [adam, bob, chris, gio, han, iggy]
+fatima.preferences = [adam, bob, chris, iggy, gio, han]
+jia.preferences = [adam, bob, chris, gio, han, iggy]
+kim.preferences = [adam, bob, chris, gio, han, iggy]
+lisa.preferences = [chris, bob, adam, iggy, gio, han]
+
+let men: Array<Man> = [adam, bob, chris, gio, han, iggy]
+let women: Array<Woman> = [delphine, elie, fatima, jia, kim, lisa]
+
+func matchmaker(men: [Man], women: [Woman]) -> [(Man, Woman)] {
+    
+    func freeMen(men: [Man], women: [Woman]) -> Bool {
+            for man in men {
+            if man.engaged == nil && man.proposed.count != women.count {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func freeMan(men: [Man], women: [Woman]) -> Man? {
+        for man in men {
+            if man.engaged == nil && man.proposed.count != women.count {
+                return man
+            }
+        }
+        return nil
+    }
+    
+    func bestWomanForMan(datingMan: Man) -> Woman? {
+        var bestWoman: Woman?
+        for i in Range(0..<datingMan.preferences.count) {
+            if !datingMan.proposed.contains(datingMan.preferences[i]) {
+                bestWoman = datingMan.preferences[i]
+                break
+            }
+        }
+        return bestWoman
+    }
+    
+
+    
+    var counter = 0
+    
+    //while there is a man m who is free and hasn't proposed to every woman
+    //choose such a man m (datingMan)
+    while let datingMan = freeMan(men, women) {
+        
+        //let w (hisWoman) be the highest-ranked Woman in m's preference list to whom m has not proposed
+        var hisWoman = bestWomanForMan(datingMan)!
+        
+        //if w is free
+        if (hisWoman.engaged == nil) {
+            
+            //m and w become engaged
+            datingMan.engaged = hisWoman
+            hisWoman.engaged = datingMan
+            datingMan.proposed.insert(hisWoman)
+            
+        //else w is currently engaged to m' (fiance)
+        } else {
+            
+            //if w prefers m' (datingMan) to m (fiance) then m remains free
+            var datingManRank = hisWoman.preferences.count
+            var fianceRank = hisWoman.preferences.count
+            for (rank, man) in enumerate(hisWoman.preferences) {
+                if man == datingMan {
+                    datingManRank = rank
+                } else if man == hisWoman.engaged! {
+                    fianceRank = rank
+                }
+            }
+            
+            datingMan.proposed.insert(hisWoman)
+
+            //if w prefers m to m' they become engaged, m' becomes free
+            if datingManRank < fianceRank {
+                hisWoman.engaged?.engaged = nil
+                datingMan.engaged = hisWoman
+                hisWoman.engaged = datingMan
+            }
+        }
+        //tracking cycles
+        counter++
+    }
+    
+    //return the set of engaged couples
+    var couples = [(Man, Woman)]()
+    for man in men {
+        let couple = (man, man.engaged!)
+        couples.append(couple)
+    }
+    println("Finished in \(counter) cycles")
+    return couples
+}
+
+println(matchmaker(men, women))
+

@@ -1,6 +1,9 @@
-<p>Students Template</p>
-Enter Name: {{input key-up="processKeyUp"}}<br/><br/>
-
-{{#each filteredStudents as |item|}}
-  {{#link-to 'student' item}}{{item.firstname}} {{item.lastname}} {{item.grade}}{{/link-to}}<br />  
-{{/each}} 
+{{student-selector 
+processKeyUp="processKeyUp"
+filteredStudents=filteredStudents}}
+{{!-- {{/student-selector}} --}}	{{!-- locked=locked 
+	isAdmin=isAdmin 
+	processKeyUp=processKeyUp 
+	searchFilter=searchFilter 
+	filteredStudents=filteredStudents 
+	unlock=unlock --}}

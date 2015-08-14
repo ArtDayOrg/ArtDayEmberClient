@@ -1,14 +1,26 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    isAdmin: false,
-
-    meshErrorCode: 0,
+    isAdmin: true,
 
     meshIsAvailable: true,
 
+    filteredStudents: Ember.computed.filter('model', function(student) {
+        var filterString = this.get('searchFilter').toUpperCase();
+
+        if ((student.get('firstname') === filterString) || (student.get('lastname') === filterString)) {
+            return true;
+        }
+        if (filterString.length < 3) {
+            return false; 
+        }
+        
+        var regex = new RegExp(filterString, 'i');
+        return student.get('firstname').match(regex) || student.get('lastname').match(regex);
+    }).property('model','searchFilter'),
+
     actions: {
-        login: function () {
+        login: function() {
             Ember.$("#message").hide();
             if (Ember.$('#pw').val() === 'password') {
                 this.set('isAdmin', true);                
@@ -18,65 +30,154 @@ export default Ember.Controller.extend({
         },
 
 
-        mesh: function () {
+        mesh: function() {
 
-            var studentsFromModel;
+                // TO-DO: check capacity of all sessions >= studentsFromModel.length 
+                // (DO THIS ON MAIN ADMIN PAGE BIG WARNING)
+            
+            function loadStudents() {
+                
+                function Student(emberStudent) {
 
-            //TODO: check capacity of all sessions >= studentsFromModel.length
+                    function rankSortedPrefsArray(preferences) {
+                        var array = preferences.sorted('rank');
+                        console.log(array);
+                        for (var pref in array) {
+                            console.log(pref);
+                        }
+                        return array;
+                    }
+                    
+                    this.emberStudent = emberStudent
+                    this.firstname = emberStudent.get('firstname');
+                    this.lastname = emberStudent.get('lastname');
+                    this.grade = emberStudent.get('grade');
+                    
+                    //TO-DO: sorted rather than nulled array
+                    this.preferences = rankSortedPrefsArray(preferences);
+                    this.bumpedGrade = grade;
+                    this.bumpcount = 0;
+                    this.enrollment = null;
+                    this.oldEnrollments = [];            
+                }
 
-            function Student(embers, firstname, lastname, preferences, grade) {
+                var students = [];
+                var studentsFromModel = this.get('students');
+                studentsFromModel.forEach(function (s) {
+                    var newStudent = new Student(s, s.get('firstname'), s.get('lastname'), s.get('preferences'), s.get('grade'));
+                    students.push(newStudent);
+                });
 
-                function sessionOrNullPrefArray(preferences) {
-                    var array = [];
-                    for (var i = 0; i<6;i++) {
-                        var candidate = preferences.filterBy('rank', i+1);
-                        if (candidate.length === 1) {
-                            array.push(candidate.objectAt(0));
-                        } else {
-                            array.push(null);
+                return students
+            }
+
+            function loadSessions() {
+                function Session(emberSession) {
+                    this.emberSession = emberSession;
+                    this.sessionName = emberSession.get('sessionName');
+                    this.capacity = emberSession.get('capacity');
+                    this.proposedEnrollments = new Array(capacity);
+                } 
+
+                var sessions = [];
+                var sessionsFromModel = this.get('sessions');
+                sessionsFromModel.forEach(function (s) {
+                    var newSession = new Session(s, s.get('sessionName'), s.get('capacity'))
+                    sessions.push(newSession);
+                });
+
+                return sessions;
+            }
+
+            function Enrollment(emberSession, emberStudent, period) {
+                this.emberSession = emberSession;
+                this.emberStudent = emberStudent;
+                this.period = period;
+            }
+
+
+            var students = loadStudents();
+            var sessions = loadSessions();
+
+            console.log(students);
+            console.log(sessions);
+
+
+            function enroll(sessions, students) {
+
+                function freeStudent(students, sessions) {
+                    for (var student in students) {
+                        if (student.enrollment === null && student.oldEnrollments.length !== sessions.length) {
+                            return student;
                         }
                     }
-                    return array;
+                    return null;
                 }
-                this.embers = embers
-                this.firstname = firstname;
-                this.lastname = lastname;
-                this.grade = grade;
-                
 
-                this.preferences = sessionOrNullPrefArray(preferences);
-                
-                this.bumpcount = 0;
-                
-                this.enrollments = [];
+                //TO-DO:
+                function stillEnrolling() {
+                    return true;
+                }
+
+                function bestSessionForStudent (nextStudent) {
+
+                    var bestSession = null;
+                    for (var i = 0; i<nextStudent.preferences.count; i++) {
+                        if (nextStudent.oldEnrollments.contains(nextStudent.preferences[i])) {
+                            bestSession=nextStudent.preferences[i];
+                            break;
+                        }
+                    }
+                    return bestSession;
+                }
+
+                //while there is a man m who is free and hasn't proposed to every woman
+                //choose such a man m (datingMan)
+                while (stillEnrolling()) {
+                    var nextStudent = freeStudent(students, sessions);
+                    if (nextStudent) {
+                        //let w (hisWoman) be the highest-ranked Woman in m's preference list to whom m has not proposed
+                        var nextStudentsSession = bestSessionForStudent(nextStudent);
+                    }
+                    //if w is free
+                    if (nextStudentsSession.proposedEnrollments < nextStudentsSession.capacity) {
+                        //m and w become engaged
+                        nextStudentsSession.proposedEnrollments.push(nextStudent);
+                        nextStudent.enrollment = nextStudentsSession;
+                        nextStudent.oldEnrollments.push(nextStudentsSession);
+                    }
+                }
+        
+        
+    //     if (hisWoman.engaged == nil) {
+            
+
+            
+    //     //else w is currently engaged to m' (fiance)
+    //     } else {
+            
+    //         //if w prefers m' (datingMan) to m (fiance) then m remains free
+    //         var datingManRank = hisWoman.preferences.count
+    //         var fianceRank = hisWoman.preferences.count
+    //         for (rank, man) in enumerate(hisWoman.preferences) {
+    //             if man == datingMan {
+    //                 datingManRank = rank
+    //             } else if man == hisWoman.engaged! {
+    //                 fianceRank = rank
+    //             }
+    //         }
+            
+    //         datingMan.proposed.insert(hisWoman)
+
+    //         //if w prefers m to m' they become engaged, m' becomes free
+    //         if datingManRank < fianceRank {
+    //             hisWoman.engaged?.engaged = nil
+    //             datingMan.engaged = hisWoman
+    //             hisWoman.engaged = datingMan
+    //         }
+    //     }
+
             }
-
-            function Session(embers, sessionName, capacity) {
-                this.embers = embers;
-                this.sessionName = sessionName;
-                this.capacity = capacity;
-                this.proposedEnrollments = new Array(capacity);
-                this.sessionEnrollments = [];
-            }
-
-            var students = [];
-            studentsFromModel = this.get('students');
-            studentsFromModel.forEach(function (s) {
-                var newStudent = new Student(s, s.get('firstname'), s.get('lastname'), s.get('preferences'), s.get('grade'));
-                students.push(newStudent);
-            });
-
-            var sessions = [];
-            var sessionsFromModel = this.get('sessions');
-            sessionsFromModel.forEach(function (s) {
-                console.log(s);
-                var newSession = new Session(s, s.get('sessionName'), s.get('capacity'))
-                sessions.push(newSession);
-            });
-            console.log(sessions)
-
-
-
         }
     }
 });
