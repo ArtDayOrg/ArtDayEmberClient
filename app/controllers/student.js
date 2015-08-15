@@ -84,7 +84,7 @@ export default Ember.Controller.extend({
 
             //dragging a preferred session to an empty preference rank
             if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {
-
+                
                 var reRankedPref = oldPrefs.filterBy('session.sessionName', dropSession.get('sessionName')).objectAt(0);
                 reRankedPref.set('rank', targetPrefRank);
                 saveThenLog(reRankedPref);

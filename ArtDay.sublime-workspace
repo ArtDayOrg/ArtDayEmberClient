@@ -4,12 +4,28 @@
 		"selected_items":
 		[
 			[
-				"filt",
-				"filteredStudents"
+				"den",
+				"deniedEnrollments"
 			],
 			[
 				"nextSt",
 				"nextStudents"
+			],
+			[
+				"proposedEn",
+				"proposedEnrollments"
+			],
+			[
+				"proposedEnrollmen",
+				"proposedEnrollment"
+			],
+			[
+				"propos",
+				"proposedEnrollments"
+			],
+			[
+				"filt",
+				"filteredStudents"
 			],
 			[
 				"for",
@@ -39,7 +55,7 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 81.0,
+		"height": 67.0,
 		"last_filter": "install",
 		"selected_items":
 		[
@@ -48,7 +64,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 512.0
+		"width": 575.0
 	},
 	"console":
 	{
@@ -74,22 +90,23 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components",
+		"/Users/Dev/Dev/ArtDayEmberClient/tests"
 	],
 	"file_history":
 	[
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-selector.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin.js",
@@ -103,7 +120,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile-BAD.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/sessions.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
 		"/Users/Dev/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/adapters/application.js",
@@ -181,6 +197,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"nextStudents",
 			"    </div>\n</div>",
 			"find",
 			";",
@@ -209,7 +226,7 @@
 		"highlight": false,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"Kentlar - Vexor - 20m - http",
@@ -266,6 +283,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 28.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -311,8 +332,8 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
-	"side_bar_width": 238.0,
+	"side_bar_visible": false,
+	"side_bar_width": 232.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

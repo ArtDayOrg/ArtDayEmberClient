@@ -21,8 +21,6 @@ export default Ember.Controller.extend({
         //mesh
         mesh: function() {
 
-            var outerSelf = this;
-
             //best performance at shuffling array from http://jsperf.com/array-shuffle-comparator/5
             Array.prototype.shuffle1 = function () {
                 var l = this.length + 1;
@@ -32,23 +30,24 @@ export default Ember.Controller.extend({
                     this[0] = o;
                 }
                 return this;
-            }
+            };
 
             //from http://stackoverflow.com/questions/1187518/javascript-array-difference
-            //does not work on IE 8
+            //returns an array with all elements of the first array that are not in the second array
+            //e.g. [1,2,3].diff([3,4,5]) --> [1,2];
             Array.prototype.diff = function(a) {
+                //does not work on IE 8?
                 return this.filter(function(i) {return a.indexOf(i) < 0;});
             };
 
-            function loadStudents() {
-                
+            function loadStudents(outerSelf) {
                 function Student(emberStudent) {
 
                     this.emberStudent = emberStudent;
                     this.firstname = emberStudent.get('firstname');
                     this.lastname = emberStudent.get('lastname');
                     this.grade = emberStudent.get('grade');
-                    this.preferences = emberStudent.get('preferences').sortBy('rank');
+                    this.preferences = emberStudent.get('preferences').sortBy('rank').reverse();
                     this.bumpedGrade = this.preferences.length > 0 ? this.grade : 0;
                     this.bumpCount = 0;
                     this.proposedEnrollment = null;
@@ -66,7 +65,7 @@ export default Ember.Controller.extend({
                 return students;
             }
 
-            function loadSessions() {
+            function loadSessions(outerSelf) {
                 function Session(emberSession) {
                     this.emberSession = emberSession;
                     this.sessionName = emberSession.get('sessionName');
@@ -90,19 +89,27 @@ export default Ember.Controller.extend({
                 this.period = period;
             }
 
-
-            var students = loadStudents().shuffle1();
-            var sessions = loadSessions();
-
-
-
-
             function enroll(sessions, students, period) {
 
-                function freeStudent(students, sessions) {
+                //helper
+                function createEnrollments(sessions) {
+                    var enrollments = [];
+                    for (var i = 0; i<sessions.length; i++) {
+                        var s = sessions.objectAt(i);
+                        for (var j = 0; j < s.proposedEnrollments.length; j++) {
+                            var enrollment = new Enrollment(s.emberSession, s.proposedEnrollments[j].emberStudent, period);
+                            enrollments.push(enrollment);
+                        }
+                    }
+                    return enrollments;
+                }
 
+                //required by our version of Gale-Shapely
+                //returns next eligable student if their is one.
+                function freeStudent(students, sessions) {
+                    var student;
                     for (var i = 0; i < students.length; i++) {
-                        var student = students.objectAt(i)
+                        student = students.objectAt(i);
                         if (student.proposedEnrollment === null && student.deniedEnrollments.length !== sessions.length) {
                             return student;
                         }
@@ -110,11 +117,10 @@ export default Ember.Controller.extend({
                     return null;
                 }
 
-                //TO-DO:
-                function stillEnrolling() {
-                    return true;
-                }
-
+                //required by our version of Gale-Shapley
+                //returns the best session for a student if their is one
+                //a random eligable session in the event of a tie
+                //and null if the sessions are all full
                 function bestSessionForStudent(student, sessions) {
 
                     function prefNotInDenied(pref, denied) {
@@ -129,13 +135,12 @@ export default Ember.Controller.extend({
                     }
 
                     function sessionNameFilter(s) {
+
                          return student.preferences.objectAt(i).get('session.sessionName') === s.sessionName;
                     }
 
                     function availableSessions(sessions, prefs, student) {
                         var notPreferredSessions = [];
-
-
                         for (var i = 0; i < sessions.length; i++) {
                             var s = sessions[i];
                             for (var j = 0; j < prefs.length; j++) {
@@ -144,73 +149,66 @@ export default Ember.Controller.extend({
                                     break;
                                 }
                             }
-                            notPreferredSessions.push(s)
+                            notPreferredSessions.push(s);
                         }
-
-                        var availableSessions = notPreferredSessions.diff(student.deniedEnrollments)
-
-                        return availableSessions;
-
-
+                        var available = notPreferredSessions.diff(student.deniedEnrollments);
+                        return available;
                     }
 
                     var bestSession = null;
                     var prefs = student.preferences;
-                    if (prefs.length === 0) {
-                        bestSession = sessions[Math.floor(Math.random() * sessions.length)]
-                    } else {
-                        for (var i = 0; i<prefs.length; i++) {
-                            if (prefNotInDenied(prefs[i], nextStudent.deniedEnrollments)) {
-                                bestSession = sessions.filter(sessionNameFilter)[0];
-                            }
+                    for (var i = 0; i<prefs.length; i++) {
+                        if (prefNotInDenied(prefs[i], nextStudent.deniedEnrollments)) {
+                            bestSession = sessions.filter(sessionNameFilter)[0];
                         }
                     }
+
                     if (!bestSession) {
-                        var availableSessions = availableSessions(sessions, prefs, student);
-                        return availableSessions[Math.floor(Math.random() * availableSessions.length)];
+                        var available = availableSessions(sessions, prefs, student);
+                        bestSession = available[Math.floor(Math.random() * available.length)];
                     }
+
                     return bestSession;
                 }
 
-                //while there is a student nextStudent who is free and hasn't attempted enrollment in every class
-                var counter = 0;
-                while (stillEnrolling()) {
+                //Gail-Shapley Algorithm starts here, adopted from Algorithm Design Kleinberg and Tardos
+                //
+                //while there is a student nextStudent who is free and hasn't attempted enrollment in every class                
+                while (true) {
                     
-                    counter++;
-                    if (counter === 80000) { break; }
-
                     //choose such a student(nextStudent)
                     var nextStudent = freeStudent(students, sessions);
                     var nextStudentsSession;
                     
                     if (nextStudent) {
+                
                         //let nextStudentsSession be the highest-ranked session in nextStudents preference list to whom nextStudent has not attempted enrollment
                         nextStudentsSession = bestSessionForStudent(nextStudent, sessions);
                     } else {
-                        console.log('no nextStudent :(')
-                        console.log('cycles: ' + counter)
+                
+                        //if there are no more students, then the algorithm is complete
                         break;
                     }
-
-                    if (counter % 1000 === 0) { console.log('looping' + counter); }
 
                     //if there is such a session and there is space in that session
                     if (nextStudentsSession && nextStudentsSession.proposedEnrollments.length < nextStudentsSession.capacity) {
                     
-                        //that student attempts to enroll in that session
+                        //that student proposes to enroll in that session
                         nextStudentsSession.proposedEnrollments.push(nextStudent);
                         nextStudent.proposedEnrollment = nextStudentsSession;
                         nextStudent.deniedEnrollments.push(nextStudentsSession);
                     
-                    //else the session is currently full
+                    //otherwise, there is such a session but the session is currently full
                     } else if (nextStudentsSession) {
                         
-                        //if that session prefers the next student
+                        //if that session prefers the next student to it's least desired student (index 0 of the sorted array)
                         nextStudentsSession.proposedEnrollments.sort(function (a, b) {
                             return a.bumpedGrade - b.bumpedGrade;
                         });
+
                         if (nextStudent.bumpedGrade > nextStudentsSession.proposedEnrollments[0].bumpedGrade) {
 
+                            //the least desired student is bumped and the next student gets the enrollment
                             var bumpedStudent = nextStudentsSession.proposedEnrollments[0];
                             bumpedStudent.proposedEnrollment = null;
                             bumpedStudent.bumpCount += 1;
@@ -221,41 +219,34 @@ export default Ember.Controller.extend({
                         
                         //the session prefers its lowest enrolled member to nextStudent
                         } else {
+
+                            //the next student is denied enrollment
+                            nextStudent.bumpCount += 1;
                             nextStudent.deniedEnrollments.push(nextStudentsSession);
                         }
 
+                    //(should never enter this branch because we check this before giving them the option to enroll)
+                    //the total capacity is less than the total number of students.
+                    //if we wanted to allow less capacity than students, we would not break here, but we don't allow that.
                     } else {
-                        console.log('no nextStudentsSession :(')
+                        console.log('not enough total session capacity for every student');
                         break;
                     }
-
-
                 }
 
-                var enrollments = [];
-
-
-                var totalCap = 0;
-                for (var i = 0; i < sessions.length; i++) {
-                    totalCap+=sessions.objectAt(i).capacity;
-                }
-                console.log(students.length + ' / ' + totalCap)
-
-                for (var i = 0; i<sessions.length; i++) {
-                    var s = sessions.objectAt(i);
-                    for (var j = 0; j < s.proposedEnrollments.length; j++) {
-                        var enrollment = new Enrollment(s.emberSession, s.proposedEnrollments[j].emberStudent, period);
-                        enrollments.push(enrollment);
-                    }
-                }
-
-                console.log(enrollments.length);
-                console.log(enrollments);
-
+                return createEnrollments(sessions); 
             }
 
+            //context for accessing model inside loading functions
+            var outerSelf = this;
+
+            //shuffle students so mesh has no hidden biases
+            var students = loadStudents(outerSelf).shuffle1();
+            var sessions = loadSessions(outerSelf);
+
             var enrollments = enroll(sessions, students, 1);
-            //console.log(enrollments);
+            console.log(enrollments.length);
+            console.log(enrollments);
         }
     }
 });
