@@ -1,6 +1,13 @@
-<p>Student Selector Component</p>
+<div class="instructions">
 Enter Name: {{input key-up="processKeyUp"}}<br/><br/>
+</div>
 
 {{#each filteredStudents as |item|}}
-  <div>{{#link-to 'student' item}}{{item.firstname}} {{item.lastname}} {{item.grade}}{{/link-to}}</div>
+  	{{#link-to 'student' item}}{{item.firstname}} {{item.lastname}} {{item.grade}}{{/link-to}}
+  	{{#if isAdmin}}
+  		{{#if item.locked}}
+   			<button {{action 'unlock' item}}>unlock</button>
+   		{{/if}}
+  	{{/if}}
+  	<br />  
 {{/each}}

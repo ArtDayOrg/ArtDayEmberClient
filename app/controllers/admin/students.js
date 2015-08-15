@@ -2,16 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-    isAdmin: false,
+    isAdmin: true,
 
     searchFilter: '',
 
     filteredStudents: Ember.computed.filter('model.students', function(student) {
 
-        console.log('inside filtered students with searchFilter: ' + this.searchFilter)
-
         var filterString = this.get('searchFilter').toUpperCase();
-
 
         if ((student.get('firstname') === filterString) || (student.get('lastname') === filterString)) {
             return true;
@@ -23,7 +20,8 @@ export default Ember.Controller.extend({
         
         var regex = new RegExp(filterString, 'i');
         return student.get('firstname').match(regex) || student.get('lastname').match(regex);
-    }).property('searchFilter', 'model'),
+    }).property('searchFilter', 'model.students'),
+
 
     actions: {
         processKeyUp: function(value) {

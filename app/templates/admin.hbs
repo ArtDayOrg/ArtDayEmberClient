@@ -2,8 +2,8 @@
 </div>
 
 <div>
-<fb:login-button scope="public_profile,email" onlogin='checkLoginState();'>
-</fb:login-button>
+    <fb:login-button scope="public_profile,email" {{action 'checkLoginState'}}>
+    </fb:login-button>
 </div>
 {{#if isLoggedIn}}
   <div>User is logged in</div>
@@ -11,6 +11,10 @@
 {{#link-to 'admin.import'}}Import{{/link-to}}
 {{#link-to 'admin.students'}}Students{{/link-to}}
 {{#link-to 'admin.sessions'}}Sessions{{/link-to}}
+  <div>
+    <button {{action 'mesh'}}>Mesh</button>
+  </div>
+
 <div>
 {{outlet}}
 </div>
