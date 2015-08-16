@@ -22,7 +22,6 @@ export default Ember.Controller.extend({
         return student.get('firstname').match(regex) || student.get('lastname').match(regex);
     }).property('searchFilter', 'model.students'),
 
-
     actions: {
         processKeyUp: function(value) {
             this.set('searchFilter', value);
