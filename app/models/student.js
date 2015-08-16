@@ -6,6 +6,8 @@ export default DS.Model.extend({
     grade: DS.attr('number'),
     locked: DS.attr('boolean'),
     preferences: DS.hasMany('preference', {async: true}),
+    enrollments: DS.hasMany('enrollment', {async: true}),
+
 
     toStringExtension: function() {
   		return "Student: " + this.get('firstname') + ' ' + this.get('lastname');
