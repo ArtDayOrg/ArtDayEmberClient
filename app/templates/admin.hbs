@@ -1,13 +1,11 @@
 {{#if isAdmin}}
-  {{#link-to 'admin.import'}}Import{{/link-to}}
-  {{#link-to 'admin.students'}}Students{{/link-to}}
-  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}
-  <div>
-	<button {{action 'enroll'}}>Enroll</button>
-  </div>
-{{else}}
+    {{#link-to 'admin.import'}}Import{{/link-to}}
+    {{#link-to 'admin.students'}}Students{{/link-to}}
+    {{#link-to 'admin.sessions'}}Sessions{{/link-to}}
+    <button {{action 'enroll'}}>Enroll</button>
+    <button {{action 'test'}}>test</button>
 {{/if}}
 
 <div>
-{{outlet}}
+	{{outlet}}
 </div>

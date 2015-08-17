@@ -112,105 +112,6 @@ export default Ember.Controller.extend({
                 });
             }
 
-            //test at array of enrollments (for a single period) fon instability
-            function testEnrollment(enrollments, students) {
-
-                console.log('----testing enrollments for instability----');
-
-                var testingStartTime = Date.now();
-
-                var unhappyEnrollments = [];
-                var noPreferences = [];
-                enrollments.forEach(function (enrollment) {
-                    var student = enrollment.emberStudent;
-                    var prefs = student.get('preferences.content');
-                    if (prefs.length > 0) {
-                        var topPref = null;
-                        prefs.forEach(function (pref) {
-                            if (!topPref || (pref.get('rank') < topPref.get('rank'))) {
-                                topPref = pref;
-                            }
-                        });
-                        if (!(enrollment.emberSession.get('sessionName') === topPref.get('session.sessionName'))) {
-                            unhappyEnrollments.push(enrollment);
-                        }
-                    } else {
-                        noPreferences.push(enrollment);
-                    }
-                });
-
-                console.log('did not get first choice: ' + unhappyEnrollments.length);
-                console.log('did not set preferences: ' + noPreferences.length);
-
-                unhappyEnrollments.forEach(function (e) {
-                    
-                    var unhappyStudent = e.emberStudent;
-                    var jealousArray = [];
-                    var unhappyStudentPrefs = unhappyStudent.get('preferences.content');
-                    var jealousRank = unhappyStudentPrefs.length + 1;
-                    var unhappySessionName = e.emberSession.get('sessionName');
-                    unhappyStudentPrefs.forEach(function (p) {
-                        if (p.get('session.sessionName') === unhappySessionName) {
-                            jealousRank = p.get('rank');
-                        }
-                    });
-                    unhappyStudentPrefs.forEach(function (p) {
-                        if (p.get('rank') < jealousRank) {
-                            jealousArray.push(p.get('session.sessionName'));
-                        }
-                    });
-
-
-                    // console.log('- - - - -')
-                    // console.log(unhappyStudent.get('firstname') + ' grade: ' + unhappyStudent.get('grade'));
-                    // console.log('enrolled: ' + e.emberSession.get('sessionName'));
-                    // console.log('prefers:')
-                    // unhappyStudentPrefs.sortBy('rank').forEach(function (p) {
-                    //     console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
-                    // })
-                    // console.log('jealous of all above rank ' + jealousRank + ' specifically:')
-                    // console.log(jealousArray);
-
-                    // noPreferences.forEach(function (e) {
-                    //     var uninterestedStudentsSessionName = e.emberSession.get('sessionName');
-                    //     jealousArray.forEach(function (n) {
-                    //         if (n === uninterestedStudentsSessionName) {
-                    //             console.log(e.emberStudent.get('firstname'), unhappyStudent.get('firstname'));
-                    //          }
-                    //     });
-                    // });
-
-                    unhappyEnrollments.forEach(function (f) {
-                        var otherUnhappyStudent = f.emberStudent;
-                        var otherJealousArray = [];
-                        var otherUnhappyStudentPrefs = otherUnhappyStudent.get('preferences.content');
-                        var otherJealousRank = otherUnhappyStudentPrefs.length + 1;
-                        var otherUnhappySessionName = f.emberSession.get('sessionName');
-                        otherUnhappyStudentPrefs.forEach(function (p) {
-                            if (p.get('session.sessionName') === otherUnhappySessionName) {
-                                otherJealousRank = p.get('rank');
-                            }
-                        });
-                        otherUnhappyStudentPrefs.forEach(function (p) {
-                            if (p.get('rank') < otherJealousRank) {
-                                otherJealousArray.push(p.get('session.sessionName'));
-                            }
-                        })
-
-                        var unhappyStudentDesiresSwitch = (jealousArray.indexOf(otherUnhappySessionName) > -1);
-                        var otherUnhappyStudentDesiresSwitch = (otherJealousArray.indexOf(unhappySessionName) > -1);
-
-                        if (unhappyStudentDesiresSwitch && otherUnhappyStudentDesiresSwitch) {
-                            console.log('unstable :(');
-                        } else {
-                            console.log('no instability!');
-                        }
-                    });
-                });
-
-                console.log('testing took ' + (Date.now() - testingStartTime) + ' milliseconds');
-            }
-
             function mesh(sessions, students, period) {
 
                 //helper
@@ -295,6 +196,9 @@ export default Ember.Controller.extend({
                 }
 
                 //Gail-Shapley Algorithm starts here, adopted from Algorithm Design Kleinberg and Tardos
+                //because we process students preferences and not the sessions preferences, we are sure
+                //students cannot cheat by lying about their preferences: http://www.columbia.edu/~js1353/pubs/tst-ipco99.pdf
+                //pgs 432-438 (students correspond to men in the discussion in the paper)
                 //while there is a student nextStudent who is free and hasn't attempted enrollment in every class                
                 while (true) {
                     
@@ -360,7 +264,7 @@ export default Ember.Controller.extend({
                 return createEnrollments(sessions); 
             }
 
-            var startDate = Date.now()
+            var startDate = Date.now();
 
             //context for accessing model inside loading functions
             var outerSelf = this;
@@ -382,10 +286,188 @@ export default Ember.Controller.extend({
             console.log(allEnrollments);
             console.log('total time: ' + (Date.now() - startDate) + ' milliseconds');
             
-            // allEnrollments.forEach(function (enrollments) {
-            //     testEnrollment(enrollments);
-            // });
+            function enrollmentsToDB(enrollments, outerSelf) {
+                
+                allEnrollments.forEach(function (enrollmentArray, index) {
+                    enrollmentArray.forEach(function (enrollment) {
+                        var newEnrollment = outerSelf.store.createRecord('enrollment', {
+                            student: enrollment.emberStudent,
+                            session: enrollment.emberSession,
+                            period: index+1
+                        });
+                        newEnrollment.save().then(function () {
+                            console.log(newEnrollment.get('student.firstname') + ' enrolls in ' + newEnrollment.get('session.sessionName') + ' during period ' + newEnrollment.get('period'));
+                        }, function (reason) {
+                            console.log('failure: ' + reason);
+                        });
+                    });
+                });
+            }
+
+            enrollmentsToDB(allEnrollments, outerSelf);
+        },
+
+        test: function() {
+            //test at array of enrollments (for a single period) fon instability
+            function testEnrollments() {
+
+                console.log('----testing enrollments for instability----');
+                var testingStartTime = Date.now();
+                var unstable = 0;
+
+                var enrollment = outerSelf.get('enrollment');
+                var loop = enrollment.sortBy('period').reverse().objectAt(0).get('period') + 1;
+                while (--loop) {
+                    var periodEnrollment = enrollment.filterBy('period', loop);
+                    testEnrollment(periodEnrollment);
+                }
+
+                function testEnrollment(enrollment) {
+
+                    var currentPeriod = enrollment.objectAt(0).get('period');
+                    var unhappyEnrollments = [];
+                    var noPreferences = [];
+
+                    enrollment.forEach(function (e) {
+                        var student = e.get('student');
+                        var prefs = student.get('preferences.content');
+                        if (prefs.length > 0) {
+                            var topPref = null;
+                            prefs.forEach(function (pref) {
+                                if (!topPref || (pref.get('rank') < topPref.get('rank'))) {
+                                    topPref = pref;
+                                }
+                            });
+                            if (e.get('session.sessionName') !== topPref.get('session.sessionName')) {
+                                unhappyEnrollments.push(e);
+                            }
+                        } else {
+                            noPreferences.push(e);
+                        }
+                    });
+
+                    console.log('did not get first choice: ' + unhappyEnrollments.length);
+                    console.log('did not set preferences: ' + noPreferences.length);
+
+                    unhappyEnrollments.forEach(function (e) {
+                        
+                        var unhappyStudent = e.get('student.content');
+                        var jealousArray = [];
+                        var notJealousArray = [];
+                        var unhappyStudentPrefs = unhappyStudent.get('preferences.content');
+                        var jealousRank = unhappyStudentPrefs.length + 1;
+                        var unhappySessionName = e.get('session.sessionName');
+                        unhappyStudentPrefs.forEach(function (p) {
+                            if (p.get('session.sessionName') === unhappySessionName) {
+                                jealousRank = p.get('rank');
+                            }
+                        });
+
+                        var unhappyStudentsEnrollments = e.get('student.enrollments');
+                        unhappyStudentsEnrollments.forEach(function (otherE) {
+                            if (otherE.get('period') !== currentPeriod) {
+                                notJealousArray.push(otherE.get('session.sessionName'));
+                            };
+                        })
+
+                        unhappyStudentPrefs.forEach(function (p) {
+                            var prefName = p.get('session.sessionName');
+                            if (p.get('rank') < jealousRank && !notJealousArray.contains(prefName)) {
+                                jealousArray.push(prefName);
+                            }
+                        });
+                        // console.log('- - - - -')
+                        // console.log(unhappyStudent.get('firstname') + ' grade: ' + unhappyStudent.get('grade'));
+                        // console.log('enrolled: ' + e.emberSession.get('sessionName'));
+                        // console.log('prefers:')
+                        // unhappyStudentPrefs.sortBy('rank').forEach(function (p) {
+                        //     console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
+                        // })
+                        // console.log('jealous of all above rank ' + jealousRank + ' specifically:')
+                        // console.log(jealousArray);
+
+                        // noPreferences.forEach(function (e) {
+                        //     var uninterestedStudentsSessionName = e.emberSession.get('sessionName');
+                        //     jealousArray.forEach(function (n) {
+                        //         if (n === uninterestedStudentsSessionName) {
+                        //             console.log(e.emberStudent.get('firstname'), unhappyStudent.get('firstname'));
+                        //          }
+                        //     });
+                        // });
+
+                        unhappyEnrollments.forEach(function (f) {
+                            var otherUnhappyStudent = f.get('student');
+                            var otherJealousArray = [];
+                            var otherNotJealousArray = [];
+                            var otherUnhappyStudentPrefs = otherUnhappyStudent.get('preferences.content');
+                            var otherJealousRank = otherUnhappyStudentPrefs.length + 1;
+                            var otherUnhappySessionName = f.get('session.sessionName');
+
+                            var otherUnhappyStudentsEnrollments = f.get('student.enrollments');
+                            otherUnhappyStudentsEnrollments.forEach(function (otherE) {
+                                if (otherE.get('period') !== currentPeriod) {
+                                    otherNotJealousArray.push(otherE.get('session.sessionName'));
+                                };
+                            })
+                            otherUnhappyStudentPrefs.forEach(function (p) {
+                                if (p.get('session.sessionName') === otherUnhappySessionName) {
+                                    otherJealousRank = p.get('rank');
+                                }
+                            });
+                            otherUnhappyStudentPrefs.forEach(function (p) {
+                                if (p.get('rank') < otherJealousRank && !otherNotJealousArray.contains(p.get('session.sessionName'))) {
+                                    otherJealousArray.push(p.get('session.sessionName'));
+                                }
+                            });
+
+                            var unhappyStudentDesiresSwitch = (jealousArray.indexOf(otherUnhappySessionName) > -1);
+                            var otherUnhappyStudentDesiresSwitch = (otherJealousArray.indexOf(unhappySessionName) > -1);
+
+                            if (unhappyStudentDesiresSwitch && otherUnhappyStudentDesiresSwitch) {
+
+                                unstable++;
+
+                                console.log('unstable :(')
+                                console.log(unhappyStudent.get('firstname') + ' has ' + unhappySessionName + ' and is jealous of ')
+                                console.log(jealousArray);
+                                var unhappyStudentsCompletePrefs = unhappyStudent.get('preferences');
+                                unhappyStudentsCompletePrefs.forEach(function (p) {
+                                    console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
+                                })
+                                var unhappyStudentsCompleteEnrollments = unhappyStudent.get('enrollments');
+                                unhappyStudentsCompleteEnrollments.forEach(function (enroll) {
+                                    console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
+                                })
+                                console.log(otherUnhappyStudent.get('firstname') + ' has ' + otherUnhappySessionName + ' and is jealous of ')
+                                console.log(otherJealousArray);
+                                var otherUnhappyStudentsCompletePrefs = otherUnhappyStudent.get('preferences');
+                                otherUnhappyStudentsCompletePrefs.forEach(function (p) {
+                                    console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
+                                })
+                                var otherUnhappyStudentsCompleteEnrollments = otherUnhappyStudent.get('enrollments');
+                                otherUnhappyStudentsCompleteEnrollments.forEach(function (enroll) {
+                                    console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
+                                })
+
+
+
+
+                            } else {
+                                console.log('no instability!');
+                            }
+                        });
+                    });
+                }
+
+                console.log('unstable: ' + unstable);
+                console.log('testing took ' + (Date.now() - testingStartTime) + ' milliseconds');
+            }
+
+            console.log('testing...')
+            var outerSelf = this;
+            testEnrollments(outerSelf);
+
         }
+
     }
 });
-

@@ -8,8 +8,6 @@ export default Ember.Controller.extend({
 
     filteredStudents: Ember.computed.filter('model.students', function(student) {
 
-        console.log('inside filtered students with searchFilter: ' + this.searchFilter)
-
         var filterString = this.get('searchFilter').toUpperCase();
 
 
