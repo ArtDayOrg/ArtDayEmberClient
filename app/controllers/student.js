@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
 
     allPrefsSet: function() {
-
         if (this.get('model.preferences.length') === 6) {
             return true;
         } else {
@@ -11,9 +10,53 @@ export default Ember.Controller.extend({
         }
     }.property('model.preferences.length'),
 
+    enrolled: function() {
+        return this.get('model.enrollments.length') ? true : false;
+    }.property(),
+
+    // this property is an array sorted by rank where unset preferences are represented 
+    // by a null element in the array.  rankedOrNullArray[0] is the preference with rank 1 or null.
+    // Our template wants to cycle through this and display pref tiles or a drop box when null.
+    rankedOrNullPrefsArray: function() {
+        var array = this.get('model.preferences');
+        var rankedOrNullPrefsArray = [];
+        function sortByRank(pref) {
+                if (pref.get('rank') === i) {
+                    tempPref = pref;
+                }
+            }
+        for (var i = 1; i < 7; i++) {
+            var tempPref = 0;
+            array.forEach(sortByRank);
+            if (tempPref !== 0) {
+                rankedOrNullPrefsArray.pushObject(tempPref);
+            } else {
+                rankedOrNullPrefsArray.pushObject(null);
+            }
+        }
+        return rankedOrNullPrefsArray;
+    }.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
+
+    availableSessions: function () {
+        var prefs = this.get('model.preferences');
+        var unavailableSessionNames = [];
+        var availableSessions = [];
+
+        prefs.forEach(function (pref) {
+            unavailableSessionNames.pushObject(pref.get('session.sessionName'));
+        });
+
+        this.store.peekAll('session').forEach(function (session) {
+            if (!unavailableSessionNames.contains(session.get('sessionName'))) {
+                    availableSessions.pushObject(session);
+                }
+        });
+        return availableSessions;
+    }.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
+
     actions: {
 
-    	sessionDropped: function (session, ops) {
+        sessionDropped: function (session, ops) {
 
             function saveThenLog(pref) {
                 pref.save().then(function () {
@@ -105,45 +148,7 @@ export default Ember.Controller.extend({
             thisStudent.set('locked', true);
             thisStudent.save();
         }
-    },
+    }
 
-    /*
-    this property is an array in ranked order where unset preferences are represented 
-    by a null element in the array.  rankedOrNullArray[0] is the preference with rank 1 or null.
-    Our template wants to cycle through this and display prefs or an empty box when null.
-    */
-    rankedOrNullPrefsArray: function() {
-        var array = this.get('model.preferences');
-        var rankedOrNullPrefsArray = [];
-        function sortByRank(pref) {
-                if (pref.get('rank') === i) {
-                    tempPref = pref;
-                }
-            }
-        for (var i = 1; i < 7; i++) {
-            var tempPref = 0;
-            array.forEach(sortByRank);
-            if (tempPref !== 0) {
-                rankedOrNullPrefsArray.pushObject(tempPref);
-            } else {
-                rankedOrNullPrefsArray.pushObject(null);
-            }
-        }
-        return rankedOrNullPrefsArray;}.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
 
-    availableSessions: function () {
-        var prefs = this.get('model.preferences');
-        var unavailableSessionNames = [];
-        var availableSessions = [];
-
-        prefs.forEach(function (pref) {
-            unavailableSessionNames.pushObject(pref.get('session.sessionName'));
-        });
-
-        this.store.peekAll('session').forEach(function (session) {
-            if (!unavailableSessionNames.contains(session.get('sessionName'))) {
-                    availableSessions.pushObject(session);
-                }
-        });
-        return availableSessions;}.property('model.preferences.@each.rank', 'model.preferences.@each.session')
 }); 

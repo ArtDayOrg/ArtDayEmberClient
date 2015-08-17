@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"otherUnhappyStudents",
+				"otherUnhappyStudentsCompletePrefs"
+			],
+			[
+				"otherUnha",
+				"otherUnhappySessionName"
+			],
+			[
+				"curr",
+				"currentPeriod"
+			],
+			[
 				"den",
 				"deniedEnrollments"
 			],
@@ -90,33 +102,45 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/models",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components",
 		"/Users/Dev/Dev/ArtDayEmberClient/tests"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/session.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/models/student.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/models/session.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/models/enrollment.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/serializers/enrollment.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/models/preference.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/add.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-selector.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/student.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/algotemplate",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-tile.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/pref-tile.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile-BAD",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile-BAD.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/sessions.hbs",
@@ -332,7 +356,7 @@
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": false,
+	"side_bar_visible": true,
 	"side_bar_width": 232.0,
 	"status_bar_visible": true,
 	"template_settings":
