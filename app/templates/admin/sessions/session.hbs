@@ -3,11 +3,11 @@
     <button {{action 'doneEditing'}}>Done</button>
 {{else}}
 
-<!-- Brian - make Adding a session work. -->
     {{#if isAdding}}
         {{partial 'admin/sessions/add'}}
         <button {{action 'doneAdding'}}>Done</button>
     {{else}}
+    <img src={{imageUrl}} class=image draggable="false" align="middle"> 
     <table>
         <tr>
             <td>Session Name:</td>
