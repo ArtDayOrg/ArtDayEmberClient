@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId: '491786194317658',
+        xfbml: true,
+        version: 'v2.3'
+      });
+    };
+    (function(d, s, id){
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {return;}
+      js = d.createElement(s); js.id = id;
+      js.src = '//connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+  </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>ArtDay</title>
@@ -11,7 +28,22 @@
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/art-day.css">
+    <script>
+      $(document).ready(function() {
+        $.ajaxSetup({ cache: true });
+        $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
+          FB.init({
+            appId: '491786194317658',
+            cookie: true,
+            xfbml: true,
+            version: 'v2.3' // or v2.0, v2.1, v2.0
+          });
 
+          $('#loginbutton,#feedbutton').removeAttr('disabled');
+          FB.getLoginStatus(updateStatusCallback);
+        });
+      });
+    </script>
     {{content-for 'head-footer'}}
   </head>
   <body>

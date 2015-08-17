@@ -5,8 +5,6 @@ export default DS.Model.extend({
   session: DS.belongsTo('session', {async: true}),
   student: DS.belongsTo('student', {async: true}),
 
-
-
   toStringExtension: function() {
   	return "Student: " + this.get('student.firstname') + ' ' + this.get('student.lastname') + 
   	' ranks ' + this.get('session.sessionName') + ' #' + this.get('rank');

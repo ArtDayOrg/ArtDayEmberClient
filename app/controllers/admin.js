@@ -1,25 +1,54 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    init: function() {        
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '491786194317658',
+            cookie     : true,                                
+            xfbml      : true,
+            version    : 'v2.4' 
+          });
+        }
 
+        (function(d, s, id) {
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "//connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    },
     isAdmin: true,
-
+    meshIsAvailable: true,
+    isLoggedIn: function() {
+        console.log('inside isLoggedIn method.');
+        FB.getLoginStatus(function(response) {
+          if (response.status === 'connected') {
+            // the user is logged in and has authenticated your
+            // app, and response.authResponse supplies
+            // the user's ID, a valid access token, a signed
+            // request, and the time the access token 
+            // and signed request each expire
+            var uid = response.authResponse.userID;
+            var accessToken = response.authResponse.accessToken;
+          } else if (response.status === 'not_authorized') {
+            // the user is logged in to Facebook, 
+            // but has not authenticated your app
+          } else {
+            // the user isn't logged in to Facebook.
+          }
+        }, function(error) {
+            console.log(error);
+        });
+    }.property(),    
     enrollIsAvailable: true,
-
     actions: {
 
-        //facebook auth
-        login: function() {
-            Ember.$("#message").hide();
-            if (Ember.$('#pw').val() === 'password') {
-                this.set('isAdmin', true);                
-            } else {
-                Ember.$("#message").show();
-            }
+        checkLoginState: function() {
+            alert('inside checkLoginState.');
         },
-
         enroll: function() {
-
             function Enrollment(emberSession, emberStudent, period) {
                 this.emberSession = emberSession;
                 this.emberStudent = emberStudent;
