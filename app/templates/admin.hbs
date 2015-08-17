@@ -1,20 +1,19 @@
-<div id="status" style='border:1px solid black; width:100px; height:50px;'>
-</div>
-
-<div>
-    <fb:login-button scope="public_profile,email" {{action 'checkLoginState'}}>
-    </fb:login-button>
-</div>
-{{#if isLoggedIn}}
-  <div>User is logged in</div>
-{{/if}}
-{{#link-to 'admin.import'}}Import{{/link-to}}
-{{#link-to 'admin.students'}}Students{{/link-to}}
-{{#link-to 'admin.sessions'}}Sessions{{/link-to}}
+{{#if isAdmin}}
   <div>
-	<button {{action 'enroll'}}>Enroll</button>
+    User is logged in
+  </div>
+  {{#link-to 'admin.import'}}Import{{/link-to}}
+  {{#link-to 'admin.students'}}Students{{/link-to}}
+  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}
+  <div>
+    <button {{action 'enroll'}}>Enroll</button>
   </div>
 
-<div>
-{{outlet}}
-</div>
+  <button {{action 'logout'}}>Logout</button>
+
+  <div>
+    {{outlet}}
+  </div>
+{{else}}
+  <button {{action 'login'}}>Facebook Login</button>
+{{/if}}

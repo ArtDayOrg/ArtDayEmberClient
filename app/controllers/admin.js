@@ -1,28 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    init: function() {        
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '491786194317658',
-            cookie     : true,                                
-            xfbml      : true,
-            version    : 'v2.4' 
-          });
-        }
-
-        (function(d, s, id) {
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "//connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    },
-    isAdmin: true,
+    isAdmin: false,
     meshIsAvailable: true,
-    isLoggedIn: function() {
-        console.log('inside isLoggedIn method.');
+    checkLoginStatus: function() {
         FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
             // the user is logged in and has authenticated your
@@ -32,21 +13,40 @@ export default Ember.Controller.extend({
             // and signed request each expire
             var uid = response.authResponse.userID;
             var accessToken = response.authResponse.accessToken;
+            // for now, just return true, and allow the user to see admin stuff.
+            // Before release, we'll do some authorization here to ensure that
+            // not all users can see the admin page.
+            return true;
           } else if (response.status === 'not_authorized') {
-            // the user is logged in to Facebook, 
-            // but has not authenticated your app
+            return true;
           } else {
-            // the user isn't logged in to Facebook.
+            return false;
           }
         }, function(error) {
             console.log(error);
         });
-    }.property(),    
+    }.property(),
     enrollIsAvailable: true,
     actions: {
-
-        checkLoginState: function() {
-            alert('inside checkLoginState.');
+        login: function() {
+            var self = this;
+            FB.login(function(response) {
+                if (response.status === 'connected') {
+                    self.set('isAdmin', true);
+                    FB.api('/me', function(response){
+                        console.log(JSON.stringify(response));
+                    });
+                    FB.api('/me/permissions', function(response){
+                        console.log(JSON.stringify(response));
+                    });
+                }
+            }, {scope: 'public_profile,email'});
+        },
+        logout: function() {
+            var self = this;
+            FB.logout(function(response){
+                self.set('isAdmin', false);
+            });
         },
         enroll: function() {
             function Enrollment(emberSession, emberStudent, period) {
