@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
     checkLoginStatus: function() {
         FB.getLoginStatus(function(response) {
           if (response.status === 'connected') {
+            
             // the user is logged in and has authenticated your
             // app, and response.authResponse supplies
             // the user's ID, a valid access token, a signed
@@ -13,6 +14,7 @@ export default Ember.Controller.extend({
             // and signed request each expire
             var uid = response.authResponse.userID;
             var accessToken = response.authResponse.accessToken;
+
             // for now, just return true, and allow the user to see admin stuff.
             // Before release, we'll do some authorization here to ensure that
             // not all users can see the admin page.

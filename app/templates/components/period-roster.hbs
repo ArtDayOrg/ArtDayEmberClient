@@ -1,0 +1,7 @@
+<div class="col-xs-4">
+    Period: {{period}}
+    <br/>
+    {{#each item as |enrollment|}} 
+        __ {{enrollment.student.firstname}} {{enrollment.student.lastname}} ({{enrollment.student.grade}})<br/>
+    {{/each}}
+</div>

@@ -3,36 +3,37 @@
     <button {{action 'doneEditing'}}>Done</button>
 {{else}}
 
+
     {{#if isAdding}}
         {{partial 'admin/sessions/add'}}
         <button {{action 'doneAdding'}}>Done</button>
     {{else}}
-    <img src={{imageUrl}} class=image draggable="false" align="middle"> 
+    <img src={{model.imageUrl}} class=image draggable="false" align="middle"> 
     <table>
         <tr>
             <td>Session Name:</td>
-            <td>{{sessionName}}</td>
+            <td>{{model.sessionName}}</td>
         </tr>
         <tr>
             <td>Capacity:</td>
-            <td>{{capacity}}</td>
+            <td>{{model.capacity}}</td>
         </tr>
         <tr>
             <td>Instructor:</td>
-            <td>{{instructorName}}</td>
+            <td>{{model.instructorName}}</td>
         </tr>
         <tr>
             <td>Location:</td>
-            <td>{{location}}</td>
+            <td>{{model.location}}</td>
         </tr>
         <tr>
             <td>Image URL:</td>
-            <td>{{imageUrl}}</td>
+            <td>{{model.imageUrl}}</td>
         </tr>
         <tr>
             <td valign="top">Description</td>
             <!-- 3 handlebars to html escape content -->
-            <td>{{{description}}}</td>
+            <td>{{{model.description}}}</td>
         </tr>
         <tr>
             <td>
@@ -44,4 +45,10 @@
         </tr>
     </table>
     {{/if}}
+
+
+{{session-roster rosters=rosters}}
+
+    <br/>
+    <br/>
 {{/if}}

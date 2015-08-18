@@ -1,17 +1,34 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({  
+export default Ember.Controller.extend({  
     isEditing: false,
     isAdding: false,
 
+    rosters: function () {
+        var rosters = [];
+        var i;
+        var enrollments = this.get('model.enrollments');
+        var numberOfPeriods = enrollments.sortBy('period').reverse().objectAt(0).get('period');
+
+        for (i = 1; i <= numberOfPeriods; i++) {
+            var periodRoster = enrollments.filterBy('period', i);
+            rosters.push(periodRoster);
+        }
+
+        return rosters;
+    }.property('model.enrollments'),
+
     actions: {
+        
         edit: function() {
             this.set('isEditing', true);
         },
+        
         doneEditing: function() {
             this.set('isEditing', false);
             this.model.save();
         },
+
         delete: function() {
             var self = this;
             this.get('model').destroyRecord().then(function() {
@@ -20,9 +37,11 @@ export default Ember.ObjectController.extend({
                 console.log(err);
             });
         },
+
         add: function() {
             this.set('isAdding', true);
         },
+
         doneAdding: function() {
             this.set('isAdding', false);
             this.model.save();
