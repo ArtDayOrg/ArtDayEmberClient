@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    init: function() {
+        FB.logout();
+    },
     isAdmin: false,
     meshIsAvailable: true,
     userEmail: null,
@@ -20,6 +23,7 @@ export default Ember.Controller.extend({
                             // user is logged in, but NOT an admin.
                             self.set('isAdmin', false);  // should already be false.
                             $('#loginError').show();
+                            FB.logout();
                         }
                     });
                 }

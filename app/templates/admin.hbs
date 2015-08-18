@@ -1,22 +1,18 @@
 {{#if isAdmin}}
-  <div>
-    User is logged in<br/>
-  </div>
-{{else}}
-  <button {{action 'login'}}>Facebook Login</button><br/>
-{{/if}}
-
   {{#link-to 'admin.import'}}Import{{/link-to}}<br/>
   {{#link-to 'admin.students'}}Students{{/link-to}}<br/>
   {{#link-to 'admin.sessions'}}Sessions{{/link-to}}<br/>
   <div>
     <button {{action 'enroll'}}>Enroll</button><br/>
     <button {{action 'test'}}>test</button><br/>
-  </div>
-
-  <button {{action 'logout'}}>Logout</button>
-  <div id='loginError' style='display: block;'>Sorry, you are not an admin.</div>
-
+  </div>  
+  <input type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}} />
   <div>
     {{outlet}}
   </div>
+{{else}}
+  <input type='image' src='assets/images/fb-login-button.png' {{action 'login'}} />
+{{/if}}
+<div id='loginError' style='display:none;'>Sorry, you are not an admin.</div>
+
+

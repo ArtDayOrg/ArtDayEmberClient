@@ -3,7 +3,7 @@
 	[
 		{
 			"path": ".",
-			"folder_exclude_patterns": ["tmp","bower_components","node_modules","public","vendor","dist"]
+			"folder_exclude_patterns": ["tmp","bower_components","node_modules","vendor","dist"]
 		}
 	]
 }
