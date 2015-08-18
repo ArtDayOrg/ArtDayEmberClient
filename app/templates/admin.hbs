@@ -1,20 +1,22 @@
 {{#if isAdmin}}
   <div>
-    User is logged in
+    User is logged in<br/>
   </div>
-  {{#link-to 'admin.import'}}Import{{/link-to}}
-  {{#link-to 'admin.students'}}Students{{/link-to}}
-  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}
+{{else}}
+  <button {{action 'login'}}>Facebook Login</button><br/>
+{{/if}}
+
+  {{#link-to 'admin.import'}}Import{{/link-to}}<br/>
+  {{#link-to 'admin.students'}}Students{{/link-to}}<br/>
+  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}<br/>
   <div>
-    <button {{action 'enroll'}}>Enroll</button>
-    <button {{action 'test'}}>test</button>
+    <button {{action 'enroll'}}>Enroll</button><br/>
+    <button {{action 'test'}}>test</button><br/>
   </div>
 
   <button {{action 'logout'}}>Logout</button>
   <div id='loginError' style='display: block;'>Sorry, you are not an admin.</div>
+
   <div>
     {{outlet}}
   </div>
-{{else}}
-  <button {{action 'login'}}>Facebook Login</button>
-{{/if}}

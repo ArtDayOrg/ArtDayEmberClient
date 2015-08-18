@@ -11,3 +11,4 @@
 # misc
 npm-debug.log
 testem.log
+*.sublime-workspace

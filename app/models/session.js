@@ -6,11 +6,11 @@ export default DS.Model.extend({
 	capacity: DS.attr('number'),
 	description: DS.attr('string'),
 	location: DS.attr('string'),
-    preferences: DS.hasMany('preference', {async: true}),
-    enrollments: DS.hasMany('enrollment', {async: true}),
-    imageUrl: DS.attr('string'),
+  preferences: DS.hasMany('preference', {async: true}),
+  enrollments: DS.hasMany('enrollment', {async: true}),
+  imageUrl: DS.attr('string'),
 
-    toStringExtension: function() {
-  		return "sessionName: " + this.get('sessionName');
-  	}
+  toStringExtension: function() {
+  	return "sessionName: " + this.get('sessionName');
+  }
 });
