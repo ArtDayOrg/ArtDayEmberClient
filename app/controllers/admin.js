@@ -3,41 +3,24 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     isAdmin: false,
     meshIsAvailable: true,
-    checkLoginStatus: function() {
-        FB.getLoginStatus(function(response) {
-          if (response.status === 'connected') {
-            // the user is logged in and has authenticated your
-            // app, and response.authResponse supplies
-            // the user's ID, a valid access token, a signed
-            // request, and the time the access token 
-            // and signed request each expire
-            var uid = response.authResponse.userID;
-            var accessToken = response.authResponse.accessToken;
-            // for now, just return true, and allow the user to see admin stuff.
-            // Before release, we'll do some authorization here to ensure that
-            // not all users can see the admin page.
-            return true;
-          } else if (response.status === 'not_authorized') {
-            return true;
-          } else {
-            return false;
-          }
-        }, function(error) {
-            console.log(error);
-        });
-    }.property(),
+    userEmail: null,
+    userImageUrl: null,
     enrollIsAvailable: true,
     actions: {
         login: function() {
+            $('#loginError').hide();
             var self = this;
             FB.login(function(response) {
                 if (response.status === 'connected') {
-                    self.set('isAdmin', true);
-                    FB.api('/me', function(response){
-                        console.log(JSON.stringify(response));
-                    });
-                    FB.api('/me/permissions', function(response){
-                        console.log(JSON.stringify(response));
+                    var adminList = ['forsmann@frontier.com', 'brian.spencer.king@gmail.com'];                    
+                    FB.api('/me?fields=name,email,picture', function(response){
+                        if ($.inArray(response.email, adminList) !== -1) {
+                            self.set('isAdmin', true);
+                        } else {
+                            // user is logged in, but NOT an admin.
+                            self.set('isAdmin', false);  // should already be false.
+                            $('#loginError').show();
+                        }
                     });
                 }
             }, {scope: 'public_profile,email'});
