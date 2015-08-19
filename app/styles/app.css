@@ -23,7 +23,7 @@ table, th, td {
     margin-top: 6px;
 }
 
-.instructions {
+.instructions .session-pane {
     font-family: Helvetica;
     font-size: 16px;
     text-align: center;
@@ -47,6 +47,11 @@ table, th, td {
     padding:0px;
     border:px black;
     cursor: pointer;
+}
+
+.roster {
+    font-family: Helvetica;
+    font-size: 10px;
 }
 
 .student {

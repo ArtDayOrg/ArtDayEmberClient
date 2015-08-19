@@ -1,4 +1,5 @@
 {{#if isAdmin}}
+<<<<<<< Updated upstream
   {{#link-to 'admin.import'}}Import{{/link-to}}<br/>
   {{#link-to 'admin.students'}}Students{{/link-to}}<br/>
   {{#link-to 'admin.sessions'}}Sessions{{/link-to}}<br/>
@@ -7,6 +8,16 @@
     <button {{action 'test'}}>test</button><br/>
   </div>  
   <input type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}} />
+=======
+  <div>
+    User is logged in<br/>
+  </div>
+{{else}}
+  <button {{action 'login'}}>Facebook Login</button>
+{{/if}}
+  {{#link-to 'admin.import'}}Import{{/link-to}}  {{#link-to 'admin.students'}}Students{{/link-to}}  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}  <button {{action 'enroll'}}>Enroll</button>  
+<button {{action 'logout'}}>Logout</button>
+>>>>>>> Stashed changes
   <div>
     {{outlet}}
   </div>

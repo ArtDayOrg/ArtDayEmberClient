@@ -1,7 +1,11 @@
 <div class="col-xs-4">
+    <div class="instructions">
     Period: {{period}}
+    </div>
     <br/>
+    <div class="roster">
     {{#each item as |enrollment|}} 
         __ {{enrollment.student.firstname}} {{enrollment.student.lastname}} ({{enrollment.student.grade}})<br/>
     {{/each}}
+    </div>
 </div>

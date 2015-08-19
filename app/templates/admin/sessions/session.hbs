@@ -1,54 +1,13 @@
-{{#if  isEditing}}
+{{#if isEditing}}
     {{partial 'admin/sessions/edit'}}
     <button {{action 'doneEditing'}}>Done</button>
 {{else}}
-
-
-    {{#if isAdding}}
+{{#if isAdding}}
         {{partial 'admin/sessions/add'}}
         <button {{action 'doneAdding'}}>Done</button>
     {{else}}
-    <img src={{model.imageUrl}} class=image draggable="false" align="middle"> 
-    <table>
-        <tr>
-            <td>Session Name:</td>
-            <td>{{model.sessionName}}</td>
-        </tr>
-        <tr>
-            <td>Capacity:</td>
-            <td>{{model.capacity}}</td>
-        </tr>
-        <tr>
-            <td>Instructor:</td>
-            <td>{{model.instructorName}}</td>
-        </tr>
-        <tr>
-            <td>Location:</td>
-            <td>{{model.location}}</td>
-        </tr>
-        <tr>
-            <td>Image URL:</td>
-            <td>{{model.imageUrl}}</td>
-        </tr>
-        <tr>
-            <td valign="top">Description</td>
-            <!-- 3 handlebars to html escape content -->
-            <td>{{{model.description}}}</td>
-        </tr>
-        <tr>
-            <td>
-                <button {{action 'edit'}}>Edit</button>
-            </td>
-            <td>
-                <button {{action 'delete'}}>Delete</button>
-            </td>
-        </tr>
-    </table>
+        {{session-pane item=model isEditing=isEditing isAdding=isAdding isAdmin=isAdmin}}
     {{/if}}
-
-
-{{session-roster rosters=rosters}}
-
-    <br/>
-    <br/>
 {{/if}}
+<br/>
+{{session-roster rosters=rosters}}
