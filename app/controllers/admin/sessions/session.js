@@ -10,12 +10,11 @@ export default Ember.Controller.extend({
         var i;
         var enrollments = this.get('model.enrollments');
         var numberOfPeriods = enrollments.sortBy('period').reverse().objectAt(0).get('period');
-
         for (i = 1; i <= numberOfPeriods; i++) {
             var periodRoster = enrollments.filterBy('period', i);
-            rosters.push(periodRoster);
+            var sortedPeriodRoster = periodRoster.sortBy('student.lastname');
+            rosters.push(sortedPeriodRoster);
         }
-
         return rosters;
     }.property('model.enrollments'),
 
