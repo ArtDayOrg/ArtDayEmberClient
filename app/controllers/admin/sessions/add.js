@@ -12,8 +12,10 @@ export default Ember.ObjectController.extend({
                 instructorName: this.get('instructorName'),
                 imageUrl: this.get('imageUrl'),
                 description: this.get('description')
-            }
+            };
+
             var newSession = this.store.createRecord('session', newSessionJson);
+            
             newSession.save().then(function(newSession) {
                 console.log('new sessionId: ' + newSession.id);
                 self.transitionToRoute('admin.sessions.session', newSession.id);

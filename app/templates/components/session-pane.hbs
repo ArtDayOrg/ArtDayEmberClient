@@ -1,40 +1,12 @@
-<img src={{item.imageUrl}} class=image draggable="false"> 
-<div class="session-pane">
-    <table>
-        <tr>
-            <td>Session Name:</td>
-            <td>{{item.sessionName}}</td>
-        </tr>
-        <tr>
-            <td>Capacity:</td>
-            <td>{{item.capacity}}</td>
-        </tr>
-        <tr>
-            <td>Instructor:</td>
-            <td>{{item.instructorName}}</td>
-        </tr>
-        <tr>
-            <td>Location:</td>
-            <td>{{item.location}}</td>
-        </tr>
-        <tr>
-            <td>Image URL:</td>
-            <td>{{item.imageUrl}}</td>
-        </tr>
-        <tr>
-            <td valign="top">Description</td>
-            <!-- 3 handlebars to html escape content -->
-            <td>{{{item.description}}}</td>
-        </tr>
-        {{#if isAdmin}}
-        <tr>
-            <td>
-                <button {{action 'edit'}}>Edit</button>
-            </td>
-            <td>
-                <button {{action 'delete'}}>Delete</button>
-            </td>
-        </tr>
-        {{/if}}
-    </table>
-</div>
+<img src={{item.imageUrl}} class="image" draggable="false" align="middle"><br/>
+Session Name: {{item.sessionName}}<br/>
+Capacity: {{item.capacity}}<br/>
+Instructor: {{item.instructorName}}<br/>
+Location: {{item.location}}<br/>
+Image URL: {{item.imageUrl}}<br/>
+Description: {{{item.description}}}<br/>
+Instructions: {{item.instructions}}<br/>    
+{{#if isAdmin}}
+<button {{action 'edit'}}>Edit</button>
+<button {{action 'delete'}}>Delete</button>
+{{/if}}

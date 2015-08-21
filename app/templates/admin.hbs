@@ -1,29 +1,35 @@
 {{#if isAdmin}}
-<<<<<<< Updated upstream
-  {{#link-to 'admin.import'}}Import{{/link-to}}<br/>
-  {{#link-to 'admin.students'}}Students{{/link-to}}<br/>
-  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}<br/>
-  <div>
-    <button {{action 'enroll'}}>Enroll</button><br/>
-    <button {{action 'test'}}>test</button><br/>
-  </div>  
-  <input type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}} />
-=======
-  <div>
-    User is logged in<br/>
-  </div>
-{{else}}
-  <button {{action 'login'}}>Facebook Login</button>
-{{/if}}
-  {{#link-to 'admin.import'}}Import{{/link-to}}  {{#link-to 'admin.students'}}Students{{/link-to}}  {{#link-to 'admin.sessions'}}Sessions{{/link-to}}  <button {{action 'enroll'}}>Enroll</button>  
-<button {{action 'logout'}}>Logout</button>
->>>>>>> Stashed changes
-  <div>
-    {{outlet}}
-  </div>
-{{else}}
-  <input type='image' src='assets/images/fb-login-button.png' {{action 'login'}} />
-{{/if}}
-<div id='loginError' style='display:none;'>Sorry, you are not an admin.</div>
+	<div class="admin-toolbar">
+    <div class="admin-functions">
+	   	{{#link-to 'admin.import'}}Import{{/link-to}} | 
+		  {{#link-to 'admin.students'}}Students{{/link-to}} |  
+		  {{#link-to 'admin.sessions'}}Sessions{{/link-to}} | 
+      {{#link-to 'admin.overview'}}Overview{{/link-to}}
+{{!--       
+      <p class="admin-enroll">
+  		  <button {{action 'enroll'}}>Enroll</button>
+      </p>
+ --}}    
+ </div>
+  	<div class="fb-widget">
+      <div class="fb-user">
+  	 	  <p class="fb-image">
+  		  	<img src={{userImageUrl}}>
+  		  </p>
+        <p class="fb-name">
+        {{adminName}}
+        </p>
+      </div>
+      <div class="fb-logout">
+  		  <input type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}}/>
+      </div>
+    </div>
+	</div>
 
-
+{{else}}
+  <input type='image' src='assets/images/fb-login-button.png' {{action 'login'}}/>
+  <div id='loginError' style='display:none;'>Sorry, you are not an admin.</div>
+{{/if}}
+<div>
+  {{outlet}}
+</div>

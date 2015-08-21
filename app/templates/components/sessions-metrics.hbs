@@ -1,0 +1,17 @@
+
+Demand/Availability
+
+<table>
+    <tr>
+        <th> Name </th>
+        <th> Preferred </th>
+        <th> Enrolled </th>
+    </tr>
+{{#each items as |s|}}
+	<tr>
+		<td>{{s.name}}</td>  
+		<td>{{s.preferred}}</td> 
+		<td>{{s.enrolled}}</td>
+	</tr>
+{{/each}}
+</table>

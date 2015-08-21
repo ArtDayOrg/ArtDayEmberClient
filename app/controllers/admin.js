@@ -1,25 +1,41 @@
+/*global FB, $ */
+
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+    
     init: function() {
         FB.logout();
     },
+
     isAdmin: false,
+    
     meshIsAvailable: true,
-    userEmail: null,
+    
+    adminName: null,
+    
     userImageUrl: null,
+    
     enrollIsAvailable: true,
+    
     actions: {
         login: function() {
+        
             $('#loginError').hide();
             var self = this;
+        
             FB.login(function(response) {
                 if (response.status === 'connected') {
+        
                     var adminList = ['forsmann@frontier.com', 'brian.spencer.king@gmail.com'];                    
                     FB.api('/me?fields=name,email,picture', function(response){
+        
                         if ($.inArray(response.email, adminList) !== -1) {
                             self.set('isAdmin', true);
+                            self.set('adminName', response.name);
+                            self.set('userImageUrl', response.picture.data.url);
                         } else {
+        
                             // user is logged in, but NOT an admin.
                             self.set('isAdmin', false);  // should already be false.
                             $('#loginError').show();
@@ -29,13 +45,16 @@ export default Ember.Controller.extend({
                 }
             }, {scope: 'public_profile,email'});
         },
+        
         logout: function() {
             var self = this;
-            FB.logout(function(response){
+            FB.logout(function(){
                 self.set('isAdmin', false);
             });
         },
+
         enroll: function() {
+        
             function Enrollment(emberSession, emberStudent, period) {
                 this.emberSession = emberSession;
                 this.emberStudent = emberStudent;
@@ -323,167 +342,170 @@ export default Ember.Controller.extend({
             enrollmentsToDB(allEnrollments, outerSelf);
         },
 
-        test: function() {
-            //test at array of enrollments (for a single period) fon instability
-            function testEnrollments() {
+        //beware!!!
+        //testing the enrollments for stability works, 
+        //but it is almost comically unoptimized 
+        //it will take about 90 seconds to test 1320 enrollments
+        // test: function() {
+        //     //test at array of enrollments (for a single period) fon instability
+        //     function testEnrollments() {
 
-                console.log('----testing enrollments for instability----');
-                var testingStartTime = Date.now();
-                var unstable = 0;
+        //         console.log('----testing enrollments for instability----');
+        //         var testingStartTime = Date.now();
+        //         var unstable = 0;
 
-                var enrollment = outerSelf.get('enrollment');
-                var loop = enrollment.sortBy('period').reverse().objectAt(0).get('period') + 1;
-                while (--loop) {
-                    var periodEnrollment = enrollment.filterBy('period', loop);
-                    testEnrollment(periodEnrollment);
-                }
+        //         var enrollment = outerSelf.get('enrollment');
+        //         var loop = enrollment.sortBy('period').reverse().objectAt(0).get('period') + 1;
+        //         while (--loop) {
+        //             var periodEnrollment = enrollment.filterBy('period', loop);
+        //             testEnrollment(periodEnrollment);
+        //         }
 
-                function testEnrollment(enrollment) {
+        //         function testEnrollment(enrollment) {
 
-                    var currentPeriod = enrollment.objectAt(0).get('period');
-                    var unhappyEnrollments = [];
-                    var noPreferences = [];
+        //             var currentPeriod = enrollment.objectAt(0).get('period');
+        //             var unhappyEnrollments = [];
+        //             var noPreferences = [];
 
-                    enrollment.forEach(function (e) {
-                        var student = e.get('student');
-                        var prefs = student.get('preferences.content');
-                        if (prefs.length > 0) {
-                            var topPref = null;
-                            prefs.forEach(function (pref) {
-                                if (!topPref || (pref.get('rank') < topPref.get('rank'))) {
-                                    topPref = pref;
-                                }
-                            });
-                            if (e.get('session.sessionName') !== topPref.get('session.sessionName')) {
-                                unhappyEnrollments.push(e);
-                            }
-                        } else {
-                            noPreferences.push(e);
-                        }
-                    });
+        //             enrollment.forEach(function (e) {
+        //                 var student = e.get('student');
+        //                 var prefs = student.get('preferences.content');
+        //                 if (prefs.length > 0) {
+        //                     var topPref = null;
+        //                     prefs.forEach(function (pref) {
+        //                         if (!topPref || (pref.get('rank') < topPref.get('rank'))) {
+        //                             topPref = pref;
+        //                         }
+        //                     });
+        //                     if (e.get('session.sessionName') !== topPref.get('session.sessionName')) {
+        //                         unhappyEnrollments.push(e);
+        //                     }
+        //                 } else {
+        //                     noPreferences.push(e);
+        //                 }
+        //             });
 
-                    console.log('did not get first choice: ' + unhappyEnrollments.length);
-                    console.log('did not set preferences: ' + noPreferences.length);
+        //             console.log('did not get first choice: ' + unhappyEnrollments.length);
+        //             console.log('did not set preferences: ' + noPreferences.length);
 
-                    unhappyEnrollments.forEach(function (e) {
+        //             unhappyEnrollments.forEach(function (e) {
                         
-                        var unhappyStudent = e.get('student.content');
-                        var jealousArray = [];
-                        var notJealousArray = [];
-                        var unhappyStudentPrefs = unhappyStudent.get('preferences.content');
-                        var jealousRank = unhappyStudentPrefs.length + 1;
-                        var unhappySessionName = e.get('session.sessionName');
-                        unhappyStudentPrefs.forEach(function (p) {
-                            if (p.get('session.sessionName') === unhappySessionName) {
-                                jealousRank = p.get('rank');
-                            }
-                        });
+        //                 var unhappyStudent = e.get('student.content');
+        //                 var jealousArray = [];
+        //                 var notJealousArray = [];
+        //                 var unhappyStudentPrefs = unhappyStudent.get('preferences.content');
+        //                 var jealousRank = unhappyStudentPrefs.length + 1;
+        //                 var unhappySessionName = e.get('session.sessionName');
+        //                 unhappyStudentPrefs.forEach(function (p) {
+        //                     if (p.get('session.sessionName') === unhappySessionName) {
+        //                         jealousRank = p.get('rank');
+        //                     }
+        //                 });
 
-                        var unhappyStudentsEnrollments = e.get('student.enrollments');
-                        unhappyStudentsEnrollments.forEach(function (otherE) {
-                            if (otherE.get('period') !== currentPeriod) {
-                                notJealousArray.push(otherE.get('session.sessionName'));
-                            };
-                        })
+        //                 var unhappyStudentsEnrollments = e.get('student.enrollments');
+        //                 unhappyStudentsEnrollments.forEach(function (otherE) {
+        //                     if (otherE.get('period') !== currentPeriod) {
+        //                         notJealousArray.push(otherE.get('session.sessionName'));
+        //                     }
+        //                 });
 
-                        unhappyStudentPrefs.forEach(function (p) {
-                            var prefName = p.get('session.sessionName');
-                            if (p.get('rank') < jealousRank && !notJealousArray.contains(prefName)) {
-                                jealousArray.push(prefName);
-                            }
-                        });
-                        // console.log('- - - - -')
-                        // console.log(unhappyStudent.get('firstname') + ' grade: ' + unhappyStudent.get('grade'));
-                        // console.log('enrolled: ' + e.emberSession.get('sessionName'));
-                        // console.log('prefers:')
-                        // unhappyStudentPrefs.sortBy('rank').forEach(function (p) {
-                        //     console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
-                        // })
-                        // console.log('jealous of all above rank ' + jealousRank + ' specifically:')
-                        // console.log(jealousArray);
+        //                 unhappyStudentPrefs.forEach(function (p) {
+        //                     var prefName = p.get('session.sessionName');
+        //                     if (p.get('rank') < jealousRank && !notJealousArray.contains(prefName)) {
+        //                         jealousArray.push(prefName);
+        //                     }
+        //                 });
+        //                 // console.log('- - - - -')
+        //                 // console.log(unhappyStudent.get('firstname') + ' grade: ' + unhappyStudent.get('grade'));
+        //                 // console.log('enrolled: ' + e.emberSession.get('sessionName'));
+        //                 // console.log('prefers:')
+        //                 // unhappyStudentPrefs.sortBy('rank').forEach(function (p) {
+        //                 //     console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
+        //                 // })
+        //                 // console.log('jealous of all above rank ' + jealousRank + ' specifically:')
+        //                 // console.log(jealousArray);
 
-                        // noPreferences.forEach(function (e) {
-                        //     var uninterestedStudentsSessionName = e.emberSession.get('sessionName');
-                        //     jealousArray.forEach(function (n) {
-                        //         if (n === uninterestedStudentsSessionName) {
-                        //             console.log(e.emberStudent.get('firstname'), unhappyStudent.get('firstname'));
-                        //          }
-                        //     });
-                        // });
+        //                 // noPreferences.forEach(function (e) {
+        //                 //     var uninterestedStudentsSessionName = e.emberSession.get('sessionName');
+        //                 //     jealousArray.forEach(function (n) {
+        //                 //         if (n === uninterestedStudentsSessionName) {
+        //                 //             console.log(e.emberStudent.get('firstname'), unhappyStudent.get('firstname'));
+        //                 //          }
+        //                 //     });
+        //                 // });
 
-                        unhappyEnrollments.forEach(function (f) {
-                            var otherUnhappyStudent = f.get('student');
-                            var otherJealousArray = [];
-                            var otherNotJealousArray = [];
-                            var otherUnhappyStudentPrefs = otherUnhappyStudent.get('preferences.content');
-                            var otherJealousRank = otherUnhappyStudentPrefs.length + 1;
-                            var otherUnhappySessionName = f.get('session.sessionName');
+        //                 unhappyEnrollments.forEach(function (f) {
+        //                     var otherUnhappyStudent = f.get('student');
+        //                     var otherJealousArray = [];
+        //                     var otherNotJealousArray = [];
+        //                     var otherUnhappyStudentPrefs = otherUnhappyStudent.get('preferences.content');
+        //                     var otherJealousRank = otherUnhappyStudentPrefs.length + 1;
+        //                     var otherUnhappySessionName = f.get('session.sessionName');
 
-                            var otherUnhappyStudentsEnrollments = f.get('student.enrollments');
-                            otherUnhappyStudentsEnrollments.forEach(function (otherE) {
-                                if (otherE.get('period') !== currentPeriod) {
-                                    otherNotJealousArray.push(otherE.get('session.sessionName'));
-                                };
-                            })
-                            otherUnhappyStudentPrefs.forEach(function (p) {
-                                if (p.get('session.sessionName') === otherUnhappySessionName) {
-                                    otherJealousRank = p.get('rank');
-                                }
-                            });
-                            otherUnhappyStudentPrefs.forEach(function (p) {
-                                if (p.get('rank') < otherJealousRank && !otherNotJealousArray.contains(p.get('session.sessionName'))) {
-                                    otherJealousArray.push(p.get('session.sessionName'));
-                                }
-                            });
+        //                     var otherUnhappyStudentsEnrollments = f.get('student.enrollments');
+        //                     otherUnhappyStudentsEnrollments.forEach(function (otherE) {
+        //                         if (otherE.get('period') !== currentPeriod) {
+        //                             otherNotJealousArray.push(otherE.get('session.sessionName'));
+        //                         }
+        //                     });
+        //                     otherUnhappyStudentPrefs.forEach(function (p) {
+        //                         if (p.get('session.sessionName') === otherUnhappySessionName) {
+        //                             otherJealousRank = p.get('rank');
+        //                         }
+        //                     });
+        //                     otherUnhappyStudentPrefs.forEach(function (p) {
+        //                         if (p.get('rank') < otherJealousRank && !otherNotJealousArray.contains(p.get('session.sessionName'))) {
+        //                             otherJealousArray.push(p.get('session.sessionName'));
+        //                         }
+        //                     });
 
-                            var unhappyStudentDesiresSwitch = (jealousArray.indexOf(otherUnhappySessionName) > -1);
-                            var otherUnhappyStudentDesiresSwitch = (otherJealousArray.indexOf(unhappySessionName) > -1);
+        //                     var unhappyStudentDesiresSwitch = (jealousArray.indexOf(otherUnhappySessionName) > -1);
+        //                     var otherUnhappyStudentDesiresSwitch = (otherJealousArray.indexOf(unhappySessionName) > -1);
 
-                            if (unhappyStudentDesiresSwitch && otherUnhappyStudentDesiresSwitch) {
+        //                     if (unhappyStudentDesiresSwitch && otherUnhappyStudentDesiresSwitch) {
 
-                                unstable++;
+        //                         unstable++;
 
-                                console.log('unstable :(')
-                                console.log(unhappyStudent.get('firstname') + ' has ' + unhappySessionName + ' and is jealous of ')
-                                console.log(jealousArray);
-                                var unhappyStudentsCompletePrefs = unhappyStudent.get('preferences');
-                                unhappyStudentsCompletePrefs.forEach(function (p) {
-                                    console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
-                                })
-                                var unhappyStudentsCompleteEnrollments = unhappyStudent.get('enrollments');
-                                unhappyStudentsCompleteEnrollments.forEach(function (enroll) {
-                                    console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
-                                })
-                                console.log(otherUnhappyStudent.get('firstname') + ' has ' + otherUnhappySessionName + ' and is jealous of ')
-                                console.log(otherJealousArray);
-                                var otherUnhappyStudentsCompletePrefs = otherUnhappyStudent.get('preferences');
-                                otherUnhappyStudentsCompletePrefs.forEach(function (p) {
-                                    console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
-                                })
-                                var otherUnhappyStudentsCompleteEnrollments = otherUnhappyStudent.get('enrollments');
-                                otherUnhappyStudentsCompleteEnrollments.forEach(function (enroll) {
-                                    console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
-                                })
-
-
+        //                         console.log('Instability detected');
+        //                         console.log(unhappyStudent.get('firstname') + ' has ' + unhappySessionName + ' and is jealous of ');
+        //                         console.log(jealousArray);
+        //                         var unhappyStudentsCompletePrefs = unhappyStudent.get('preferences');
+        //                         unhappyStudentsCompletePrefs.forEach(function (p) {
+        //                             console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
+        //                         });
+        //                         var unhappyStudentsCompleteEnrollments = unhappyStudent.get('enrollments');
+        //                         unhappyStudentsCompleteEnrollments.forEach(function (enroll) {
+        //                             console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
+        //                         });
+        //                         console.log(otherUnhappyStudent.get('firstname') + ' has ' + otherUnhappySessionName + ' and is jealous of ');
+        //                         console.log(otherJealousArray);
+        //                         var otherUnhappyStudentsCompletePrefs = otherUnhappyStudent.get('preferences');
+        //                         otherUnhappyStudentsCompletePrefs.forEach(function (p) {
+        //                             console.log('\t' + p.get('session.sessionName') + ' rank ' + p.get('rank'));
+        //                         });
+        //                         var otherUnhappyStudentsCompleteEnrollments = otherUnhappyStudent.get('enrollments');
+        //                         otherUnhappyStudentsCompleteEnrollments.forEach(function (enroll) {
+        //                             console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
+        //                         });
 
 
-                            } else {
-                                console.log('no instability!');
-                            }
-                        });
-                    });
-                }
 
-                console.log('unstable: ' + unstable);
-                console.log('testing took ' + (Date.now() - testingStartTime) + ' milliseconds');
-            }
 
-            console.log('testing...')
-            var outerSelf = this;
-            testEnrollments(outerSelf);
+        //                     } else {
+        //                         console.log('no instability!');
+        //                     }
+        //                 });
+        //             });
+        //         }
 
-        }
+        //         console.log('unstable: ' + unstable);
+        //         console.log('testing took ' + (Date.now() - testingStartTime) + ' milliseconds');
+        //     }
+
+        //     console.log('testing...');
+        //     var outerSelf = this;
+        //     testEnrollments(outerSelf);
+        // }
 
     }
 });

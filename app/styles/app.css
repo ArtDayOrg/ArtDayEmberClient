@@ -1,5 +1,15 @@
 table, th, td {
-   border: 0px solid black;   
+   border: 1px solid black;
+   padding: 4px;
+}
+
+td {
+    text-align: left;
+}
+
+th {
+    text-align: center;
+    height: 40px;
 }
 
 .exampleImport {
@@ -8,27 +18,17 @@ table, th, td {
     margin-left: 20px;
 }
 
-.studentName {
-    font-family: Helvetica;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.sessionName {
-    font-family: Helvetica;
-    font-size: 12px;
-    text-align: center;
-    margin-bottom: 12px;
-    margin-top: 6px;
-}
-
-.instructions .session-pane {
+.instructions {
     font-family: Helvetica;
     font-size: 16px;
     text-align: center;
     margin-bottom: 10px;
     margin-top: 10px;
+}
+
+.roster {
+    font-family: Helvetica;
+    font-size: 10px;
 }
 
 .droptarget {
@@ -38,20 +38,84 @@ table, th, td {
     height:100px;
     border:3px dashed black;
     display: flex;
-    justify-content: center;
-    align-items: center;
     border-radius: 20px;
+}
+
+.admin-toolbar {
+    height: 100px;
+}
+
+.admin-functions {
+    float: left;
+    height: 100px;
+    line-height: 100px;
+    vertical-align: middle;
+    width: 80%;
+    font-family: Helvetica;
+    font-size: 24px;
+}
+
+.admin-enroll {
+    height: 20px;
+    width: 60px
+    float: right;
+}
+
+.fb-widget {
+    border: 1px solid black;
+    height: 100px;
+    width: 20%;
+    margin: 0 auto;
+    float: right;
+}
+
+.fb-image {
+    float: right;
+    margin-left: 5px;
+}
+
+.fb-name {
+    line-height: 50px;
+    vertical-align: middle;
+    float: right;
+}
+
+.fb-logout {
+    clear: both;
+    float: right;
 }
 
 .session-tile {
     padding:0px;
-    border:px black;
     cursor: pointer;
 }
 
-.roster {
+.studentName {
     font-family: Helvetica;
-    font-size: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.sessionName .session-detail {
+    font-family: Helvetica;
+    font-size: 12px;
+    text-align: center;
+    margin-bottom: 12px;
+    margin-top: 6px;
+}
+
+.session-pane {
+    padding: 0px;
+}
+
+.student-selector {
+    margin-top: 75px;
+}
+
+.sessions-metrics {
+    width: 100%;
+    margin: auto;
 }
 
 .student {
@@ -67,5 +131,6 @@ table, th, td {
 .image {
     border-radius: 20px; 
     width: 140px;
-    height: 100px;    
+    height: 100px;
+    align: middle;
 }

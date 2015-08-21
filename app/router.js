@@ -15,5 +15,10 @@ export default Router.map(function() {
       this.route('session', {path: '/:session_id'});
       this.route('add');
     });
+    this.route('overview', function() {
+      this.route('sessions');
+      this.route('enrollment');
+      this.route('students');
+    });
   });
 }); 

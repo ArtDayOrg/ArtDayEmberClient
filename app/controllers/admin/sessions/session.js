@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({  
     isEditing: false,
     isAdding: false,
+    isAdmin: true, 
 
     rosters: function () {
         var rosters = [];
