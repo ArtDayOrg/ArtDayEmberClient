@@ -1,17 +1,22 @@
-
-Demand/Availability
+<div class="instructions admin-instructions">
+	Demand{{#if isEnrolled}}/Availability{{/if}}
+</div>
 
 <table>
     <tr>
         <th> Name </th>
         <th> Preferred </th>
-        <th> Enrolled </th>
+        {{#if isEnrolled}}
+	        <th> Enrolled </th>
+	    {{/if}}
     </tr>
 {{#each items as |s|}}
 	<tr>
 		<td>{{s.name}}</td>  
 		<td>{{s.preferred}}</td> 
-		<td>{{s.enrolled}}</td>
+		{{#if isEnrolled}}
+			<td>{{s.enrolled}}</td>
+		{{/if}}
 	</tr>
 {{/each}}
 </table>
