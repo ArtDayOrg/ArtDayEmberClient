@@ -4,13 +4,8 @@
 	   	{{#link-to 'admin.import'}}Import{{/link-to}} | 
 		  {{#link-to 'admin.students'}}Students{{/link-to}} |  
 		  {{#link-to 'admin.sessions'}}Sessions{{/link-to}} | 
-      {{#link-to 'admin.overview'}}Overview{{/link-to}}
-{{!--       
-      <p class="admin-enroll">
-  		  <button {{action 'enroll'}}>Enroll</button>
-      </p>
- --}}    
- </div>
+      {{#link-to 'admin.overview'}}Overview{{/link-to}} |    
+    </div>
   	<div class="fb-widget">
       <div class="fb-user">
   	 	  <p class="fb-image">
@@ -24,11 +19,12 @@
   		  <input type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}}/>
       </div>
     </div>
-	</div>
-
+  </div>
 {{else}}
   <input type='image' src='assets/images/fb-login-button.png' {{action 'login'}}/>
-  <div id='loginError' style='display:none;'>Sorry, you are not an admin.</div>
+  <div id='loginError' style='display:none;'>
+    Sorry, you are not an admin.
+  </div>
 {{/if}}
 <div>
   {{outlet}}

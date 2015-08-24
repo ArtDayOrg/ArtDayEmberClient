@@ -1,16 +1,13 @@
-
-<div class="tile">
-    {{#draggable-object-target action="sessionDropped" rank=rank}}
-        {{#with item.session as |session|}}
-            {{#draggable-object content=session}}
-                {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
-            {{/draggable-object}}
-        {{else}}
-            <div class="droptarget">
-                <h3>
-                    {{rank}}
-                </h3>
-            </div>
-        {{/with}}
-    {{/draggable-object-target}}
-</div>
+{{#draggable-object-target action="sessionDropped" rank=rank}}
+    {{#with item.session as |session|}}
+        {{#draggable-object content=session}}
+            {{#session-tile imageUrl=session.imageUrl sessionName=session.sessionName}}{{/session-tile}}  
+        {{/draggable-object}}
+    {{else}}
+        <div class="droptarget">
+            <h3>
+                {{rank}}
+            </h3>
+        </div>
+    {{/with}}
+{{/draggable-object-target}}

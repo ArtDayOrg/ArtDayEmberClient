@@ -5,7 +5,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     
     init: function() {
-        FB.logout();
+        // FB.logout();
     },
 
     isAdmin: false,
@@ -15,10 +15,47 @@ export default Ember.Controller.extend({
     adminName: null,
     
     userImageUrl: null,
+
+    enrollmentBegan: false,
+
+    enrollmentSucceeded: false,
+
+    enrollmentFailed: false,
     
-    enrollIsAvailable: true,
+    isEnrolled: function () {
+        console.log('admin isEnrolled: ' + (this.get('enrollment.length') > 0));
+        return (this.get('enrollment.length') > 0);
+    }.property('enrollment.length'),
     
+    hasSetPrefs: function () {
+        var count = 0;
+        var students = this.get('students');
+        students.forEach(function (s) {
+            if (s.get('preferences.length') > 0) {
+                count += 1;
+            };
+        });
+        return count;
+    }.property('model.students.@each.preferences'),
+
+    totalCapacity: function () {
+        var count = 0;
+        var sessions = this.get('sessions');
+        sessions.forEach(function (s) {
+            count += s.get('capacity');
+        });
+        return count;
+    }.property('model.sessions.@each.capacity'),
+
+    enrollmentAvailable: function () {
+        if (this.get('totalCapacity') >= this.get('students.length')) {
+            return true;
+        }
+        return false;
+    }.property('totalCapacity', 'students.length'),
+
     actions: {
+
         login: function() {
         
             $('#loginError').hide();
@@ -27,7 +64,8 @@ export default Ember.Controller.extend({
             FB.login(function(response) {
                 if (response.status === 'connected') {
         
-                    var adminList = ['forsmann@frontier.com', 'brian.spencer.king@gmail.com'];                    
+                    var adminList = ['forsmann@frontier.com', 'brian.spencer.king@gmail.com'];
+
                     FB.api('/me?fields=name,email,picture', function(response){
         
                         if ($.inArray(response.email, adminList) !== -1) {
@@ -147,6 +185,42 @@ export default Ember.Controller.extend({
                 });
             }
 
+            function enrollmentsToDB(enrollments, outerSelf) {
+                var successes = 0;
+                var needed = 0;
+                var i;
+
+                for (i = 0; i < enrollments.length; i++) {
+                    needed += enrollments[i].length;
+                }
+
+                console.log('needed: ' + needed);
+
+                allEnrollments.forEach(function (enrollmentArray, index) {
+                    enrollmentArray.forEach(function (enrollment) {
+                        var newEnrollment = outerSelf.store.createRecord('enrollment', {
+                            student: enrollment.emberStudent,
+                            session: enrollment.emberSession,
+                            period: index+1
+                        });
+                        newEnrollment.save().then(function () {
+                            successes += 1;
+                            console.log('success '+ successes);
+                            if (successes === needed) {
+                                outerSelf.set('enrollmentSucceeded', true);
+                                console.log(outerSelf.get('enrollment'));
+                                outerSelf.get('enrollment').then(function (result) {
+                                    console.log(result);
+                                });
+                            }
+                        }, function (reason) {
+                            console.log('failure: ' + reason);
+                            outerSelf.set('enrollmentFailed', true);
+                        });
+                    });
+                });
+            }
+
             function mesh(sessions, students, period) {
 
                 //helper
@@ -233,7 +307,8 @@ export default Ember.Controller.extend({
                 //Gail-Shapley Algorithm starts here, adopted from Algorithm Design Kleinberg and Tardos
                 //because we process students preferences and not the sessions preferences, we are sure
                 //students cannot cheat by lying about their preferences: http://www.columbia.edu/~js1353/pubs/tst-ipco99.pdf
-                //pgs 432-438 (students correspond to men in the discussion in the paper)
+                //pgs 432-438 (assume students correspond to men in the discussion in the paper)
+
                 //while there is a student nextStudent who is free and hasn't attempted enrollment in every class                
                 while (true) {
                     
@@ -262,7 +337,8 @@ export default Ember.Controller.extend({
                     //otherwise, there is such a session but the session is currently full
                     } else if (nextStudentsSession) {
                         
-                        //if that session prefers the next student to it's least desired student (index 0 of the sorted array)
+                        //if that session prefers the next student to it's least desired student 
+                        //(index 0 of the sorted array)
                         nextStudentsSession.proposedEnrollments.sort(function (a, b) {
                             return a.priority - b.priority;
                         });
@@ -278,7 +354,7 @@ export default Ember.Controller.extend({
                             nextStudentsSession.proposedEnrollments.shift();
                             nextStudentsSession.proposedEnrollments.push(nextStudent);
                         
-                        //the session prefers its lowest enrolled member to nextStudent
+                        //else the session prefers its lowest enrolled member to nextStudent
                         } else {
 
                             //the next student is denied enrollment
@@ -286,8 +362,8 @@ export default Ember.Controller.extend({
                             nextStudent.deniedEnrollments.push(nextStudentsSession);
                         }
 
-                    //(User should never enter because we check capacity vs. number of students before giving them the option to enroll)
-                    //the total capacity is less than the total number of students.
+                    //else the total capacity is less than the total number of students.
+                    //(our app should never enter because we check capacity vs. number of students before giving them the option to enroll)
                     //if we wanted to allow less capacity than students, leaving the least preferred to be unenrolled, 
                     //then we would not break here, but we don't allow that.
                     } else {
@@ -299,7 +375,8 @@ export default Ember.Controller.extend({
                 return createEnrollments(sessions); 
             }
 
-            var startDate = Date.now();
+            console.log('enrollmentBegan');
+            this.set('enrollmentBegan', true);
 
             //context for accessing model inside loading functions
             var outerSelf = this;
@@ -310,33 +387,12 @@ export default Ember.Controller.extend({
 
             var allEnrollments = [];
 
-            var loop = 3;
-            while (loop--) {
-                var enrollments = mesh(sessions, students, loop+1);
+            var loop = 4;
+            while (--loop) {
+                var enrollments = mesh(sessions, students, loop);
                 allEnrollments.push(enrollments);
                 resetStudents(students);
                 resetSessions(sessions);
-            }
-
-            console.log(allEnrollments);
-            console.log('total time: ' + (Date.now() - startDate) + ' milliseconds');
-            
-            function enrollmentsToDB(enrollments, outerSelf) {
-                
-                allEnrollments.forEach(function (enrollmentArray, index) {
-                    enrollmentArray.forEach(function (enrollment) {
-                        var newEnrollment = outerSelf.store.createRecord('enrollment', {
-                            student: enrollment.emberStudent,
-                            session: enrollment.emberSession,
-                            period: index+1
-                        });
-                        newEnrollment.save().then(function () {
-                            console.log(newEnrollment.get('student.firstname') + ' enrolls in ' + newEnrollment.get('session.sessionName') + ' during period ' + newEnrollment.get('period'));
-                        }, function (reason) {
-                            console.log('failure: ' + reason);
-                        });
-                    });
-                });
             }
 
             enrollmentsToDB(allEnrollments, outerSelf);

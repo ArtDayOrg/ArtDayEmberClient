@@ -26,6 +26,10 @@ th {
     margin-top: 10px;
 }
 
+.admin-instructions {
+    text-align: left !important;
+}
+
 .roster {
     font-family: Helvetica;
     font-size: 10px;
@@ -57,21 +61,23 @@ th {
 
 .admin-enroll {
     height: 20px;
-    width: 60px
-    float: right;
+    width: 60px;
+    clear: both;
 }
 
 .fb-widget {
-    border: 1px solid black;
     height: 100px;
     width: 20%;
     margin: 0 auto;
+    padding-top:10px;
     float: right;
 }
 
 .fb-image {
     float: right;
     margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
 }
 
 .fb-name {
@@ -116,6 +122,11 @@ th {
 .sessions-metrics {
     width: 100%;
     margin: auto;
+}
+
+.grade-metrics {
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .student {
