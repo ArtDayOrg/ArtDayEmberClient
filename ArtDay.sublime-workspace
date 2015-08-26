@@ -152,6 +152,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/helpers",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin",
@@ -166,6 +167,8 @@
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/students-metrics.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/period-roster.js",
@@ -180,9 +183,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/edit.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/session.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/students.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/fb-widget.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/fb-widget.hbs",
 		"/Users/Dev/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
