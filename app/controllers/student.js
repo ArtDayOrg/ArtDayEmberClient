@@ -2,6 +2,10 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+    descriptionForDisplay: 'Click a session to see details.',
+
+    sessionNameForDisplay: '',
+
     allPrefsSet: function() {
         if (this.get('model.preferences.length') === 6) {
             return true;
@@ -147,8 +151,11 @@ export default Ember.Controller.extend({
             var thisStudent = this.get('model');
             thisStudent.set('locked', true);
             thisStudent.save();
+        },
+        
+        changeDescription: function(description, sessionName) {
+            this.set('descriptionForDisplay', description);
+            this.set('sessionNameForDisplay', sessionName)
         }
     }
-
-
 }); 

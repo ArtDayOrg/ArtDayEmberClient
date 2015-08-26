@@ -1,22 +1,26 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({  
+
     isEditing: false,
+    
     isAdding: false,
-    isAdmin: true, 
+
+    adminController: Ember.inject.controller('admin'),
+    admin: Ember.computed.reads('adminController'),
 
     rosters: function () {
         var rosters = [];
         var i;
-        var enrollments = this.get('model.enrollments');
-        var numberOfPeriods = enrollments.sortBy('period').reverse().objectAt(0).get('period');
+        var enrollment = this.get('model.enrollments');
+        var numberOfPeriods = enrollment.sortBy('period').reverse().objectAt(0).get('period');
         for (i = 1; i <= numberOfPeriods; i++) {
-            var periodRoster = enrollments.filterBy('period', i);
+            var periodRoster = enrollment.filterBy('period', i);
             var sortedPeriodRoster = periodRoster.sortBy('student.lastname');
             rosters.push(sortedPeriodRoster);
         }
         return rosters;
-    }.property('model.enrollments'),
+    }.property('model'),
 
     actions: {
         
@@ -34,7 +38,7 @@ export default Ember.Controller.extend({
             this.get('model').destroyRecord().then(function() {
                 self.transitionToRoute('admin.sessions');
             }, function(err) {
-                console.log(err);
+                console.error(err);
             });
         },
 

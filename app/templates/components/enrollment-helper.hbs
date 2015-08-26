@@ -1,0 +1,33 @@
+<div class="instructions admin-instructions">
+	{{admin.hasSetPrefs}} of {{admin.students.length}} students have set their preferences.<br/>
+	<br/>
+	{{admin.sessions.length}} sessions give {{admin.totalCapacity}} total capacity.<br/>
+	<br/>
+
+	{{#if admin.isEnrolled}}
+		{{#if admin.enrollmentBegan}}
+			{{#if admin.enrollmentSucceeded}}
+			Success! Enrollments successfully set<br/>
+			{{else}}{{#if admin.enrollmentFailed}}
+			Failure.
+			{{else}}
+			<div class="spinner">
+				<img src="http://i.imgur.com/FYRaRXg.gifv" draggable="false">
+			</div>
+			Spinner!  Spin Spin Spin.
+			{{/if}}{{/if}}
+		{{else}}
+		Enrollments already set!
+		{{/if}}
+	{{else}}{{#if admin.enrollmentAvailable}}
+		When you press this button, take a quick coffee break.  Processing {{admin.students.length}} students takes a couple minutes.  If you navigate away from this page before you see a success message, you may break the enrollment process<br/>
+		<br/>
+		{{#unless admin.enrollmentBegan}}
+		<p class="admin-enroll">
+	  		<button {{action 'enroll'}}>Enroll</button>
+		</p>
+		{{/unless}}
+	{{else}} 
+		The sessions total capacity of {{admin.totalCapacity}} is insufficient to enroll all {{admin.students.length}} students.  Add more session capacity to enable enrollments.
+	{{/if}}{{/if}}
+</div>

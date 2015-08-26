@@ -1,35 +1,32 @@
 <div class="student">
+    <div class="studentName" draggable="false"> 
+        {{model.firstname}} {{model.lastname}}
+    </div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-4">
-                <div class="studentName" draggable="false"> 
-                    {{model.firstname}} {{model.lastname}}
-                </div>
-            </div>
-            <div class="col-xs-8">
+        <div class="row student-display">
+            <div class="col-xs-4 student-display-left">
+                <p class="centered">
                 {{#if enrolled}}
-                    <div class="instructions">
-                        Enjoy Art Day!
-                    </div>
-                {{else}}
-                    {{#if allPrefsSet}}
-                        {{#if model.locked}}
-                             <div class="instructions">
-                                Your preferences are locked.
-                            </div>
-                        {{else}}
-                            <div class="instructions" style='margin: 0 auto; width:100%'>
-                                <button {{action 'lockPrefs'}} style='display:block;width:250px;margin:10px auto;'>
-                                    Lock in Preferences
-                                </button>
-                            </div>
-                        {{/if}}
+                    Enjoy Art Day!
+                {{else}}{{#if allPrefsSet}}
+                    {{#if model.locked}}
+                        Your preferences are locked.
                     {{else}}
-                        <div class="instructions" draggable="false">
-                            Drag and Drop to set your preferences.
-                        </div>         
-                    {{/if}}
-                {{/if}}
+                        <button {{action 'lockPrefs'}} class="centered-button">
+                            Lock in Preferences
+                        </button>
+                    {{/if}}{{else}}
+                        Drag and Drop to set your preferences.
+                {{/if}}{{/if}}
+                </p>
+            </div>
+            <div class="col-xs-8 description-display">
+                <p class="centered">
+                    <div class="student-display-h">
+                        {{sessionNameForDisplay}}
+                    </div>
+                {{{descriptionForDisplay}}}
+                </p>
             </div>
         </div>
     </div>
@@ -41,7 +38,8 @@
             {{#each model.enrollments as |enrollment|}}
                 <div class="col-xs-4">
                     <div class="instructions">
-                        {{session-tile imageUrl=enrollment.session.imageUrl sessionName=enrollment.session.sessionName}}
+                        {{session-tile imageUrl=enrollment.session.imageUrl sessionName=enrollment.session.sessionName 
+                            description=enrollment.session.description changeDescription="changeDescription"}}
                         Period: {{enrollment.period}}<br/>
                         Instructor: {{enrollment.session.instructorName}}<br/>
                         Location: {{enrollment.session.location}}<br/>
@@ -56,13 +54,15 @@
             {{#if model.locked}}
                 {{#each rankedOrNullPrefsArray as |pref|}}
                     <div class="col-md-2">
-                        {{session-tile imageUrl=pref.session.imageUrl sessionName=pref.session.sessionName}}  
+                        {{session-tile imageUrl=pref.session.imageUrl sessionName=pref.session.sessionName 
+                            description=pref.session.description changeDescription="changeDescription"}}  
                     </div>
                 {{/each}}
             {{else}}
                 {{#each rankedOrNullPrefsArray as |item index|}}
                     <div class="col-md-2">
-                        {{pref-tile item=item index=index sessionDropped="sessionDropped"}}
+                        {{pref-tile item=item index=index sessionDropped="sessionDropped" 
+                            changeDescription="changeDescription" description=item.session.description}}
                     </div>    
                 {{/each}}
             {{/if}}
@@ -78,7 +78,8 @@
                     {{#each availableSessions as |availableSession|}}
                         <div class="col-md-2">
                             {{#draggable-object content=availableSession}}
-                                    {{session-tile imageUrl=availableSession.imageUrl sessionName=availableSession.sessionName}}
+                                    {{session-tile imageUrl=availableSession.imageUrl sessionName=availableSession.sessionName 
+                                        description=availableSession.description changeDescription="changeDescription"}}
                             {{/draggable-object}}
                         </div>
                     {{/each}}

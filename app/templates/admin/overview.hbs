@@ -1,10 +1,14 @@
-<div class="row">
-    <div class="col-xs-2">
-    	{{#link-to 'admin.overview.enrollment'}}Enrollment<br/>{{/link-to}}
-    	{{#link-to 'admin.overview.sessions'}}Session Metrics<br/>{{/link-to}}
-    	{{#link-to 'admin.overview.students'}}Student Metrics<br/>{{/link-to}}
-    </div>    
-    <div class="col-xs-10">
-        {{outlet}}
-    </div>    
-</div> 
+{{#if admin.isAdmin}}
+	<div class="row">
+	    <div class="col-xs-2">
+	    	{{#link-to 'admin.overview.enrollment'}}Enrollment<br/>{{/link-to}}
+	    	{{#link-to 'admin.overview.sessions'}}Session Metrics<br/>{{/link-to}}
+	    	{{#link-to 'admin.overview.students'}}Student Metrics<br/>{{/link-to}}
+	    </div>    
+	    <div class="col-xs-10">
+	        {{outlet}}
+	    </div>    
+	</div>
+{{else}}
+	{{not-admin}}
+{{/if}}

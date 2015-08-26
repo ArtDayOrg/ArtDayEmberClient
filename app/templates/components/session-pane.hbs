@@ -8,5 +8,7 @@ Description: {{{item.description}}}<br/>
 Instructions: {{item.instructions}}<br/>    
 {{#if isAdmin}}
 	<button {{action 'edit'}}>Edit</button>
-	<button {{action 'delete'}}>Delete</button>
+	{{#unless isEnrolled}}
+		<button {{action 'delete'}}>Delete</button>
+	{{/unless}}
 {{/if}}

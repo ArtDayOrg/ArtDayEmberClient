@@ -138,7 +138,7 @@ export default Ember.Controller.extend({
 		console.log(grades);
 		return grades;
 
-	}.property('students.length', 'students.@each', 'students'),
+	}.property('enrollment.length', 'students.@each.preferences'),
 
 	metricsOverview: function() {
 		return this.get('students.length');

@@ -23,7 +23,6 @@ export default Ember.Controller.extend({
     enrollmentFailed: false,
     
     isEnrolled: function () {
-        console.log('admin isEnrolled: ' + (this.get('enrollment.length') > 0));
         return (this.get('enrollment.length') > 0);
     }.property('enrollment.length'),
     
@@ -45,7 +44,7 @@ export default Ember.Controller.extend({
             count += s.get('capacity');
         });
         return count;
-    }.property('model.sessions.@each.capacity'),
+    }.property('sessions.@each.capacity', 'sessions.length'),
 
     enrollmentAvailable: function () {
         if (this.get('totalCapacity') >= this.get('students.length')) {
@@ -131,7 +130,7 @@ export default Ember.Controller.extend({
                     this.bumpCount = 0;
                     this.proposedEnrollment = null;
                     this.deniedEnrollments = [];
-                    this.enrolled = [];                            
+                    this.enrolled = [];
                 }
 
                 var students = [];
@@ -194,8 +193,6 @@ export default Ember.Controller.extend({
                     needed += enrollments[i].length;
                 }
 
-                console.log('needed: ' + needed);
-
                 allEnrollments.forEach(function (enrollmentArray, index) {
                     enrollmentArray.forEach(function (enrollment) {
                         var newEnrollment = outerSelf.store.createRecord('enrollment', {
@@ -208,10 +205,6 @@ export default Ember.Controller.extend({
                             console.log('success '+ successes);
                             if (successes === needed) {
                                 outerSelf.set('enrollmentSucceeded', true);
-                                console.log(outerSelf.get('enrollment'));
-                                outerSelf.get('enrollment').then(function (result) {
-                                    console.log(result);
-                                });
                             }
                         }, function (reason) {
                             console.log('failure: ' + reason);
@@ -224,6 +217,7 @@ export default Ember.Controller.extend({
             function mesh(sessions, students, period) {
 
                 //helper
+                //iterates through sessions and returns an array of all enrollments
                 function createEnrollments(sessions) {
                     var enrollments = [];
                     for (var i = 0; i<sessions.length; i++) {
@@ -242,6 +236,21 @@ export default Ember.Controller.extend({
                     var student;
                     for (var i = 0; i < students.length; i++) {
                         student = students.objectAt(i);
+
+                        // if a student has no proposed enrollment and has been denied from every session, then that student would be orphaned.
+                        // this could occur in rare cases, for example where a student without preferences is assigned the two least popular sessions during the first two runs through
+                        // and then is processed late in the last run through, when only the 2 sessions they are already assigned to are available.
+                        // to handle this special case, we set their denied enrollments to be only those sessions they are enrolled in, then
+                        // give them priority over all other students without preferences and try again.  this ensures no students are orphaned and that no orphan bumps a student who did
+                        // set their preferences
+                        if (student.proposedEnrollment === null && student.deniedEnrollments.length === sessions.length) {
+                            student.deniedEnrollments = [];
+                            student.enrolled.forEach(function (e) {
+                                student.deniedEnrollments.push(e);
+                            });
+                            student.priority += 1;
+                            return student;
+                        }
                         if (student.proposedEnrollment === null && student.deniedEnrollments.length !== sessions.length) {
                             return student;
                         }
@@ -267,7 +276,6 @@ export default Ember.Controller.extend({
                     }
 
                     function sessionNameFilter(s) {
-
                          return student.preferences.objectAt(i).get('session.sessionName') === s.sessionName;
                     }
 
@@ -342,7 +350,6 @@ export default Ember.Controller.extend({
                         nextStudentsSession.proposedEnrollments.sort(function (a, b) {
                             return a.priority - b.priority;
                         });
-
                         if (nextStudent.priority > nextStudentsSession.proposedEnrollments[0].priority) {
 
                             //the least desired student is bumped and the next student gets the enrollment
@@ -372,6 +379,7 @@ export default Ember.Controller.extend({
                     }
                 }
 
+                //return an array of enrollments 
                 return createEnrollments(sessions); 
             }
 
@@ -387,10 +395,15 @@ export default Ember.Controller.extend({
 
             var allEnrollments = [];
 
+            //3,2,1
             var loop = 4;
             while (--loop) {
                 var enrollments = mesh(sessions, students, loop);
                 allEnrollments.push(enrollments);
+                //if we are going to loop again, reset students and sessions
+                if (loop === 1) {
+                    break;
+                }
                 resetStudents(students);
                 resetSessions(sessions);
             }
@@ -398,10 +411,19 @@ export default Ember.Controller.extend({
             enrollmentsToDB(allEnrollments, outerSelf);
         },
 
-        //beware!!!
-        //testing the enrollments for stability works, 
-        //but it is almost comically unoptimized 
-        //it will take about 90 seconds to test 1320 enrollments
+        // the following tests the enrollments for stability 
+        // (instability === there exist 2 students who 
+        // would change sessions for a single period)
+        //
+        // beware!!!
+        //
+        // testing the enrollments for stability works, 
+        // but it is comically unoptimized (it takes about 90 seconds to test 1320 enrollments)
+        // not intended to use in production, only during development 
+        // to ensure the mesh is still producing stable enrollments after changes.
+        //
+        // optimization is left as an exercise to the reader.
+        //
         // test: function() {
         //     //test at array of enrollments (for a single period) fon instability
         //     function testEnrollments() {
@@ -522,7 +544,7 @@ export default Ember.Controller.extend({
 
         //                         unstable++;
 
-        //                         console.log('Instability detected');
+        //                         console.error('Instability detected');
         //                         console.log(unhappyStudent.get('firstname') + ' has ' + unhappySessionName + ' and is jealous of ');
         //                         console.log(jealousArray);
         //                         var unhappyStudentsCompletePrefs = unhappyStudent.get('preferences');
@@ -554,13 +576,13 @@ export default Ember.Controller.extend({
         //             });
         //         }
 
-        //         console.log('unstable: ' + unstable);
+        //         console.error('unstable: ' + unstable);
         //         console.log('testing took ' + (Date.now() - testingStartTime) + ' milliseconds');
         //     }
 
         //     console.log('testing...');
         //     var outerSelf = this;
-        //     testEnrollments(outerSelf);
+        //     testEnrollments();
         // }
 
     }
