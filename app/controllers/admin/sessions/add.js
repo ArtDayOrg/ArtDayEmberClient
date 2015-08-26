@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+
+    adminController: Ember.inject.controller('admin'),
+    admin: Ember.computed.reads('adminController'),
+
     actions: {
         addSession: function() {
             var self = this;

@@ -1,1 +1,5 @@
-{{students-metrics grades=metricsByGrade isEnrolled=admin.isEnrolled}}
+{{#if admin.isAdmin}}
+	{{students-metrics grades=metricsByGrade isEnrolled=admin.isEnrolled}}
+{{else}}
+	{{not-admin}}
+{{/if}}

@@ -33,5 +33,5 @@ export default Ember.Controller.extend({
 		}
 		return sessionsMetrics;
 
-	}.property('sessions.length', 'sessions')
+	}.property('sessions.length', 'sessions', 'enrollment.length')
 });

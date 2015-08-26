@@ -1,11 +1,16 @@
-{{#if isEditing}}
-    {{partial 'admin/sessions/edit'}}
-    <button {{action 'doneEditing'}}>Done</button>
-{{else}}{{#if isAdding}}
-    {{partial 'admin/sessions/add'}}
-    <button {{action 'doneAdding'}}>Done</button>
+{{#if admin.isAdmin}}
+	{{#if isEditing}}
+	    {{partial 'admin/sessions/edit'}}
+	    <button {{action 'doneEditing'}}>Done</button>
+	{{else}}{{#if isAdding}}
+	    {{partial 'admin/sessions/add'}}
+	    <button {{action 'doneAdding'}}>Done</button>
+	{{else}}
+	    {{session-pane item=model edit="edit" delete="delete" isEditing=isEditing isAdding=isAdding isAdmin=admin.isAdmin isEnrolled=admin.isEnrolled}}
+	{{/if}}{{/if}}
+	{{#if admin.isEnrolled}}
+		{{session-roster rosters=rosters}}
+	{{/if}}
 {{else}}
-    {{session-pane item=model isEditing=isEditing isAdding=isAdding isAdmin=isAdmin}}
-{{/if}}{{/if}}
-
-{{session-roster rosters=rosters}}
+	{{not-admin}}
+{{/if}}

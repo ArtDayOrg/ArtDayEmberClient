@@ -2,7 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
-    isAdmin: true,
+    adminController: Ember.inject.controller('admin'),
+    admin: Ember.computed.reads('adminController'),
 
     searchFilter: '',
 
@@ -30,6 +31,29 @@ export default Ember.Controller.extend({
         unlock: function(student) {
             student.set('locked', false);
             student.save();
+        },
+
+        doImport: function(importText) {
+            var body = [];
+            var newStudents = importText.split('\n');
+            for (var i = 0; i < newStudents.length; i++) {
+                var student = newStudents[i].split(',');
+                var studentJson = {
+                    firstName: student[0],
+                    lastName: student[1],
+                    grade: student[2],
+                    locked: false
+                };
+                body.push(studentJson);
+            }
+
+            Ember.$.ajax({
+                method: 'POST',
+                url: 'http://localhost:51773/api/students',
+                data: JSON.stringify(body)
+            }).done(function(msg) {
+                alert('Data Saved: ' + msg );
+            });
         }
     }
 }); 

@@ -1,24 +1,11 @@
 {{#if isAdmin}}
 	<div class="admin-toolbar">
     <div class="admin-functions">
-	   	{{#link-to 'admin.import'}}Import{{/link-to}} | 
 		  {{#link-to 'admin.students'}}Students{{/link-to}} |  
 		  {{#link-to 'admin.sessions'}}Sessions{{/link-to}} | 
-      {{#link-to 'admin.overview'}}Overview{{/link-to}} |    
+      {{#link-to 'admin.overview'}}Overview{{/link-to}} 
     </div>
-  	<div class="fb-widget">
-      <div class="fb-user">
-  	 	  <p class="fb-image">
-  		  	<img src={{userImageUrl}}>
-  		  </p>
-        <p class="fb-name">
-        {{adminName}}
-        </p>
-      </div>
-      <div class="fb-logout">
-  		  <input type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}}/>
-      </div>
-    </div>
+      {{fb-widget adminName=adminName userImageUrl=userImageUrl logout='logout'}}
   </div>
 {{else}}
   <input type='image' src='assets/images/fb-login-button.png' {{action 'login'}}/>

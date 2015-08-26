@@ -12,6 +12,19 @@ th {
     height: 40px;
 }
 
+
+/*
+vertical centering from:;
+http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
+*/
+h3 {
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+    width: 100%;
+
+}
+
 .exampleImport {
     font-family: Helvetica;
     font-size: 16px;
@@ -43,6 +56,7 @@ th {
     border:3px dashed black;
     display: flex;
     border-radius: 20px;
+    text-align: center;
 }
 
 .admin-toolbar {
@@ -100,15 +114,50 @@ th {
     font-family: Helvetica;
     font-size: 20px;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
-.sessionName .session-detail {
+.sessionName {
     font-family: Helvetica;
     font-size: 12px;
     text-align: center;
     margin-bottom: 12px;
     margin-top: 6px;
+    width: 100%;
+}
+
+.student-display {
+    height: 110px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.student-display-left {
+    text-align: center;
+    height: inherit;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.student-display-h {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.centered {
+    text-align: center;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
+}
+
+.description-display {
+    text-align: center;
+    height: inherit;
+    top: 50%;
+    position: relative;
+    transform: translateY(-50%);
 }
 
 .session-pane {
@@ -143,5 +192,6 @@ th {
     border-radius: 20px; 
     width: 140px;
     height: 100px;
-    align: middle;
+    display: block;
+    margin: auto;
 }

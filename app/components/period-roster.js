@@ -7,5 +7,5 @@ export default Ember.Component.extend({
 	//off by one fix from index
 	period: Ember.computed('index', function () {
 		return this.get('index')+1;
-	}),
+	})
 });
