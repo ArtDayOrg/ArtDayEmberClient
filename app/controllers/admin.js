@@ -5,7 +5,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     
     init: function() {
-        FB.logout();
+        // FB.logout();
     },
 
     isAdmin: false,
