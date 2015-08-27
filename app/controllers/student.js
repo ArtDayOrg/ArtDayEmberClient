@@ -22,13 +22,16 @@ export default Ember.Controller.extend({
     // by a null element in the array.  rankedOrNullArray[0] is the preference with rank 1 or null.
     // Our template wants to cycle through this and display pref tiles or a drop box when null.
     rankedOrNullPrefsArray: function() {
+
+        function sortByRank(pref) {
+            if (pref.get('rank') === i) {
+                tempPref = pref;
+            }
+        }
+
         var array = this.get('model.preferences');
         var rankedOrNullPrefsArray = [];
-        function sortByRank(pref) {
-                if (pref.get('rank') === i) {
-                    tempPref = pref;
-                }
-            }
+
         for (var i = 1; i < 7; i++) {
             var tempPref = 0;
             array.forEach(sortByRank);
@@ -39,7 +42,7 @@ export default Ember.Controller.extend({
             }
         }
         return rankedOrNullPrefsArray;
-    }.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
+    }.property('model.preferences.@each.rank', 'model.preferences.@each.session', 'model'),
 
     availableSessions: function () {
         var prefs = this.get('model.preferences');
@@ -56,7 +59,7 @@ export default Ember.Controller.extend({
                 }
         });
         return availableSessions;
-    }.property('model.preferences.@each.rank', 'model.preferences.@each.session'),
+    }.property('model.preferences.@each.rank', 'model.preferences.@each.session', 'model'),
 
     actions: {
 
@@ -64,9 +67,9 @@ export default Ember.Controller.extend({
 
             function saveThenLog(pref) {
                 pref.save().then(function () {
-                    console.log('saved!');
+                    return;
                 }, function (reason) {
-                    console.log('failure: ' + reason);
+                    console.error('failure: ' + reason);
                 }); }
 
             var oldPrefs = this.get('model.preferences');
@@ -75,6 +78,8 @@ export default Ember.Controller.extend({
             if (ops.target.get('rank') === 0) {
                 if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {
                     var prefToDelete = oldPrefs.filterBy('session.sessionName', session.get('sessionName')).objectAt(0);
+
+                    //source of error when dragging from top to bottom?
                     prefToDelete.destroyRecord();
                 }
                 return;
@@ -108,13 +113,14 @@ export default Ember.Controller.extend({
                         saveThenLog(targetPref);
                         oldPref.set('rank', targetPrefRank);
                         saveThenLog(oldPref);
-
                         exit = true;
                         return; 
                     }
                 });
 
-                if (exit) { return; }
+                if (exit) { 
+                    return; 
+                }
 
                 //otherwise they dragged from the bottom to the top, so replace the target session with the dragged session
                 var replacedPref = oldPrefs.filterBy('rank', targetPrefRank).objectAt(0);

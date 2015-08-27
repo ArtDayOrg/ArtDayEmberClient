@@ -12,6 +12,14 @@ th {
     height: 40px;
 }
 
+/* page breaks for printing*/
+@media all {
+    .page-break { display: none; }
+}
+
+@media print {
+    .page-break { display: block; page-break-before: always; }
+}
 
 /*
 vertical centering from:;

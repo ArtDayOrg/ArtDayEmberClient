@@ -10,8 +10,9 @@ export default Ember.Controller.extend({
 
         var filterString = this.get('searchFilter').toUpperCase();
 
+        var fullName = student.get('firstname') + ' ' + student.get('lastname');
 
-        if ((student.get('firstname') === filterString) || (student.get('lastname') === filterString)) {
+        if ((student.get('firstname') === filterString) || (student.get('lastname') === filterString) || fullName === filterString) {
             return true;
         }
 

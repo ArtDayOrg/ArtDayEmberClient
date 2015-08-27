@@ -1,0 +1,10 @@
+
+
+{{#each sessionsPrint as |sessionPrint|}}
+	<h3>
+		{{sessionPrint.sessionName}} | {{sessionPrint.sessionInstructor}} | Location: {{sessionPrint.sessionLocation}} <br/>
+	</h3>
+	<hr>
+	{{session-roster rosters=sessionPrint.sessionRosters}}
+	<div class="page-break"></div>
+{{/each}}

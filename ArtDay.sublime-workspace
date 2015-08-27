@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"filter",
+				"filterString"
+			],
+			[
 				"grou",
 				"groupCollapsed"
 			],
@@ -167,6 +171,7 @@
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/students-metrics.js",
@@ -230,7 +235,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/enrollment.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/serializers/enrollment.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/preference.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/application.js",
