@@ -11,6 +11,8 @@ export default Ember.Route.extend({
   	},
 
   	setupController: function(controller, models) {
+      // doesn't the controller have access to the model defined in model above?
+      // if so, why is the stuff below needed?  Seems redundant.
     	var preferences = models.preferences;
     	var students = models.students;
     	var sessions = models.sessions;

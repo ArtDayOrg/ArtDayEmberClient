@@ -41,7 +41,9 @@ export default Ember.Controller.extend({
                 console.error(err);
             });
         },
-
+        fileChanged: function(evt) {
+            alert('file changed!');
+        },
         add: function() {
             this.set('isAdding', true);
         },

@@ -21,6 +21,10 @@
             <td>{{input type="text" value=model.imageUrl}}</td>
         </tr>
         <tr>
+            <td>Image File:</td>
+            <td><input type="file" id="imageFile" {{action "fileChanged" on="change"}}/></td>
+        </tr>
+        <tr>
             <td valign="top">Description (280 character max)</td>
             <td>
                 {{textarea value=model.description cols="60" rows="4"}}
