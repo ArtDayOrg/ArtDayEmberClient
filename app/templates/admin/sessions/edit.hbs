@@ -25,9 +25,15 @@
             <td><input type="file" id="imageFile" {{action "fileChanged" on="change"}}/></td>
         </tr>
         <tr>
-            <td valign="top">Description (280 character max)</td>
+            <td valign="top">Description (4 line max)</td>
             <td>
                 {{textarea value=model.description cols="60" rows="4"}}
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">Instructions</td>
+            <td>                 
+                {{textarea value=model.instructions cols="60" rows="4"}}
             </td>
         </tr>
     </table>

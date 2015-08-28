@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
 
         var filterString = this.get('searchFilter').toUpperCase();
 
-        if ((student.get('firstname') === filterString) || (student.get('lastname') === filterString)) {
+        if ((student.get('firstName') === filterString) || (student.get('lastName') === filterString)) {
             return true;
         }
 
@@ -20,8 +20,8 @@ export default Ember.Controller.extend({
         }
         
         var regex = new RegExp(filterString, 'i');
-        return student.get('firstname').match(regex) || student.get('lastname').match(regex);
-    }).property('searchFilter', 'model.students'),
+        return student.get('firstName').match(regex) || student.get('lastName').match(regex);
+    }).property('searchFilter', 'model.students', 'model.students.length'),
 
     actions: {
         processKeyUp: function(value) {

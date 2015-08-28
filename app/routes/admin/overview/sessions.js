@@ -16,7 +16,7 @@ export default Ember.Route.extend({
     	var preferences = models.preferences;
     	var students = models.students;
     	var sessions = models.sessions;
-      var enrollment = models.enrollment
+      var enrollment = models.enrollment;
 
     	controller.set('preferences', preferences);
     	controller.set('students', students);
