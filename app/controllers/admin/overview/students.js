@@ -8,6 +8,37 @@ export default Ember.Controller.extend({
 
 	metricsByGrade: function() {
 
+		var enrollmentStrings;
+		var prefsGot;
+
+		var countPrefs = function (p) {
+			if (enrollmentStrings.contains(p.get('session.sessionName'))) {
+				prefsGot += 1;
+				grade.prefs[p.get('rank')] += 1;
+			}
+		};
+
+		var pushSessionNameToEnrollmentStrings = function (e) {
+			enrollmentStrings.push(e.get('session.sessionName'));
+		};
+
+		var compileMetricsForStudent = function (s) {
+			prefsGot = 0;
+			if (s.get('preferences.length') !== 0) {
+				var prefs = s.get('preferences');
+				var enrollment = s.get('enrollments');
+				enrollmentStrings = [];
+				enrollment.forEach(function (e) {
+					pushSessionNameToEnrollmentStrings(e);
+				});
+				prefs.forEach(function (p) {
+					countPrefs(p);
+				});
+				grade.got[prefsGot] += 1;
+				grade.setPrefs += 1;
+			}
+		};
+
 		var grades = [];
 		var minGrade;
 		var maxGrade;
@@ -18,7 +49,7 @@ export default Ember.Controller.extend({
 		maxGrade = students.get('lastObject.grade');
 
 		for (var i = minGrade; i<=maxGrade; i++) {
-			var studentsForGrade = students.filterBy('grade', i)
+			var studentsForGrade = students.filterBy('grade', i);
 			var grade = {
 				grade: i.toString(),
 				studentCount: studentsForGrade.get('length'),
@@ -52,25 +83,9 @@ export default Ember.Controller.extend({
 					"5": 0,
 					"6": 0
 				}
-			}
+			};
 			studentsForGrade.forEach(function (s) {
-				var prefsGot = 0;
-				if (s.get('preferences.length') !== 0) {
-					var prefs = s.get('preferences');
-					var enrollment = s.get('enrollments');
-					var enrollmentStrings = [];
-					enrollment.forEach(function (e) {
-						enrollmentStrings.push(e.get('session.sessionName'));
-					});
-					prefs.forEach(function (p) {
-						if (enrollmentStrings.contains(p.get('session.sessionName'))) {
-							prefsGot += 1;
-							grade.prefs[p.get('rank')] += 1;
-						}
-					});
-					grade.got[prefsGot] += 1;
-					grade.setPrefs += 1;
-				}
+				compileMetricsForStudent(s);
 			});
 			grades.push(grade);
 		}
@@ -81,11 +96,11 @@ export default Ember.Controller.extend({
 				if (otherProp) {
 					total += this[i][prop][otherProp];
 				} else {
-					total += this[i][prop]
+					total += this[i][prop];
 				}
 			}
 			return total;
-		}
+		};
 
 		var overview = {
 			grade: "Overview",
@@ -120,14 +135,15 @@ export default Ember.Controller.extend({
 				"5": 0,
 				"6": 0
 			}
-		}
+		};
 
 		grades.push(overview);
+		
 		grades.forEach(function (grade) {
-			Ember.$.each(grade.gotPercent, function(index, value) {
+			Ember.$.each(grade.gotPercent, function(index) {
 				grade.gotPercent[index] = (grade.got[index]/grade.setPrefs * 100).toFixed(0);
 			});
-			Ember.$.each(grade.prefsPercent, function(index, value) {
+			Ember.$.each(grade.prefsPercent, function(index) {
 				grade.prefsPercent[index] = (grade.prefs[index] / grade.setPrefs * 100).toFixed(0);
 			});
 			grade.setPrefsPercent = (grade.setPrefs/grade.studentCount * 100).toFixed(0);

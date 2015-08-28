@@ -30,7 +30,7 @@ export default Ember.Controller.extend({
         students.forEach(function (s) {
             if (s.get('preferences.length') > 0) {
                 count += 1;
-            };
+            }
         });
         return count;
     }.property('model.students.@each.preferences'),
@@ -55,6 +55,7 @@ export default Ember.Controller.extend({
 
         login: function() {
         
+            //??? should be Ember.$ ???
             $('#loginError').hide();
             var self = this;
         
@@ -120,7 +121,6 @@ export default Ember.Controller.extend({
             function loadStudents(outerSelf) {
 
                 function Student(emberStudent) {
-
                     this.emberStudent = emberStudent;
                     this.grade = emberStudent.get('grade');
                     this.preferences = emberStudent.get('preferences').sortBy('rank').reverse();
@@ -143,15 +143,11 @@ export default Ember.Controller.extend({
 
             function resetStudents(students) {
                 students.forEach(function (s) {
-                    
                     s.deniedEnrollments.splice(0, s.deniedEnrollments.length);
-                    
-                    s.priority = s.preferences.length > 0 ? s.grade + s.bumpCount * 3 : 0;
+                    s.priority = s.preferences.length > 0 ? s.grade + (s.bumpCount * 3) : 0;
                     s.bumpCount = 0;
-                    
                     s.enrolled.push(s.proposedEnrollment);
                     s.proposedEnrollment = null;
-                    
                     s.enrolled.forEach(function (e) {
                         s.deniedEnrollments.push(e);
                     });
@@ -165,14 +161,12 @@ export default Ember.Controller.extend({
                     this.capacity = emberSession.get('capacity');
                     this.proposedEnrollments = [];
                 } 
-
                 var sessions = [];
                 var sessionsFromModel = outerSelf.get('sessions');
                 sessionsFromModel.forEach(function (s) {
                     var newSession = new Session(s);
                     sessions.push(newSession);
                 });
-
                 return sessions;
             }
 
@@ -214,8 +208,7 @@ export default Ember.Controller.extend({
 
             function mesh(sessions, students, period) {
 
-                //helper
-                //iterates through sessions and returns an array of all enrollments
+                //iterates through sessions that have proposed enrollments and returns an array of enrollments for that period
                 function createEnrollments(sessions) {
                     var enrollments = [];
                     for (var i = 0; i<sessions.length; i++) {
@@ -228,19 +221,20 @@ export default Ember.Controller.extend({
                     return enrollments;
                 }
 
-                //required by our version of Gale-Shapely
-                //returns the next unenrolled student if there is one or null
+                // required by our version of Gale-Shapely Algorithm
+                // returns the next unenrolled student if there is one or null
                 function freeStudent(students, sessions) {
                     var student;
                     for (var i = 0; i < students.length; i++) {
                         student = students.objectAt(i);
 
+                        // handle a special case that was (rarely) causing errors
                         // if a student has no proposed enrollment and has been denied from every session, then that student would be orphaned.
-                        // this could occur in rare cases, for example where a student without preferences is assigned the two least popular sessions during the first two runs through
+                        // for example where a student without preferences is assigned the two least popular sessions during the first two runs through
                         // and then is processed late in the last run through, when only the 2 sessions they are already assigned to are available.
-                        // to handle this special case, we set their denied enrollments to be only those sessions they are enrolled in, then
-                        // give them priority over all other students without preferences and try again.  this ensures no students are orphaned and that no orphan bumps a student who did
-                        // set their preferences
+                        // to handle this special case, we set their denied enrollments to be only those sessions they are enrolled in, 
+                        // then give them priority over all other students without preferences and try again.  
+                        // this ensures no students are orphaned and that no orphan bumps a student who did set their preferences
                         if (student.proposedEnrollment === null && student.deniedEnrollments.length === sessions.length) {
                             student.deniedEnrollments = [];
                             student.enrolled.forEach(function (e) {
@@ -249,7 +243,9 @@ export default Ember.Controller.extend({
                             student.priority += 1;
                             return student;
                         }
-                        if (student.proposedEnrollment === null && student.deniedEnrollments.length !== sessions.length) {
+
+                        // return the next unenrolled student
+                        if (student.proposedEnrollment === null) {
                             return student;
                         }
                     }
@@ -296,12 +292,14 @@ export default Ember.Controller.extend({
                     var bestSession = null;
                     var prefs = student.preferences;
 
+                    //go through preferences and grab the first session they are both eligable and prefer
                     for (var i = 0; i<prefs.length; i++) {
                         if (prefNotInDenied(prefs[i], nextStudent.deniedEnrollments)) {
                             bestSession = sessions.filter(sessionNameFilter)[0];
                         }
                     }
 
+                    //if there is no such session, or if they did not set their preferences, they get a random session chosen from all available sessions
                     if (!bestSession) {
                         var available = availableSessions(sessions, prefs, student);
                         bestSession = available[Math.floor(Math.random() * available.length)];
@@ -310,12 +308,12 @@ export default Ember.Controller.extend({
                     return bestSession;
                 }
 
-                //Gail-Shapley Algorithm starts here, adopted from Algorithm Design Kleinberg and Tardos
-                //because we process students preferences and not the sessions preferences, we are sure
-                //students cannot cheat by lying about their preferences: http://www.columbia.edu/~js1353/pubs/tst-ipco99.pdf
-                //pgs 432-438 (assume students correspond to men in the discussion in the paper)
+                // Gail-Shapley Algorithm starts here, adopted from Algorithm Design Kleinberg and Tardos
+                // because we process students preferences and not the sessions preferences, we are sure
+                // students cannot cheat by lying about their preferences: http://www.columbia.edu/~js1353/pubs/tst-ipco99.pdf
+                // pgs 432-438 (assume students correspond to men in the discussion in the paper)
 
-                //while there is a student nextStudent who is free and hasn't attempted enrollment in every class                
+                // while there is a student nextStudent who is free and hasn't attempted enrollment in every class                
                 while (true) {
                     
                     //choose such a student(nextStudent)
@@ -372,12 +370,12 @@ export default Ember.Controller.extend({
                     //if we wanted to allow less capacity than students, leaving the least preferred to be unenrolled, 
                     //then we would not break here, but we don't allow that.
                     } else {
-                        console.log('not enough total session capacity for every student');
+                        console.warn('not enough total session capacity for every student');
                         break;
                     }
                 }
 
-                //return an array of enrollments 
+                //return an array of enrollments for the period
                 return createEnrollments(sessions); 
             }
 
@@ -492,7 +490,7 @@ export default Ember.Controller.extend({
         //                     }
         //                 });
         //                 // console.log('- - - - -')
-        //                 // console.log(unhappyStudent.get('firstname') + ' grade: ' + unhappyStudent.get('grade'));
+        //                 // console.log(unhappyStudent.get('firstName') + ' grade: ' + unhappyStudent.get('grade'));
         //                 // console.log('enrolled: ' + e.emberSession.get('sessionName'));
         //                 // console.log('prefers:')
         //                 // unhappyStudentPrefs.sortBy('rank').forEach(function (p) {
@@ -501,11 +499,12 @@ export default Ember.Controller.extend({
         //                 // console.log('jealous of all above rank ' + jealousRank + ' specifically:')
         //                 // console.log(jealousArray);
 
+        //                 // check to make sure no student that set preferences is jealous of any student who did not set preferences.
         //                 // noPreferences.forEach(function (e) {
         //                 //     var uninterestedStudentsSessionName = e.emberSession.get('sessionName');
         //                 //     jealousArray.forEach(function (n) {
         //                 //         if (n === uninterestedStudentsSessionName) {
-        //                 //             console.log(e.emberStudent.get('firstname'), unhappyStudent.get('firstname'));
+        //                 //             console.log(e.emberStudent.get('firstName'), unhappyStudent.get('firstName'));
         //                 //          }
         //                 //     });
         //                 // });
@@ -541,9 +540,9 @@ export default Ember.Controller.extend({
         //                     if (unhappyStudentDesiresSwitch && otherUnhappyStudentDesiresSwitch) {
 
         //                         unstable++;
-
         //                         console.error('Instability detected');
-        //                         console.log(unhappyStudent.get('firstname') + ' has ' + unhappySessionName + ' and is jealous of ');
+        //                         console.groupCollapsed();
+        //                         console.log(unhappyStudent.get('firstName') + ' has ' + unhappySessionName + ' and is jealous of ');
         //                         console.log(jealousArray);
         //                         var unhappyStudentsCompletePrefs = unhappyStudent.get('preferences');
         //                         unhappyStudentsCompletePrefs.forEach(function (p) {
@@ -553,7 +552,7 @@ export default Ember.Controller.extend({
         //                         unhappyStudentsCompleteEnrollments.forEach(function (enroll) {
         //                             console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
         //                         });
-        //                         console.log(otherUnhappyStudent.get('firstname') + ' has ' + otherUnhappySessionName + ' and is jealous of ');
+        //                         console.log(otherUnhappyStudent.get('firstName') + ' has ' + otherUnhappySessionName + ' and is jealous of ');
         //                         console.log(otherJealousArray);
         //                         var otherUnhappyStudentsCompletePrefs = otherUnhappyStudent.get('preferences');
         //                         otherUnhappyStudentsCompletePrefs.forEach(function (p) {
@@ -563,25 +562,19 @@ export default Ember.Controller.extend({
         //                         otherUnhappyStudentsCompleteEnrollments.forEach(function (enroll) {
         //                             console.log('\t\t' + enroll.get('session.sessionName') + ' period ' + enroll.get('period'));
         //                         });
-
-
-
-
+        //                         console.groupEnd();
         //                     } else {
         //                         console.log('no instability!');
         //                     }
         //                 });
         //             });
         //         }
-
         //         console.error('unstable: ' + unstable);
         //         console.log('testing took ' + (Date.now() - testingStartTime) + ' milliseconds');
         //     }
-
         //     console.log('testing...');
         //     var outerSelf = this;
         //     testEnrollments();
         // }
-
     }
 });

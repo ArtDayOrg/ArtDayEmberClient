@@ -1,11 +1,14 @@
+
 <img src={{item.imageUrl}} class="image" draggable="false" align="middle"><br/>
+<div style="text-align:left;">
 Session Name: {{item.sessionName}}<br/>
 Capacity: {{item.capacity}}<br/>
 Instructor: {{item.instructorName}}<br/>
 Location: {{item.location}}<br/>
 Image URL: {{item.imageUrl}}<br/>
 Description: {{{item.description}}}<br/>
-Instructions: {{item.instructions}}<br/>    
+Instructions: {{{item.instructions}}}<br/> 
+</div>   
 {{#if isAdmin}}
 	<button {{action 'edit'}}>Edit</button>
 	{{#unless isEnrolled}}

@@ -12,15 +12,16 @@
 			Failure.
 			{{else}}
 			<div class="spinner">
-				<img src="http://i.imgur.com/FYRaRXg.gifv" draggable="false">
+				<img src="assets/images/spinner.gif" draggable="false">
 			</div>
-			Spinner!  Spin Spin Spin.
+			Please wait.  Processing {{admin.students.length}} students.
 			{{/if}}{{/if}}
 		{{else}}
 		Enrollments already set!
 		{{/if}}
 	{{else}}{{#if admin.enrollmentAvailable}}
-		When you press this button, take a quick coffee break.  Processing {{admin.students.length}} students takes a couple minutes.  If you navigate away from this page before you see a success message, you may break the enrollment process<br/>
+		Processing {{admin.students.length}} students takes a couple minutes.  <br/>
+		If you navigate away from this page before you see a success message, you may break the enrollment process.<br/>
 		<br/>
 		{{#unless admin.enrollmentBegan}}
 		<p class="admin-enroll">

@@ -124,6 +124,8 @@ export default Ember.Controller.extend({
 
                 //otherwise they dragged from the bottom to the top, so replace the target session with the dragged session
                 var replacedPref = oldPrefs.filterBy('rank', targetPrefRank).objectAt(0);
+
+                //source of error when dragging preference away from prefOrNullArray row?
                 replacedPref.destroyRecord();
 
                 newPref = this.store.createRecord('preference', {
@@ -161,7 +163,7 @@ export default Ember.Controller.extend({
         
         changeDescription: function(description, sessionName) {
             this.set('descriptionForDisplay', description);
-            this.set('sessionNameForDisplay', sessionName)
+            this.set('sessionNameForDisplay', sessionName);
         }
     }
 }); 

@@ -18,19 +18,21 @@ export default Ember.Controller.extend({
 				preferred: s.get('preferences.length')
 			};
 			sessionsMetrics.push(sessionMetrics);
-		})
+		});
 
 		//if enrollments are set, sort by difference between enrollment and preference 
-		//otherwise sort by numebr of students who preferred the course
 		if (this.get('admin.isEnrolled')) {
 			sessionsMetrics.sort(function (a, b) {
 				return b.preferred/b.enrolled - a.preferred/a.enrolled;
 			});
+
+		//otherwise sort by numebr of students who preferred the course
 		} else {
 			sessionsMetrics.sort(function (a, b) {
 				return b.preferred - a.preferred;
 			});
 		}
+		
 		return sessionsMetrics;
 
 	}.property('sessions.length', 'sessions', 'enrollment.length')

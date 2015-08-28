@@ -1,8 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-    firstname: DS.attr('string'),
-    lastname: DS.attr('string'),
+    firstName: DS.attr('string'),
+    lastName: DS.attr('string'),
     grade: DS.attr('number'),
     locked: DS.attr('boolean'),
     preferences: DS.hasMany('preference', {async: true}),
@@ -10,6 +10,6 @@ export default DS.Model.extend({
 
 
     toStringExtension: function() {
-  		return "Student: " + this.get('firstname') + ' ' + this.get('lastname');
+  		return "Student: " + this.get('firstName') + ' ' + this.get('lastName');
   	}
 });

@@ -21,9 +21,15 @@
             <td>{{input type="text" value=imageUrl}}</td>
         </tr>
         <tr>
-            <td valign="top">Description</td>
+            <td valign="top">Description (4 line max)</td>
             <td>
-                {{textarea value=description cols="80" rows="6"}}
+                {{textarea value=description cols="60" rows="4"}}
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">Instructions</td>
+            <td>                 
+                {{textarea value=instructions cols="60" rows="4"}}
             </td>
         </tr>
     </table>

@@ -9,6 +9,7 @@ export default DS.Model.extend({
   preferences: DS.hasMany('preference', {async: true}),
   enrollments: DS.hasMany('enrollment', {async: true}),
   imageUrl: DS.attr('string'),
+  instructions: DS.attr('string'),
 
   toStringExtension: function() {
   	return "sessionName: " + this.get('sessionName');

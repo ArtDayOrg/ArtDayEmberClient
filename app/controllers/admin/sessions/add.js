@@ -15,15 +15,15 @@ export default Ember.ObjectController.extend({
                 capacity: this.get('capacity'),
                 instructorName: this.get('instructorName'),
                 imageUrl: this.get('imageUrl'),
-                description: this.get('description')
-            };
+                description: this.get('description'),
+                instructions: this.get('instructions')
+            };  
 
             var newSession = this.store.createRecord('session', newSessionJson);
             
             newSession.save().then(function(newSession) {
                 self.transitionToRoute('admin.sessions.session', newSession.id);
             }, function(err) {
-                // handle error
                 console.error(err);
                 alert('Save session failed. Check the console.');                
             });
