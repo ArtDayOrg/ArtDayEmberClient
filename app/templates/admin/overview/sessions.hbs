@@ -1,1 +1,5 @@
-{{sessions-metrics items=sessionsMetrics isEnrolled=admin.isEnrolled}}
+{{#if admin.isAdmin}}
+	{{sessions-metrics items=sessionsMetrics isEnrolled=admin.isEnrolled}}
+{{else}}
+	{{not-admin}}
+{{/if}}

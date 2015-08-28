@@ -122,7 +122,6 @@ export default Ember.Controller.extend({
 			}
 		}
 
-		console.log(overview);
 		grades.push(overview);
 		grades.forEach(function (grade) {
 			Ember.$.each(grade.gotPercent, function(index, value) {
@@ -135,7 +134,6 @@ export default Ember.Controller.extend({
 		});
 
 		grades.reverse();
-		console.log(grades);
 		return grades;
 
 	}.property('enrollment.length', 'students.@each.preferences'),

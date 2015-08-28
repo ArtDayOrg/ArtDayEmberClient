@@ -9,9 +9,7 @@ export default Ember.Controller.extend({
     },
 
     isAdmin: false,
-    
-    meshIsAvailable: true,
-    
+        
     adminName: null,
     
     userImageUrl: null,

@@ -9,7 +9,7 @@
 	    {{session-pane item=model edit="edit" delete="delete" isEditing=isEditing isAdding=isAdding isAdmin=admin.isAdmin isEnrolled=admin.isEnrolled}}
 	{{/if}}{{/if}}
 	{{#if admin.isEnrolled}}
-		{{session-roster rosters=rosters}}
+		{{roster-session rosters=rosters}}
 	{{/if}}
 {{else}}
 	{{not-admin}}

@@ -12,12 +12,39 @@ th {
     height: 40px;
 }
 
+/* hide rosters until print, and print with page breaks*/
+@media all {
+
+    .page-break { 
+        display: none; 
+    }
+
+    .printable {
+        display: none;
+    }
+}
+
+
+
+@media print {
+
+    .page-break { 
+        display: block; 
+        page-break-before: always; 
+    }
+    .printable {
+        display: block !important;
+    }
+}
+
+
 
 /*
 vertical centering from:;
 http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
 */
-h3 {
+
+.floatcenter {
     top: 50%;
     position: relative;
     transform: translateY(-50%);

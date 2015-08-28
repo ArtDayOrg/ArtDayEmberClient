@@ -21,11 +21,10 @@ export default Ember.ObjectController.extend({
             var newSession = this.store.createRecord('session', newSessionJson);
             
             newSession.save().then(function(newSession) {
-                console.log('new sessionId: ' + newSession.id);
                 self.transitionToRoute('admin.sessions.session', newSession.id);
             }, function(err) {
                 // handle error
-                console.log(err);
+                console.error(err);
                 alert('Save session failed. Check the console.');                
             });
         }        
