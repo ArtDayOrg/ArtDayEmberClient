@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
 
     adminController: Ember.inject.controller('admin'),
     admin: Ember.computed.reads('adminController'),
@@ -10,14 +10,14 @@ export default Ember.ObjectController.extend({
             var self = this;
 
             var newSessionJson = {
-                sessionName: this.get('sessionName'),
-                location: this.get('location'),
-                capacity: this.get('capacity'),
-                instructorName: this.get('instructorName'),
-                imageUrl: this.get('imageUrl'),
-                description: this.get('description'),
-                instructions: this.get('instructions')
-            };  
+                sessionName: this.get('model.sessionName'),
+                location: this.get('model.location'),
+                capacity: this.get('model.capacity'),
+                instructorName: this.get('model.instructorName'),
+                imageUrl: this.get('model.imageUrl'),
+                description: this.get('model.description'),
+                instructions: this.get('model.instructions')
+            };
 
             var newSession = this.store.createRecord('session', newSessionJson);
             

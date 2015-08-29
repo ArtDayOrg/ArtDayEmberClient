@@ -38,8 +38,7 @@
             {{#each model.enrollments as |enrollment|}}
                 <div class="col-xs-4">
                     <div class="instructions">
-                        {{session-tile imageUrl=enrollment.session.imageUrl sessionName=enrollment.session.sessionName 
-                            description=enrollment.session.description changeDescription="changeDescription"}}
+                        {{session-tile item=enrollment.session changeDescription="changeDescription"}}
                         Period: {{enrollment.period}}<br/>
                         Instructor: {{enrollment.session.instructorName}}<br/>
                         Location: {{enrollment.session.location}}<br/>
@@ -55,8 +54,7 @@
             {{#if model.locked}}
                 {{#each rankedOrNullPrefsArray as |pref|}}
                     <div class="col-md-2">
-                        {{session-tile imageUrl=pref.session.imageUrl sessionName=pref.session.sessionName 
-                            description=pref.session.description changeDescription="changeDescription"}}  
+                        {{session-tile item=pref.session changeDescription="changeDescription"}}  
                     </div>
                 {{/each}}
             {{else}}
@@ -79,8 +77,7 @@
                     {{#each availableSessions as |availableSession|}}
                         <div class="col-md-2">
                             {{#draggable-object content=availableSession}}
-                                    {{session-tile imageUrl=availableSession.imageUrl sessionName=availableSession.sessionName 
-                                        description=availableSession.description changeDescription="changeDescription"}}
+                                    {{session-tile item=availableSession changeDescription="changeDescription"}}
                             {{/draggable-object}}
                         </div>
                     {{/each}}
