@@ -6,6 +6,12 @@ export default Ember.Controller.extend({
 
     sessionNameForDisplay: '',
 
+    imagePath: function () {
+        var id = this.get('item.id');
+        var imagePath = 'assets/images/' + id + '.png';
+        return imagePath;
+    }.property('model'),
+
     allPrefsSet: function() {
         if (this.get('model.preferences.length') === 6) {
             return true;

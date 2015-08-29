@@ -1,42 +1,5 @@
 {{#if admin.isAdmin}}
-    <table>
-        <tr>
-            <td>Session Name:</td>
-            <td>{{input type="text" value=sessionName}}</td>
-        </tr>
-        <tr>
-            <td>Capacity:</td>
-            <td>{{input type="text" value=capacity}}</td>
-        </tr>
-        <tr>
-            <td>Instructor:</td>
-            <td>{{input type="text" value=instructorName}}</td>
-        </tr>
-        <tr>
-            <td>Location:</td>
-            <td>{{input type="text" value=location}}</td>
-        </tr>
-        <tr>
-            <td>Image URL:</td>
-            <td>{{input type="text" value=imageUrl}}</td>
-        </tr>
-        <tr>
-            <td>Image File:</td>
-            <td>{{input type="file"}}</td>
-        </tr>
-        <tr>
-            <td valign="top">Description (4 line max)</td>
-            <td>
-                {{textarea value=description cols="60" rows="4"}}
-            </td>
-        </tr>
-        <tr>
-            <td valign="top">Instructions</td>
-            <td>                 
-                {{textarea value=instructions cols="60" rows="4"}}
-            </td>
-        </tr>
-    </table>
+    {{session-form model=model}}
     <button {{action 'addSession'}}>Add Session</button>
 {{else}}
     {{not-admin}}

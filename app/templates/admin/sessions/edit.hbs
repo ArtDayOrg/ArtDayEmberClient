@@ -1,42 +1,5 @@
 {{#if admin.isAdmin}}
-    <table>
-        <tr>
-            <td>Session Name:</td>
-            <td>{{input type="text" value=model.sessionName}}</td>
-        </tr>
-        <tr>
-            <td>Capacity:</td>
-            <td>{{input type="text" value=model.capacity}}</td>
-        </tr>
-        <tr>
-            <td>Instructor:</td>
-            <td>{{input type="text" value=model.instructorName}}</td>
-        </tr>
-        <tr>
-            <td>Location:</td>
-            <td>{{input type="text" value=model.location}}</td>
-        </tr>
-        <tr>
-            <td>Image URL:</td>
-            <td>{{input type="text" value=model.imageUrl}}</td>
-        </tr>
-        <tr>
-            <td>Image File:</td>
-            <td><input type="file" id="imageFile" {{action "fileChanged" on="change"}}/></td>
-        </tr>
-        <tr>
-            <td valign="top">Description (4 line max)</td>
-            <td>
-                {{textarea value=model.description cols="60" rows="4"}}
-            </td>
-        </tr>
-        <tr>
-            <td valign="top">Instructions</td>
-            <td>                 
-                {{textarea value=model.instructions cols="60" rows="4"}}
-            </td>
-        </tr>
-    </table>
+    {{session-form model=model}}
 {{else}}
     {{not-admin}}
 {{/if}}

@@ -185,24 +185,49 @@ export default Ember.Controller.extend({
                     needed += enrollments[i].length;
                 }
 
+
+                var body = [];
+
                 allEnrollments.forEach(function (enrollmentArray, index) {
                     enrollmentArray.forEach(function (enrollment) {
-                        var newEnrollment = outerSelf.store.createRecord('enrollment', {
-                            student: enrollment.emberStudent,
-                            session: enrollment.emberSession,
-                            period: index+1
-                        });
-                        newEnrollment.save().then(function () {
-                            successes += 1;
-                            console.log('success '+ successes);
-                            if (successes === needed) {
-                                outerSelf.set('enrollmentSucceeded', true);
-                            }
-                        }, function (reason) {
-                            console.log('failure: ' + reason);
-                            outerSelf.set('enrollmentFailed', true);
-                        });
+
+                        var enrollmentJSON = {
+                            "studentId": enrollment.emberStudent.get('id'),
+                            "sessionId": enrollment.emberSession.get('id'),
+                            "period": enrollment.period
+                        }
+                        body.push(enrollmentJSON);
+
+                        // var newEnrollment = outerSelf.store.createRecord('enrollment', {
+                        //     student: enrollment.emberStudent,
+                        //     session: enrollment.emberSession,
+                        //     period: index+1
+                        // });
+                        // newEnrollment.save().then(function () {
+                        //     successes += 1;
+                        //     console.log('success '+ successes);
+                        //     if (successes === needed) {
+                        //         outerSelf.set('enrollmentSucceeded', true);
+                        //     }
+                        // }, function (reason) {
+                        //     console.log('failure: ' + reason);
+                        //     outerSelf.set('enrollmentFailed', true);
+                        // });
                     });
+                });
+                console.log(body);
+                var now = Date.now();
+                Ember.$.ajax({
+                    method: 'POST',
+                    url: 'http://artday.azurewebsites.net/api/enrollments/Add',
+                    data: JSON.stringify(body)
+                }).done(function(msg) {
+                    console.log('time: ' + (Date.now() - now))
+                    outerSelf.set('enrollmentSucceeded', true);
+
+                    //reload model 
+                    
+                    alert('Data Saved: ' + msg );
                 });
             }
 
