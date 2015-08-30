@@ -1,13 +1,8 @@
 import Ember from 'ember';
+import ImagePath from 'art-day/mixins/image-path';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(ImagePath, {
 	classNames: ['session-detail', 'session-pane', 'instructions'],
-
-	imagePath: function () {
-		var id = this.get('item.id');
-		var imagePath = 'assets/images/' + id + '.png';
-		return imagePath;
-	}.property('item'),
 
 	actions: {
 		isAdding: function () {

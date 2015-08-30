@@ -1,4 +1,4 @@
-{{#if admin.isAdmin}}
+{{#admin-only isAdmin=admin.isAdmin}}
     <div class="row">
         <div class="col-xs-3">
             {{#link-to 'admin.sessions.add'}}Add New Session{{/link-to}}<br/>        
@@ -7,7 +7,7 @@
                 <button {{action 'printRosters'}}>Print All Rosters</button><br/>
                 <br/>        
             {{/if}}
-            {{#each model as |item|}}
+            {{#each admin.sessions as |item|}}
                 {{#link-to 'admin.sessions.session' item}}{{item.sessionName}}{{/link-to}}<br/>
             {{/each}}
         </div>    
@@ -16,7 +16,5 @@
         </div>    
     </div> 
     {{rosters-print-all sessionsPrint=sessionsPrint}}
-{{else}}
-    {{not-admin}}
-{{/if}}
+{{/admin-only}}
 

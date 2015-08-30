@@ -1,88 +1,11 @@
-<div class="student">
-    <div class="studentName" draggable="false"> 
-        {{model.firstName}} {{model.lastName}}
-    </div>
-    <div class="container-fluid">
-        <div class="row student-display">
-            <div class="col-xs-4 student-display-left">
-                <p class="centered">
-                {{#if enrolled}}
-                    Enjoy Art Day!
-                {{else}}{{#if allPrefsSet}}
-                    {{#if model.locked}}
-                        Your preferences are locked.
-                    {{else}}
-                        <button {{action 'lockPrefs'}} class="centered-button">
-                            Lock in Preferences
-                        </button>
-                    {{/if}}{{else}}
-                        Drag and Drop to set your preferences.
-                {{/if}}{{/if}}
-                </p>
-            </div>
-            <div class="col-xs-8 description-display">
-                <p class="centered">
-                    <div class="student-display-h">
-                        {{sessionNameForDisplay}}
-                    </div>
-                {{{descriptionForDisplay}}}
-                </p>
-            </div>
-        </div>
-    </div>
-</div>
+{{student-header item=model enrolled=enrolled allPrefsSet=allPrefsSet lockPrefs="lockPrefs" sessionNameForDisplay=sessionNameForDisplay descriptionForDisplay=descriptionForDisplay}}
 
 {{#if enrolled}}
-    <div class="container-fluid">
-        <div class="row">
-            {{#each model.enrollments as |enrollment|}}
-                <div class="col-xs-4">
-                    <div class="instructions">
-                        {{session-tile item=enrollment.session changeDescription="changeDescription"}}
-                        Period: {{enrollment.period}}<br/>
-                        Instructor: {{enrollment.session.instructorName}}<br/>
-                        Location: {{enrollment.session.location}}<br/>
-                        Instructions: {{{enrollment.session.instructions}}}<br/>
-                    </div>
-                </div>
-            {{/each}}
-        </div>
-    </div>
+    {{student-enrollments items=model.enrollments changeDescription="changeDescription"}}
 {{else}}
-    <div class="container-fluid">
-        <div class="row">
-            {{#if model.locked}}
-                {{#each rankedOrNullPrefsArray as |pref|}}
-                    <div class="col-md-2">
-                        {{session-tile item=pref.session changeDescription="changeDescription"}}  
-                    </div>
-                {{/each}}
-            {{else}}
-                {{#each rankedOrNullPrefsArray as |item index|}}
-                    <div class="col-md-2">
-                        {{pref-tile item=item index=index sessionDropped="sessionDropped" 
-                            changeDescription="changeDescription" description=item.session.description}}
-                    </div>    
-                {{/each}}
-            {{/if}}
-        </div>
-    </div>
-
+    {{student-preferences-row items=rankedOrNullPrefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
     <hr>
-
     {{#unless model.locked}}
-        {{#draggable-object-target action="sessionDropped" rank=0}}
-            <div class="container-fluid">
-                <div class="row">
-                    {{#each availableSessions as |availableSession|}}
-                        <div class="col-md-2">
-                            {{#draggable-object content=availableSession}}
-                                    {{session-tile item=availableSession changeDescription="changeDescription"}}
-                            {{/draggable-object}}
-                        </div>
-                    {{/each}}
-                </div>
-            </div>
-        {{/draggable-object-target}}
+        {{student-available-sessions-mosaic sessionDropped="sessionDropped" availableSessions=availableSessions changeDescription="changeDescription"}}
     {{/unless}}
 {{/if}}

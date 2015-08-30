@@ -1,4 +1,4 @@
-{{#if admin.isAdmin}}
+{{#admin-only isAdmin=admin.isAdmin}}
 	{{#if isEditing}}
 	    {{partial 'admin/sessions/edit'}}
 	    <button {{action 'doneEditing'}}>Done</button>
@@ -11,6 +11,4 @@
 	{{#if admin.isEnrolled}}
 		{{roster-session rosters=rosters}}
 	{{/if}}
-{{else}}
-	{{not-admin}}
-{{/if}}
+{{/admin-only}}

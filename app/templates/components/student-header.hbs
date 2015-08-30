@@ -1,0 +1,31 @@
+<div class="studentName" draggable="false"> 
+    {{item.firstName}} {{item.lastName}} ({{item.grade}})
+</div>
+<div class="container-fluid">
+    <div class="row student-display">
+        <div class="col-xs-4 student-display-left">
+            <p class="centered">
+            {{#if enrolled}}
+                Enjoy Art Day!
+            {{else}}{{#if allPrefsSet}}
+                {{#if item.locked}}
+                    Your preferences are locked.
+                {{else}}
+                    <button {{action 'lockPrefs'}} class="centered-button">
+                        Lock in Preferences
+                    </button>
+                {{/if}}{{else}}
+                    Drag and Drop to set your preferences.
+            {{/if}}{{/if}}
+            </p>
+        </div>
+        <div class="col-xs-8 description-display">
+            <p class="centered">
+                <div class="student-display-h">
+                    {{sessionNameForDisplay}}
+                </div>
+            {{{descriptionForDisplay}}}
+            </p>
+        </div>
+    </div>
+</div>

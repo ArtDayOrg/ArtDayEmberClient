@@ -1,11 +1,8 @@
 import Ember from 'ember';
+import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks'
 
-export default Ember.Controller.extend({
+export default Ember.Controller.extend(AdminControllerHooks, {
 	
-	//need isEnrolled property
-	adminController: Ember.inject.controller('admin'),
-	admin: Ember.computed.reads('adminController'),
-
 	metricsByGrade: function() {
 
 		var enrollmentStrings;
@@ -39,16 +36,13 @@ export default Ember.Controller.extend({
 			}
 		};
 
+		var minGrade = students.get('firstObject.grade');
+		var maxGrade = students.get('lastObject.grade');
 		var grades = [];
-		var minGrade;
-		var maxGrade;
-
-		var students = this.get('students');
+		var students = this.get('admin.students');
 		students.sortBy('grade');
-		minGrade = students.get('firstObject.grade');
-		maxGrade = students.get('lastObject.grade');
 
-		for (var i = minGrade; i<=maxGrade; i++) {
+		for (var i = minGrade; i <= maxGrade; i++) {
 			var studentsForGrade = students.filterBy('grade', i);
 			var grade = {
 				grade: i.toString(),
@@ -152,9 +146,9 @@ export default Ember.Controller.extend({
 		grades.reverse();
 		return grades;
 
-	}.property('enrollment.length', 'students.@each.preferences'),
+	}.property('admin.enrollment.length', 'admin.students.@each.preferences'),
 
 	metricsOverview: function() {
-		return this.get('students.length');
-	}.property('students.length')
+		return this.get('admin.students.length');
+	}.property('admin.students.length')
 });

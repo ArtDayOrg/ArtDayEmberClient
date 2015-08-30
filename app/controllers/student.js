@@ -6,12 +6,6 @@ export default Ember.Controller.extend({
 
     sessionNameForDisplay: '',
 
-    imagePath: function () {
-        var id = this.get('item.id');
-        var imagePath = 'assets/images/' + id + '.png';
-        return imagePath;
-    }.property('model'),
-
     allPrefsSet: function() {
         if (this.get('model.preferences.length') === 6) {
             return true;
@@ -80,8 +74,10 @@ export default Ember.Controller.extend({
 
             var oldPrefs = this.get('model.preferences');
          
+            console.log(session.get('sessionName'), ops.target.target);
+
             //Dragging a preferred section back to availabale sessions
-            if (ops.target.get('rank') === 0) {
+            if (ops.target.target === 0) {
                 if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {
                     var prefToDelete = oldPrefs.filterBy('session.sessionName', session.get('sessionName')).objectAt(0);
 
@@ -93,7 +89,7 @@ export default Ember.Controller.extend({
 
             var student = this.get('model');
             var dropSession = session.content;
-            var targetPrefRank = ops.target.get('rank');            
+            var targetPrefRank = ops.target.target;            
             var newPref;
 
 

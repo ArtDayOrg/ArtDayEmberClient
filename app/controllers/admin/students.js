@@ -1,9 +1,7 @@
 import Ember from 'ember';
+import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks'
 
-export default Ember.Controller.extend({
-
-    adminController: Ember.inject.controller('admin'),
-    admin: Ember.computed.reads('adminController'),
+export default Ember.Controller.extend(AdminControllerHooks, {
 
     searchFilter: '',
 
@@ -24,10 +22,11 @@ export default Ember.Controller.extend({
     }).property('searchFilter', 'model.students', 'model.students.length'),
 
     actions: {
+ 
         processKeyUp: function(value) {
             this.set('searchFilter', value);
         },
-
+ 
         unlock: function(student) {
             student.set('locked', false);
             student.save();

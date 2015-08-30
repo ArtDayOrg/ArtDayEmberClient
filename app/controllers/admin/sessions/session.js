@@ -1,13 +1,11 @@
 import Ember from 'ember';
+import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks'
 
-export default Ember.Controller.extend({  
+export default Ember.Controller.extend(AdminControllerHooks, {  
 
     isEditing: false,
     
     isAdding: false,
-
-    adminController: Ember.inject.controller('admin'),
-    admin: Ember.computed.reads('adminController'),
 
     // processes the current models enrollment and
     // returns a sorted array of alphabetized session rosters
@@ -15,7 +13,7 @@ export default Ember.Controller.extend({
         var rosters = [];
         var i;
         var numberOfPeriods;
-        var enrollment = this.get('model.enrollments');
+        var enrollment = this.get('admin.enrollment');
         
         if (enrollment.get('length')) {
             numberOfPeriods = enrollment.sortBy('period').reverse().objectAt(0).get('period');
@@ -28,7 +26,7 @@ export default Ember.Controller.extend({
             rosters.push(sortedPeriodRoster);
         }
         return rosters;
-    }.property('model', 'model.@each.enrollments'),
+    }.property('admin.model', 'admin.model.@each.enrollments'),
 
     actions: {
         

@@ -54,7 +54,6 @@ export default Ember.Controller.extend({
     actions: {
 
         login: function() {
-        
             //??? should be Ember.$ ???
             $('#loginError').hide();
             var self = this;

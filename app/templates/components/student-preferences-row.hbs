@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+        {{#if locked}}
+            {{#each items as |pref|}}
+                <div class="col-md-2">
+                    {{session-tile item=pref.session changeDescription="changeDescription"}}
+                </div>
+            {{/each}}
+        {{else}}
+            {{#each items as |item index|}}
+                <div class="col-md-2">
+                    {{pref-tile item=item index=index sessionDropped="sessionDropped" 
+                        changeDescription="changeDescription"}}
+                </div> 
+            {{/each}}
+        {{/if}}
+    </div>
+</div>

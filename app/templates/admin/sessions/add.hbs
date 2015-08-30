@@ -1,6 +1,4 @@
-{{#if admin.isAdmin}}
+{{#admin-only isAdmin=admin.isAdmin}}
     {{session-form model=model}}
     <button {{action 'addSession'}}>Add Session</button>
-{{else}}
-    {{not-admin}}
-{{/if}}
+{{/admin-only}}
