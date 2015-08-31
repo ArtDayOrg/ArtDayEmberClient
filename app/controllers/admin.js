@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
     
     isEnrolled: function () {
         return (this.get('enrollment.length') > 0);
-    }.property('enrollment.length'),
+    }.property('model.enrollment.length'),
     
     hasSetPrefs: function () {
         var count = 0;

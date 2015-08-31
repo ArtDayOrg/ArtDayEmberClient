@@ -3,8 +3,6 @@ import StudentSchedule from 'art-day/mixins/student-schedule';
 
 export default Ember.Component.extend(StudentSchedule, {
 
-  classNames: ['schedule'],
-
-  locations: false,
+  classNames: ['printable'],
 
 });

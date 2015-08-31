@@ -1,6 +1,10 @@
-{{index}}
 {{#draggable-object-target action="sessionDropped" target=rank}}
     {{#with item.session as |session|}}
+        <div class="rank">
+            <h4>
+                {{rank}}
+            </h4>
+        </div>
         {{#draggable-object content=session}}
             {{#session-tile item=session changeDescription="changeDescription" rank=rank}}{{/session-tile}}  
         {{/draggable-object}}

@@ -1,6 +1,8 @@
 {{#each sessionsPrint as |sessionPrint|}}
 	<h3>
-		{{sessionPrint.sessionName}} | {{sessionPrint.sessionInstructor}} | Location: {{sessionPrint.sessionLocation}} <br/>
+    <p class="nextline">
+  		{{sessionPrint.sessionName}} | {{sessionPrint.sessionInstructor}} | Location: {{sessionPrint.sessionLocation}}
+    </p>
 	</h3>
 	<hr>
 	{{roster-session rosters=sessionPrint.sessionRosters}}

@@ -1,8 +1,15 @@
 {{student-header item=model enrolled=enrolled allPrefsSet=allPrefsSet lockPrefs="lockPrefs" sessionNameForDisplay=sessionNameForDisplay descriptionForDisplay=descriptionForDisplay}}
-
 {{#if enrolled}}
-  {{student-enrollments items=model.enrollments changeDescription="changeDescription"}}
-  {{schedule-display item=model}}
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6">
+        {{schedule-display item=model}}
+      </div>
+      <div class="col-xs-6">
+        {{student-enrollments items=model.enrollments changeDescription="changeDescription"}}
+      </div>
+    </div>
+  </div>
 {{else}}
     {{student-preferences-row items=rankedOrNullPrefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
     <hr>

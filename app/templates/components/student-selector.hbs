@@ -3,11 +3,12 @@
 </div>
 
 {{#each filteredStudents as |item|}}
+  <p class="nextline">
   	{{#link-to 'student' item}}{{item.firstName}} {{item.lastName}} {{item.grade}}{{/link-to}}
   	{{#if isAdmin}}
   		{{#if item.locked}}
    			<button {{action 'unlock' item}}>unlock</button>
    		{{/if}}
   	{{/if}}
-  	<br/>
+  </p>
 {{/each}}

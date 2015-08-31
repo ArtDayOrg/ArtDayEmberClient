@@ -1,17 +1,21 @@
 table, th, td {
-   border: 1px solid black;
    padding: 4px;
 }
+
 
 td {
     text-align: left;
 }
 
-th {
-    text-align: center;
-    height: 40px;
+p {
+    padding-top: 10px;
 }
 
+.nextline {
+    padding: 0px;
+    margin: 0px;
+
+}
 /* hide rosters until print, and print with page breaks*/
 @media all {
 
@@ -49,7 +53,11 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     position: relative;
     transform: translateY(-50%);
     width: 100%;
+}
 
+.rank {
+    width: 140px;
+    text-align: center;
 }
 
 .exampleImport {
@@ -119,10 +127,12 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     margin-left: 5px;
     margin-right: 5px;
     margin-top: 5px;
+    margin-bottom: 0px;
 }
 
 .fb-name {
     line-height: 50px;
+    margin-bottom: 10px;
     vertical-align: middle;
     float: right;
 }

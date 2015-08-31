@@ -1,9 +1,24 @@
-<table>
+<table class="table">
+  <thead>
+    <tr>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Session</th>
+        {{#if locations}}
+          <th>Location</th>
+        {{/if}}
+    </tr>
+  </thead>
   {{#each schedule as |scheduleFragment|}}
-  <tr>
+  <tbody>
+    <tr>
       <td>{{scheduleFragment.[0]}}</td>
       <td>{{scheduleFragment.[1]}}</td>
       <td>{{scheduleFragment.[2]}}</td>
-  </tr>
+      {{#if locations}}
+        <td>{{scheduleFragment.[3]}}</td>
+      {{/if}}
+    </tr>
+  </tbody>
   {{/each}}
 </table>

@@ -40,7 +40,6 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 		
 		});
 		
-		console.log(sessionsPrint);
 		return sessionsPrint;
 
 	}.property('admin.enrollments.length'),

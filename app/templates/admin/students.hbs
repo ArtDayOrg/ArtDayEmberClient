@@ -3,11 +3,15 @@
 	    <div class="container-fluid">
 	       	<div class="row">
 	        	<div class="col-xs-6">
-	        		Unlock or view students:<br/>
+	        	<p>
+	        		Unlock or view students:
+	        	</p>
 					{{student-selector processKeyUp="processKeyUp" unlock="unlock" filteredStudents=filteredStudents isAdmin=admin.isAdmin}}
 				</div>
 				<div class="col-xs-6">
-					Import Students:<br/>
+					<p>
+						Import Students:
+					</p>
 					{{import-helper doImport="doImport"}}
 				</div>
 			</div>

@@ -1,0 +1,19 @@
+<h2>
+  {{student.firstName}} {{student.lastName}} ({{student.grade}})
+</h2>
+<hr>
+
+{{schedule-display schedule=schedule locations=locations}}
+
+<h3>
+Special Instructions:
+</h3>
+{{#each student.enrollments as |enrollment|}}
+  {{#with enrollment.session.instructions}}
+    <hr>
+    <h4>
+      {{enrollment.session.sessionName}}
+    </h4>
+      {{enrollment.session.instructions}}
+  {{/with}}
+{{/each}}

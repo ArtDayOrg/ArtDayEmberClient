@@ -1,12 +1,31 @@
-<img src={{imagePath}} class="image" draggable="false" align="middle"><br/>
-<div style="text-align:left;">
-Session Name: {{item.sessionName}}<br/>
-Capacity: {{item.capacity}}<br/>
-Instructor: {{item.instructorName}}<br/>
-Location: {{item.location}}<br/>
-Description: {{{item.description}}}<br/>
-Instructions: {{{item.instructions}}}<br/> 
-</div>   
+<p>
+  <img src={{imagePath}} class="image" draggable="false" align="middle">
+</p>
+<table class="table">
+  <tr>
+    <td><p>Session Name:</p></td>
+    <td>{{item.sessionName}}</td>
+  </tr>
+  <tr><td>Capacity:</td> 
+    <td>{{item.capacity}}</td>
+  </tr>
+  <tr>
+    <td>Instructor:</td>
+    <td>{{item.instructorName}}</td>
+  </tr>
+  <tr>
+    <td>Location:</td>
+    <td>{{item.location}}</td>
+  </tr>
+  <tr>
+    <td>Description:</td>
+    <td>{{{item.description}}}</td>
+  </tr>
+  <tr>
+    <td>Instructions:</td>
+    <td>{{{item.instructions}}}</td>
+  </tr>
+</table>
 {{#if isAdmin}}
 	<button {{action 'edit'}}>Edit</button>
 	{{#unless isEnrolled}}

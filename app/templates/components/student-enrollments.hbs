@@ -1,12 +1,18 @@
 <div class="container-fluid">
     <div class="row">
         {{#each sortedItems as |enrollment|}}
-            <div class="col-xs-4">
+            <div class="col-xs-12">
                 <div class="instructions">
                     {{session-tile item=enrollment.session changeDescription="changeDescription"}}
-                    Instructor: {{enrollment.session.instructorName}}<br/>
-                    Instructions: {{{enrollment.session.instructions}}}<br/>
-                    Period: {{enrollment.period}}<br/>
+                    <p class="nextline">
+                        Instructor: {{enrollment.session.instructorName}}
+                    </p>
+                    <p class="nextline">
+                        Instructions: {{{enrollment.session.instructions}}}
+                    </p>
+                    <p class="nextline">
+                        Period: {{enrollment.period}}
+                    </p>
                 </div>
             </div>
         {{/each}}

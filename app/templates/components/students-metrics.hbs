@@ -1,21 +1,45 @@
 <div class="student">
-    <div class="container-fluid">
-       	<div class="row">
+  <div class="container-fluid">
+    <div class="row">
 			{{#each grades as |grade|}}
-            	<div class="col-xs-3 grade-metrics">
-					Grade {{grade.grade}}: {{grade.studentCount}} Students<br/>
-					&nbsp;&nbsp;&nbsp;&nbsp;Set Prefs: {{grade.setPrefs}} ({{grade.setPrefsPercent}}%)<br/>
+        <div class="col-xs-3 grade-metrics">
+          <p class="nextline">
+						Grade {{grade.grade}}: {{grade.studentCount}} Students
+					</p>
+					<p class="nextline">
+						&nbsp;&nbsp;&nbsp;&nbsp;Set Prefs: {{grade.setPrefs}} ({{grade.setPrefsPercent}}%)
+					</p>
 					{{#if isEnrolled}}
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 3 prefs: {{grade.got.[3]}} ({{grade.gotPercent.[3]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 2 prefs: {{grade.got.[2]}} ({{grade.gotPercent.[2]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 1 prefs: {{grade.got.[1]}} ({{grade.gotPercent.[1]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got no prefs: {{grade.got.[0]}} ({{grade.gotPercent.[0]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 1st pref: {{grade.prefs.[1]}} ({{grade.prefsPercent.[1]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 2nd pref: {{grade.prefs.[2]}} ({{grade.prefsPercent.[2]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 3rd pref: {{grade.prefs.[3]}} ({{grade.prefsPercent.[3]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 4th pref: {{grade.prefs.[4]}} ({{grade.prefsPercent.[4]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 5th pref: {{grade.prefs.[5]}} ({{grade.prefsPercent.[5]}}%)<br/>
-						&nbsp;&nbsp;&nbsp;&nbsp;Got 6th pref: {{grade.prefs.[6]}} ({{grade.prefsPercent.[6]}}%)<br/>
+						<p class="nextline">
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 3 prefs: {{grade.got.[3]}} ({{grade.gotPercent.[3]}}%)
+						</p>
+						<p class="nextline">
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 2 prefs: {{grade.got.[2]}} ({{grade.gotPercent.[2]}}%)
+						</p>
+						<p class="nextline">						
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 1 prefs: {{grade.got.[1]}} ({{grade.gotPercent.[1]}}%)
+						</p>
+						<p class="nextline">
+							&nbsp;&nbsp;&nbsp;&nbsp;Got no prefs: {{grade.got.[0]}} ({{grade.gotPercent.[0]}}%)
+						</p>
+						<p>
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 1st pref: {{grade.prefs.[1]}} ({{grade.prefsPercent.[1]}}%)
+						</p>
+						<p class="nextline">
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 2nd pref: {{grade.prefs.[2]}} ({{grade.prefsPercent.[2]}}%)
+						</p>
+						<p>
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 3rd pref: {{grade.prefs.[3]}} ({{grade.prefsPercent.[3]}}%)
+						</p>
+						<p class="nextline">
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 4th pref: {{grade.prefs.[4]}} ({{grade.prefsPercent.[4]}}%)
+						</p>
+						<p class="nextline">
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 5th pref: {{grade.prefs.[5]}} ({{grade.prefsPercent.[5]}}%)
+						</p>
+						<p class="nextline">
+							&nbsp;&nbsp;&nbsp;&nbsp;Got 6th pref: {{grade.prefs.[6]}} ({{grade.prefsPercent.[6]}}%)
+						</p>
 					{{/if}}
 				</div>
 			{{/each}}

@@ -6,7 +6,9 @@
         <div class="col-xs-4 student-display-left">
             <p class="centered">
             {{#if enrolled}}
-                Enjoy Art Day!
+                <button {{action 'printSchedule'}}>Print Schedule</button><br/>
+                <br/>   
+            {{student-print-schedule schedule=schedule locations=locations student=item}}  
             {{else}}{{#if allPrefsSet}}
                 {{#if item.locked}}
                     Your preferences are locked.

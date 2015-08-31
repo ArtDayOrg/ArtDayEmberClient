@@ -1,32 +1,45 @@
-{{admin.hasSetPrefs}} of {{admin.students.length}} students have set their preferences.<br/>
-<br/>
-{{admin.sessions.length}} sessions give {{admin.totalCapacity}} total capacity.<br/>
-<br/>
+<p>
+	{{admin.hasSetPrefs}} of {{admin.students.length}} students have set their preferences.
+</p>
+<p>
+	{{admin.sessions.length}} sessions give {{admin.totalCapacity}} total capacity.
+</p>
 
 {{#if admin.isEnrolled}}
+	<p>
 	{{#if admin.enrollmentBegan}}
 		{{#if admin.enrollmentSucceeded}}
-		Success! Enrollments successfully set<br/>
+			Success! Enrollments successfully set
 		{{else}}{{#if admin.enrollmentFailed}}
-		Failure.
+			Failure.
 		{{/if}}{{/if}}
 	{{else}}
-	Enrollments already set!
+		Enrollments already set!
 	{{/if}}
+	</p>
 {{else}}{{#if admin.enrollmentAvailable}}
-	Processing {{admin.students.length}} students may take a couple minutes.  <br/>
-	If you navigate away from this page before you see a success message, you may break the enrollment process.<br/>
-	<br/>
-	{{#if admin.enrollmentBegan}} 
+	<p>
+		Processing {{admin.students.length}} students may take a couple minutes.
+	</p>
+	<p>
+		If you navigate away from this page before you see a success message, you may break the enrollment process.
+	</p>
+	{{#if admin.enrollmentBegan}}
+		{{#unless admin.enrollmentSucceeded}}
 		<div class="spinner">
 			<img src="assets/images/spinner.gif" draggable="false">
 		</div>
+		<p>
 		Please wait.  Processing {{admin.students.length}} students.
+		</p>
+		{{/unless}}
 	{{else}}
 		<p class="admin-enroll">
 	  		<button {{action 'enroll'}}>Enroll</button>
 		</p>
 	{{/if}}
 {{else}} 
-	The sessions total capacity of {{admin.totalCapacity}} is insufficient to enroll all {{admin.students.length}} students.  Add more session capacity to enable enrollments.
+	<p>
+		 The sessions total capacity of {{admin.totalCapacity}} is insufficient to enroll all {{admin.students.length}} students.  Add more session capacity to enable enrollments.
+	</p>
 {{/if}}{{/if}}

@@ -5,6 +5,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
 	actions: {
 		enroll: function () {
+      this.get('adminController').set('enrollmentBegan', true);
 			this.get('adminController').send('enroll');
 		}
 	}

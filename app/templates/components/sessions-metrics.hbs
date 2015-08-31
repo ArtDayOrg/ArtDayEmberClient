@@ -2,12 +2,12 @@
 	Demand{{#if isEnrolled}}/Availability{{/if}}
 </div>
 
-<table>
+<table class="table">
     <tr>
-        <th> Name </th>
-        <th> Preferred </th>
+        <th>Name</th>
+        <th>Preferred</th>
         {{#if isEnrolled}}
-	        <th> Enrolled </th>
+	        <th>Enrolled</th>
 	    {{/if}}
     </tr>
 {{#each items as |s|}}
