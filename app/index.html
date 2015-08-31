@@ -28,22 +28,6 @@
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/art-day.css">
-    <script>
-      $(document).ready(function() {
-        $.ajaxSetup({ cache: true });
-        $.getScript('//connect.facebook.net/en_US/sdk.js', function(){
-          FB.init({
-            appId: '491786194317658',
-            cookie: true,
-            xfbml: true,
-            version: 'v2.3' // or v2.0, v2.1, v2.0
-          });
-
-          $('#loginbutton,#feedbutton').removeAttr('disabled');
-          FB.getLoginStatus(updateStatusCallback);
-        });
-      });
-    </script>
     {{content-for 'head-footer'}}
   </head>
   <body>
