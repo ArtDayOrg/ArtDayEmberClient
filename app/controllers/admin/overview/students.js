@@ -36,11 +36,12 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 			}
 		};
 
+		var students = this.get('admin.students');
+		students.sortBy('grade');
+		
 		var minGrade = students.get('firstObject.grade');
 		var maxGrade = students.get('lastObject.grade');
 		var grades = [];
-		var students = this.get('admin.students');
-		students.sortBy('grade');
 
 		for (var i = minGrade; i <= maxGrade; i++) {
 			var studentsForGrade = students.filterBy('grade', i);

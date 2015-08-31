@@ -13,7 +13,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
         var rosters = [];
         var i;
         var numberOfPeriods;
-        var enrollment = this.get('admin.enrollment');
+        var enrollment = this.get('model.enrollments');
         
         if (enrollment.get('length')) {
             numberOfPeriods = enrollment.sortBy('period').reverse().objectAt(0).get('period');
@@ -26,7 +26,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
             rosters.push(sortedPeriodRoster);
         }
         return rosters;
-    }.property('admin.model', 'admin.model.@each.enrollments'),
+    }.property('model', 'model.@each.enrollments'),
 
     actions: {
         

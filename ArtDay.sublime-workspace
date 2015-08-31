@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"se",
+				"sessionsArray"
+			],
+			[
 				"comp",
 				"compileMetricsForStudent"
 			],
@@ -155,23 +159,47 @@
 	[
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/adapters",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/helpers",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/overview",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/sessions",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components",
 		"/Users/Dev/Dev/ArtDayEmberClient/config",
 		"/Users/Dev/Dev/ArtDayEmberClient/public"
 	],
 	"file_history":
 	[
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-header.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components/enrollment-helper.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/schedule-display-joe.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components/schedule-display-joe.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-enrollments.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components/schedule-display.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/schedule-display.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/adapters/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-enrollments.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/admin-only.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/package.json",
+		"/Users/Dev/Dev/ArtDayEmberClient/ember-cli-build.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-header.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/enrollment-helper.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
@@ -180,7 +208,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-available-sessions-mosaic.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/pref-tile.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-preferences-row.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
 		"/Users/Dev/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-available-sessions-mosaic.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
@@ -196,13 +223,10 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/image-path.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/session-pane.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-enrollments.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-header.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components/enrollment-helper.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview/sessions.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview/enrollment.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/admin-only.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/add.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/edit.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/session.hbs",
@@ -212,11 +236,8 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/sessions.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/enrollment.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/add.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/admin-controller-hooks.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/sessions.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/overview/students.js",
@@ -226,7 +247,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-tile.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/not-admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/adapters/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/import-helper.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/roster-period.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/import-helper.hbs",
@@ -234,7 +254,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/preference.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/enrollment.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/rosters-print-all.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/rosters-print-all.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/roster-session.hbs",
@@ -258,7 +277,6 @@
 		"/Users/Dev/Desktop/TO-DOs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/serializers/enrollment.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
@@ -291,23 +309,19 @@
 		"/C/Users/Joe/Downloads/advanced-javascript/day1/exercises/ex1/ex1.js",
 		"/C/Users/Joe/Documents/Code/ArtDay/app/models/session.js",
 		"/C/Users/Joe/Documents/Code/ArtDay/app/models/preference.js",
-		"/C/Users/Joe/Documents/Code/ArtDay/app/models/student.js",
-		"/C/Users/Joe/Documents/Code/ArtDay/app/controllers/student.js",
-		"/C/Users/Joe/Documents/Code/ArtDay/app/templates/student.hbs",
-		"/C/Users/Joe/Desktop/GANK_INFO.txt",
-		"/C/Users/Joe/Documents/Intake form.pdf",
-		"/C/Users/Joe/Documents/Code/ArtDay/app/controllers/students.js",
-		"/C/Users/Joe/Documents/Code/ArtDay/app/templates/students.hbs"
+		"/C/Users/Joe/Documents/Code/ArtDay/app/models/student.js"
 	],
 	"find":
 	{
-		"height": 35.0
+		"height": 38.0
 	},
 	"find_in_files":
 	{
 		"height": 90.0,
 		"where_history":
 		[
+			"*",
+			"app",
 			"",
 			"app",
 			""
@@ -318,6 +332,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"\n{{",
+			"EmberApp",
 			"<h3>",
 			"<",
 			"h3",
@@ -409,7 +425,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 28.0
+		"height": 31.0
 	},
 	"output.find_results":
 	{

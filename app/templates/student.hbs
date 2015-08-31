@@ -1,7 +1,8 @@
 {{student-header item=model enrolled=enrolled allPrefsSet=allPrefsSet lockPrefs="lockPrefs" sessionNameForDisplay=sessionNameForDisplay descriptionForDisplay=descriptionForDisplay}}
 
 {{#if enrolled}}
-    {{student-enrollments items=model.enrollments changeDescription="changeDescription"}}
+  {{student-enrollments items=model.enrollments changeDescription="changeDescription"}}
+  {{schedule-display item=model}}
 {{else}}
     {{student-preferences-row items=rankedOrNullPrefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
     <hr>

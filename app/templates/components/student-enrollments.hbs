@@ -1,13 +1,12 @@
 <div class="container-fluid">
     <div class="row">
-        {{#each items as |enrollment|}}
+        {{#each sortedItems as |enrollment|}}
             <div class="col-xs-4">
                 <div class="instructions">
                     {{session-tile item=enrollment.session changeDescription="changeDescription"}}
-                    Period: {{enrollment.period}}<br/>
                     Instructor: {{enrollment.session.instructorName}}<br/>
-                    Location: {{enrollment.session.location}}<br/>
                     Instructions: {{{enrollment.session.instructions}}}<br/>
+                    Period: {{enrollment.period}}<br/>
                 </div>
             </div>
         {{/each}}
