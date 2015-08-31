@@ -182,6 +182,8 @@
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/ember-cli-build.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
@@ -198,9 +200,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-enrollments.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/admin-only.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/package.json",
-		"/Users/Dev/Dev/ArtDayEmberClient/ember-cli-build.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-header.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/enrollment-helper.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/pref-tile.js",

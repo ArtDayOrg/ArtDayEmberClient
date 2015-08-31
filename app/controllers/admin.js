@@ -69,6 +69,7 @@ export default Ember.Controller.extend({
                             self.set('isAdmin', true);
                             self.set('adminName', response.name);
                             self.set('userImageUrl', response.picture.data.url);
+                            self.transitionToRoute('admin');
                         } else {
         
                             // user is logged in, but NOT an admin.
