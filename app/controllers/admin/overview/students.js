@@ -5,6 +5,12 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 	
 	metricsByGrade: function() {
 
+		function compileMetricsForGrade(studentsForGrade) {
+			studentsForGrade.forEach(function (s) {
+				compileMetricsForStudent(s);
+			});
+		}
+
 		var enrollmentStrings;
 		var prefsGot;
 
@@ -39,8 +45,8 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 		var students = this.get('admin.students');
 		students.sortBy('grade');
 		
-		var minGrade = students.get('firstObject.grade');
-		var maxGrade = students.get('lastObject.grade');
+		var minGrade = 6;
+		var maxGrade = 12;
 		var grades = [];
 
 		for (var i = minGrade; i <= maxGrade; i++) {
@@ -79,9 +85,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 					"6": 0
 				}
 			};
-			studentsForGrade.forEach(function (s) {
-				compileMetricsForStudent(s);
-			});
+			compileMetricsForGrade(studentsForGrade);
 			grades.push(grade);
 		}
 

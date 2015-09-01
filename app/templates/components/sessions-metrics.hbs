@@ -1,22 +1,23 @@
 <div class="instructions admin-instructions">
 	Demand{{#if isEnrolled}}/Availability{{/if}}
 </div>
-
-<table class="table">
-    <tr>
-        <th>Name</th>
-        <th>Preferred</th>
-        {{#if isEnrolled}}
-	        <th>Enrolled</th>
-	    {{/if}}
-    </tr>
-{{#each items as |s|}}
-	<tr>
-		<td>{{s.name}}</td>  
-		<td>{{s.preferred}}</td> 
-		{{#if isEnrolled}}
-			<td>{{s.enrolled}}</td>
-		{{/if}}
-	</tr>
-{{/each}}
-</table>
+<div class="col-xs-8">
+  <table class="table">
+      <tr>
+          <th>Name</th>
+          <th>Preferred</th>
+          {{#if isEnrolled}}
+  	        <th>Enrolled</th>
+  	    {{/if}}
+      </tr>
+  {{#each items as |s|}}
+  	<tr>
+  		<td>{{s.name}}</td>  
+  		<td>{{s.preferred}}</td> 
+  		{{#if isEnrolled}}
+  			<td>{{s.enrolled}}</td>
+  		{{/if}}
+  	</tr>
+  {{/each}}
+  </table>
+</div>

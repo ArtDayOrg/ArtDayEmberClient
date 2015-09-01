@@ -6,7 +6,6 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 	sessionsPrint: function () {
 		
 		var sessions = this.get('admin.sessions');
-		console.log(sessions);
 		var sessionsPrint = [];
 
 		sessions.forEach(function (s) {

@@ -20,5 +20,11 @@ export default Ember.Route.extend({
     	controller.set('students', students);
     	controller.set('sessions', sessions);
       controller.set('enrollment', enrollment);
+    },
+
+    actions: {
+      refreshAdmin: function () {
+        this.refresh();
+      }
     }
 });

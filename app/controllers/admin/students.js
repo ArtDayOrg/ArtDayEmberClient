@@ -46,13 +46,14 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 };
                 body.push(studentJson);
             }
-
+            var self = this;
             Ember.$.ajax({
                 method: 'POST',
                 url: ENV.APP.host + '/api/students',
                 data: JSON.stringify(body)
             }).done(function(msg) {
                 alert('Data Saved: ' + msg );
+                self.send('refreshAdmin');
             });
         }
     }

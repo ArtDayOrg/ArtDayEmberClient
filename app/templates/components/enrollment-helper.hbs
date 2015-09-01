@@ -1,5 +1,5 @@
 <p>
-	{{admin.hasSetPrefs}} of {{admin.students.length}} students have set their preferences.
+	{{admin.hasSetPrefs}} of {{admin.students.length}} students set their preferences.
 </p>
 <p>
 	{{admin.sessions.length}} sessions give {{admin.totalCapacity}} total capacity.
@@ -7,28 +7,18 @@
 
 {{#if admin.isEnrolled}}
 	<p>
-	{{#if admin.enrollmentBegan}}
-		{{#if admin.enrollmentSucceeded}}
-			Success! Enrollments successfully set
-		{{else}}{{#if admin.enrollmentFailed}}
-			Failure.
-		{{/if}}{{/if}}
-	{{else}}
-		Enrollments already set!
-	{{/if}}
+		{{admin.students.length}} students {{#if admin.enrollmentBegan}}successfully {{/if}}enrolled!
 	</p>
-{{else}}{{#if admin.enrollmentAvailable}}
-	{{#if admin.enrollmentSucceeded}}
-		<p>
-			Enrollments successfully set!
-		</p>
-	{{else}}
-		<p>
-			Processing {{admin.students.length}} students may take a couple minutes.
-		</p>
-		<p>
-			If you navigate away from this page before you see a success message, you may break the enrollment process.
-		</p>
+{{else}}
+	<p>
+		When the deadline for setting preferences has passed, you can use this page to enroll all students for art day sessions.  Each student will be assigned sessions from their preferences in a way that maximizes satisfaction for the highest possible number of students, and guarentees no two students who set their preferences would want to trade sessions in a single period.  Students in higher grades are given slightly higher priority.  
+	</p>
+	<p>
+		A few students who only prefer popular sessions with low availability will get 1 or 2 random sessions.  Students who did not set preferences will be assigned into random sessions with availability after all students who set their preferences have been placed.  
+	</p>
+{{/if}}
+{{#if admin.enrollmentAvailable}}
+	{{#unless admin.isEnrolled}}
 		{{#if admin.enrollmentBegan}}
 			<div class="spinner">
 				<img src="assets/images/spinner.gif" draggable="false">
@@ -37,13 +27,16 @@
 				Please wait.  Processing {{admin.students.length}} students.
 			</p>
 		{{else}}
+			<p>
+				Once you press this button, do not navigate away until you see a success message or you may break the enrollment process.
+			</p>
 			<p class="admin-enroll">
 		  	<button {{action 'enroll'}}>Enroll</button>
 			</p>
 		{{/if}}
-	{{/if}}
+	{{/unless}}
 {{else}} 
 	<p>
 		 The sessions total capacity of {{admin.totalCapacity}} is insufficient to enroll all {{admin.students.length}} students.  Add more session capacity to enable enrollments.
 	</p>
-{{/if}}{{/if}}
+{{/if}}

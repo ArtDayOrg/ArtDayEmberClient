@@ -27,5 +27,5 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 			});
 		}
 		return sessionsMetrics;
-	}.property('admin.sessions.length', 'admin.sessions', 'admin.enrollment.length')
+	}.property('admin.sessions.length', 'admin.sessions.[]', 'admin.enrollment.length')
 });

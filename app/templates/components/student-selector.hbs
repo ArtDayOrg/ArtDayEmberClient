@@ -4,11 +4,18 @@
 
 {{#each filteredStudents as |item|}}
   <p class="nextline">
+    {{!-- from http://findicons.com/icon/438922/lock --}}
+    {{#unless isEnrolled}}
+      {{#if item.locked}}
+        {{#if isAdmin}}
+          <button {{action 'unlock' item}}>Unlock</button>
+        {{/if}}
+        <img src="assets/images/lock.png" class="floatingimage" draggable="false" style="height: 12px; width: 12px"> 
+      {{/if}}
+    {{/unless}}
   	{{#link-to 'student' item}}{{item.firstName}} {{item.lastName}} {{item.grade}}{{/link-to}}
-  	{{#if isAdmin}}
-  		{{#if item.locked}}
-   			<button {{action 'unlock' item}}>unlock</button>
+  		{{#if isAdmin}}
+        <button {{action 'deleteStudent' item}}>Delete</button>
    		{{/if}}
-  	{{/if}}
   </p>
 {{/each}}

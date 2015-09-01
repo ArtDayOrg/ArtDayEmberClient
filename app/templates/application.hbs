@@ -15,9 +15,9 @@
     <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
             <li><a class="navbar-brand" href="#">ICS Art Day 2015</a></li>
-            <li class="active"><a href="">Home</a></li>
-            <li><a href="/#/students">Students</a></li>
-            <li><a href="/#/admin">Admin</a></li>            
+            {{#link-to "index" tagName="li"}}<a href="">Home</a>{{/link-to}}
+            {{#link-to "students" tagName="li"}}<a href="/#/students">Students</a>{{/link-to}}
+            {{#link-to "admin" tagName="li"}}<a href="/#/admin">Admin</a>{{/link-to}}            
         </ul>
     </div><!--/.nav-collapse -->
 </div>

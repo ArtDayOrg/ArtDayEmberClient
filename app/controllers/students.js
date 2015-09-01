@@ -7,7 +7,12 @@ export default Ember.Controller.extend(StudentFilter, {
     
     searchFilter: '',
 
-    filteredStudents: Ember.computed.filter('model', function(student) {
+    isEnrolled: function () {
+        console.log(this.get('enrollment.length'));
+        return this.get('enrollment.length') > 0;
+    }.property('enrollment.length'),
+
+    filteredStudents: Ember.computed.filter('model.students', function(student) {
         var filterString = this.get('searchFilter').toUpperCase();
         if ((student.get('firstName') === filterString) || (student.get('lastName') === filterString)) {
             return true;
@@ -17,7 +22,7 @@ export default Ember.Controller.extend(StudentFilter, {
         }    
         var regex = new RegExp(filterString, 'i');
         return student.get('firstName').match(regex) || student.get('lastName').match(regex);
-    }).property('searchFilter', 'model', 'model.length'),
+    }).property('searchFilter', 'students', 'students.length'),
 
     actions: {
         processKeyUp: function(value) {

@@ -4,17 +4,34 @@
             <div class="col-xs-12">
                 <div class="instructions">
                     {{session-tile item=enrollment.session changeDescription="changeDescription"}}
-                    <p class="nextline">
-                        Instructor: {{enrollment.session.instructorName}}
-                    </p>
-                    {{#with enrollment.session.instructions}}
-                        <p class="nextline">
-                            Instructions: {{{enrollment.session.instructions}}}
-                        </p>
-                    {{/with}}
-                    <p class="nextline">
-                        Period: {{enrollment.period}}
-                    </p>
+                    <table class="table">
+                        <tr>
+                            <td>
+                                Instructor:
+                            </td>
+                            <td>
+                                {{enrollment.session.instructorName}}
+                            </td>
+                        </tr>
+                        {{#with enrollment.session.instructions}}
+                            <tr>
+                                <td>
+                                    Instructions:
+                                </td>
+                                <td>
+                                    {{{enrollment.session.instructions}}}
+                                </td>
+                            </tr>
+                        {{/with}}
+                        <tr>
+                            <td>
+                                Period:
+                            </td>
+                            <td>
+                                {{enrollment.period}}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         {{/each}}

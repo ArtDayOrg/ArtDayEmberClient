@@ -1,14 +1,17 @@
 <p class="nextline">
-  Paste the student list below, then click import.
-</p>
-<p class="nextline">
-  Import data needs to be in this format - one line per student:
+  To import a list of all students, paste it below, then click import.  You may also import single students the same way if new students are added once the bulk import has been completed.
 </p>
 <p>
+  Import data needs to be in this format - one line per student:
+</p>
+<p class="nextline">
+ firstName,lastName,gradeNumber
+</p>
+<p class="nextline">
   john,doe,12
 </p>
 <div>
-	<textarea id='importText' style='width:500px;height:400px'></textarea>
+	<textarea id='importText' style='width:500px;height:320px'></textarea>
 </div>
 <div>
 	<button {{action 'doImport'}}>Import</button>

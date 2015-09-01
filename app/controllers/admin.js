@@ -22,7 +22,7 @@ export default Ember.Controller.extend({
     
     isEnrolled: function () {
         return (this.get('enrollment.length') > 0);
-    }.property('model.enrollment.length'),
+    }.property('enrollment.length'),
     
     hasSetPrefs: function () {
         var count = 0;
@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
             }
         });
         return count;
-    }.property('model.students.@each.preferences'),
+    }.property('students.@each.preferences'),
 
     totalCapacity: function () {
         var count = 0;
@@ -219,8 +219,9 @@ export default Ember.Controller.extend({
                     method: 'POST',
                     url: 'http://artday.azurewebsites.net/api/enrollments/Add',
                     data: JSON.stringify(body)
-                }).done(function(msg) {
+                }).done(function() {
                     outerSelf.set('enrollmentSucceeded', true);
+                    outerSelf.send('refreshAdmin');
                 });
             }
 
@@ -242,6 +243,11 @@ export default Ember.Controller.extend({
                 // required by our version of Gale-Shapely Algorithm
                 // returns the next unenrolled student if there is one or null
                 function freeStudent(students, sessions) {
+                    function denyEnrolledSessionForStudent(student) {
+                        student.enrolled.forEach(function (e) {
+                            student.deniedEnrollments.push(e);
+                        });
+                    }
                     var student;
                     for (var i = 0; i < students.length; i++) {
                         student = students.objectAt(i);
@@ -255,9 +261,7 @@ export default Ember.Controller.extend({
                         // this ensures no students are orphaned and that no orphan bumps a student who did set their preferences
                         if (student.proposedEnrollment === null && student.deniedEnrollments.length === sessions.length) {
                             student.deniedEnrollments = [];
-                            student.enrolled.forEach(function (e) {
-                                student.deniedEnrollments.push(e);
-                            });
+                            denyEnrolledSessionForStudent(student);
                             student.priority += 1;
                             return student;
                         }
