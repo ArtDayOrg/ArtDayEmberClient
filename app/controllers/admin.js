@@ -215,15 +215,12 @@ export default Ember.Controller.extend({
                         // });
                     });
                 });
-                console.log(body);
                 Ember.$.ajax({
                     method: 'POST',
                     url: 'http://artday.azurewebsites.net/api/enrollments/Add',
                     data: JSON.stringify(body)
                 }).done(function(msg) {
                     outerSelf.set('enrollmentSucceeded', true);
-                    //reload model 
-                    alert('Data Saved: ' + msg );
                 });
             }
 
@@ -400,7 +397,6 @@ export default Ember.Controller.extend({
                 return createEnrollments(sessions); 
             }
 
-            console.log('enrollmentBegan');
             this.set('enrollmentBegan', true);
 
             //context for accessing model inside loading functions
