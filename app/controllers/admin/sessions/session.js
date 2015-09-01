@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks'
+import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks';
 
 export default Ember.Controller.extend(AdminControllerHooks, {  
 
@@ -47,9 +47,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 console.error(err);
             });
         },
-        fileChanged: function(evt) {
-            alert('file changed!');
-        },
+
         add: function() {
             this.set('isAdding', true);
         },

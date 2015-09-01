@@ -26,7 +26,7 @@ export default Ember.Mixin.create({
     ['11:20AM', '12:15PM', 'Lunch', 'Cafeteria'],
     ['12:25PM', '1:15PM', 'Assembly', 'Gym'],
     ['1:30PM', '3:00PM', sessionsArray[2], locationsArray[2]]
-    ]
+    ];
 
     return schedule;
 

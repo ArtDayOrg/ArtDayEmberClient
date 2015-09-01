@@ -12,7 +12,6 @@ export default Ember.Component.extend(StudentSchedule, {
     },
 
     printSchedule: function () {
-      console.log('printSchedule')
       var scheduleContent = document.getElementsByClassName('printable')[0];
       var printWindow = window.open('', 'ICS Art Day', 'left=300,top=100,width=595,height=841');
       printWindow.document.write('<html><head><title>ICS Art Day</title>');

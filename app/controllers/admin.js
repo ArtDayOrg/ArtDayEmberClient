@@ -178,7 +178,6 @@ export default Ember.Controller.extend({
             }
 
             function enrollmentsToDB(enrollments, outerSelf) {
-                var successes = 0;
                 var needed = 0;
                 var i;
 
@@ -189,14 +188,14 @@ export default Ember.Controller.extend({
 
                 var body = [];
 
-                allEnrollments.forEach(function (enrollmentArray, index) {
+                allEnrollments.forEach(function (enrollmentArray) {
                     enrollmentArray.forEach(function (enrollment) {
 
                         var enrollmentJSON = {
                             "studentId": enrollment.emberStudent.get('id'),
                             "sessionId": enrollment.emberSession.get('id'),
                             "period": enrollment.period
-                        }
+                        };
                         body.push(enrollmentJSON);
 
                         // var newEnrollment = outerSelf.store.createRecord('enrollment', {
@@ -217,17 +216,13 @@ export default Ember.Controller.extend({
                     });
                 });
                 console.log(body);
-                var now = Date.now();
                 Ember.$.ajax({
                     method: 'POST',
                     url: 'http://artday.azurewebsites.net/api/enrollments/Add',
                     data: JSON.stringify(body)
                 }).done(function(msg) {
-                    console.log('time: ' + (Date.now() - now))
                     outerSelf.set('enrollmentSucceeded', true);
-
                     //reload model 
-                    
                     alert('Data Saved: ' + msg );
                 });
             }
