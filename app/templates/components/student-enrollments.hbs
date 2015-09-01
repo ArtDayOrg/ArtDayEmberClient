@@ -7,9 +7,11 @@
                     <p class="nextline">
                         Instructor: {{enrollment.session.instructorName}}
                     </p>
-                    <p class="nextline">
-                        Instructions: {{{enrollment.session.instructions}}}
-                    </p>
+                    {{#with enrollment.session.instructions}}
+                        <p class="nextline">
+                            Instructions: {{{enrollment.session.instructions}}}
+                        </p>
+                    {{/with}}
                     <p class="nextline">
                         Period: {{enrollment.period}}
                     </p>

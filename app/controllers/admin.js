@@ -39,7 +39,8 @@ export default Ember.Controller.extend({
         var count = 0;
         var sessions = this.get('sessions');
         sessions.forEach(function (s) {
-            count += s.get('capacity');
+            var value = parseInt(count);
+            count = value + parseInt(s.get('capacity'));
         });
         return count;
     }.property('sessions.@each.capacity', 'sessions.length'),

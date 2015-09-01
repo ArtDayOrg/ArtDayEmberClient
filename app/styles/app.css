@@ -17,6 +17,11 @@ p {
 
 }
 /* hide rosters until print, and print with page breaks*/
+
+.padded {
+    padding: 10px;
+}
+
 @media all {
 
     .page-break { 
