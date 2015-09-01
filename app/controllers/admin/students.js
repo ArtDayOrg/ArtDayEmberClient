@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks';
+import ENV from '../../config/environment';
 
 export default Ember.Controller.extend(AdminControllerHooks, {
 
@@ -48,7 +49,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
             Ember.$.ajax({
                 method: 'POST',
-                url: 'http://localhost:51773/api/students',
+                url: ENV.APP.host + '/api/students',
                 data: JSON.stringify(body)
             }).done(function(msg) {
                 alert('Data Saved: ' + msg );
