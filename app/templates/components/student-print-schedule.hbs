@@ -6,13 +6,13 @@
     <hr>
 
     {{schedule-display schedule=schedule locations=locations}}
-
+    {{#if studentHasInstructions}}
     <h3>
     Special Instructions:
     </h3>
+    {{/if}}
     {{#each student.enrollments as |enrollment|}}
       {{#with enrollment.session.instructions}}
-        <hr>
         <h4>
           {{enrollment.session.sessionName}}
         </h4>

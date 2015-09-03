@@ -3,7 +3,7 @@
 </p>
 <table class="table">
   <tr>
-    <td><p>Session Name:</p></td>
+    <td class="nocollapse"><p>Session Name:</p></td>
     <td>{{item.sessionName}}</td>
   </tr>
   <tr><td>Capacity:</td> 
@@ -21,10 +21,12 @@
     <td>Description:</td>
     <td>{{{item.description}}}</td>
   </tr>
+  {{#with item.instructions as instructions}}
   <tr>
     <td>Instructions:</td>
-    <td>{{{item.instructions}}}</td>
+    <td>{{{instructions}}}</td>
   </tr>
+  {{/with}}
 </table>
 {{#if isAdmin}}
 	<button {{action 'edit'}}>Edit</button>

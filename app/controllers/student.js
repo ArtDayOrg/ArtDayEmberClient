@@ -16,7 +16,7 @@ export default Ember.Controller.extend({
 
     enrolled: function() {
         return this.get('model.enrollments.length') ? true : false;
-    }.property(),
+    }.property('model.enrollments.length'),
 
     // this property is an array sorted by rank where unset preferences are represented 
     // by a null element in the array.  rankedOrNullArray[0] is the preference with rank 1 or null.
@@ -74,8 +74,6 @@ export default Ember.Controller.extend({
 
             var oldPrefs = this.get('model.preferences');
          
-            console.log(session.get('sessionName'), ops.target.target);
-
             //Dragging a preferred section back to availabale sessions
             if (ops.target.target === 0) {
                 if (oldPrefs.filterBy('session.sessionName', session.get('sessionName')).length) {

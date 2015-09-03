@@ -41,13 +41,13 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 		
 		return sessionsPrint;
 
-	}.property('admin.enrollments.length'),
+	}.property('admin.enrollment.length' ),
 
 	actions: {
 		printRosters: function () {
 			var rosterContent = document.getElementsByClassName('printable')[0];
 	        var printWindow = window.open('', 'ICS Art Day', 'left=300,top=100,width=595,height=841');
-			printWindow.document.write('<html><head><title>ICS Art Day</title>');
+			    printWindow.document.write('<html><head><title>ICS Art Day</title>');
         	printWindow.document.write('<link rel="stylesheet" href="assets/vendor.css" type="text/css">');
         	printWindow.document.write('<link rel="stylesheet" href="assets/art-day.css" type="text/css">');
         	printWindow.document.write('</head><body>');

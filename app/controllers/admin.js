@@ -146,7 +146,11 @@ export default Ember.Controller.extend({
                 students.forEach(function (s) {
                     s.deniedEnrollments.splice(0, s.deniedEnrollments.length);
                     s.priority = s.preferences.length > 0 ? s.grade + (s.bumpCount * 3) : 0;
-                    s.bumpCount = 0;
+                    if (s.bumpCount > 4) {
+                        s.bumpCount = 2;
+                    } else {
+                        s.bumpCount = 0;
+                    };
                     s.enrolled.push(s.proposedEnrollment);
                     s.proposedEnrollment = null;
                     s.enrolled.forEach(function (e) {

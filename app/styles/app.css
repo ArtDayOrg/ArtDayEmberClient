@@ -1,10 +1,12 @@
 table, th, td {
    padding: 4px;
+   width: auto !important;
 }
 
 
 td {
     text-align: left;
+    width: auto !important;
 }
 
 p {
@@ -16,27 +18,29 @@ p {
     margin: 0px;
 
 }
-/* hide rosters until print, and print with page breaks*/
+
+.inline {
+    float: left;
+}
 
 .padded {
     padding: 10px;
 }
 
-@media all {
+.nocollapse {
+    min-width: 130px;
+}
 
+/* hide rosters until print, and print with page breaks*/
+@media all {
     .page-break { 
         display: none; 
     }
-
     .printable {
         display: none;
     }
 }
-
-
-
 @media print {
-
     .page-break { 
         display: block; 
         page-break-before: always; 
@@ -52,7 +56,6 @@ p {
 vertical centering from:;
 http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
 */
-
 .floatcenter {
     top: 50%;
     position: relative;

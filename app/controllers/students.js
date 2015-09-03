@@ -8,7 +8,6 @@ export default Ember.Controller.extend(StudentFilter, {
     searchFilter: '',
 
     isEnrolled: function () {
-        console.log(this.get('enrollment.length'));
         return this.get('enrollment.length') > 0;
     }.property('enrollment.length'),
 

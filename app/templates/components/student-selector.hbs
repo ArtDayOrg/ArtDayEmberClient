@@ -2,20 +2,40 @@
 	Enter Name: {{input key-up="processKeyUp"}}<br/><br/>
 </div>
 
-{{#each filteredStudents as |item|}}
-  <p class="nextline">
-    {{!-- from http://findicons.com/icon/438922/lock --}}
-    {{#unless isEnrolled}}
-      {{#if item.locked}}
-        {{#if isAdmin}}
-          <button {{action 'unlock' item}}>Unlock</button>
-        {{/if}}
-        <img src="assets/images/lock.png" class="floatingimage" draggable="false" style="height: 12px; width: 12px"> 
-      {{/if}}
-    {{/unless}}
-  	{{#link-to 'student' item}}{{item.firstName}} {{item.lastName}} {{item.grade}}{{/link-to}}
-  		{{#if isAdmin}}
-        <button {{action 'deleteStudent' item}}>Delete</button>
-   		{{/if}}
-  </p>
-{{/each}}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-3">
+    </div>
+    <div class="col-xs-6">
+      <table class="table">
+        {{#each filteredStudents as |item|}}
+          <tr>
+          {{#unless isEnrolled}}
+            {{#if isAdmin}}
+              <td>
+              {{#if item.locked}}
+                  <button {{action 'unlock' item}}>Unlock</button>
+              {{/if}}
+              </td>
+            {{/if}}
+              <td>
+              {{#if item.locked}}
+                {{!-- from http://findicons.com/icon/438922/lock --}}  
+                <img src="assets/images/lock.png" class="inline" draggable="false" style="height: 12px; width: 12px"> 
+              {{/if}}
+              </td>
+          {{/unless}}
+        	  <td>
+              {{#link-to 'student' item}}{{item.firstName}} {{item.lastName}} {{item.grade}}{{/link-to}}
+        		</td>
+            {{#if isAdmin}}
+              <td>
+                <button {{action 'deleteStudent' item}}>Delete</button>
+         	    </td>
+            {{/if}}
+            </tr>
+        {{/each}}
+      </table>
+    </div>
+  </div>
+</div>
