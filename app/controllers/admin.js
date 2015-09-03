@@ -5,7 +5,7 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     
     init: function() {
-        // FB.logout();
+        //FB.logout();
     },
 
     isAdmin: false,
@@ -150,7 +150,7 @@ export default Ember.Controller.extend({
                         s.bumpCount = 2;
                     } else {
                         s.bumpCount = 0;
-                    };
+                    }
                     s.enrolled.push(s.proposedEnrollment);
                     s.proposedEnrollment = null;
                     s.enrolled.forEach(function (e) {
