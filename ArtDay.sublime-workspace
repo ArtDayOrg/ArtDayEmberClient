@@ -123,14 +123,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "app/controllers/admin.js",
-			"settings":
-			{
-				"buffer_size": 29605,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -176,24 +168,25 @@
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/serializers",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components",
+		"/Users/Dev/Dev/ArtDayEmberClient/tests",
+		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit",
+		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/controllers"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/teststudents",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/serializers/preference.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-print-schedule.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-print-schedule.js",
-		"/Users/Dev/Dev/teststudents",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/import-helper.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-pane.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
@@ -202,11 +195,9 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-enrollments.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/rosters-print-all.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-selector.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/enrollment-helper.hbs",
@@ -316,8 +307,7 @@
 		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/models/session.js",
 		"/C/Users/Joe/Documents/Code/ICSArtDay/ICSArtDay/Client/app/templates/sessions.hbs",
 		"/C/Users/Joe/Documents/Code/ArtDay/app/templates/sessions/add.hbs",
-		"/C/Users/Joe/Documents/Code/ArtDay/app/templates/sessions/edit.hbs",
-		"/C/Users/Joe/Documents/Code/ArtDay/app/templates/sessions/session.hbs"
+		"/C/Users/Joe/Documents/Code/ArtDay/app/templates/sessions/edit.hbs"
 	],
 	"find":
 	{
@@ -328,6 +318,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"<project>",
 			"*",
 			"app",
 			"",
@@ -340,6 +331,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"console",
 			"\"",
 			"\n{{",
 			"EmberApp",
@@ -397,39 +389,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "app/controllers/admin.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 29605,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								5189,
-								5189
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],
