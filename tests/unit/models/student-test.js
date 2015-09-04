@@ -5,7 +5,7 @@ import {
 
 moduleForModel('student', {
   // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:preference', 'model:enrollment']
 });
 
 test('it exists', function(assert) {
