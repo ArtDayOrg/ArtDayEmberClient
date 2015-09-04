@@ -48,12 +48,12 @@ test('handles actions ok', function(assert) {
   var item = {
     sessionName: sessionName1,
     description: description1
-  }
+  };
 
   var otherItem = {
     sessionName: sessionName2,
     description: description2
-  }
+  };
 
   this.set('item', item);
 
