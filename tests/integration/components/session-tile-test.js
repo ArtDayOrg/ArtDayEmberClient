@@ -5,7 +5,7 @@ moduleForComponent('session-tile', 'Integration | Component | session tile', {
   integration: true
 });
 
-test('displays ok', function(assert) {
+test('before/after displays ok', function(assert) {
 
   assert.expect(4);
 
@@ -14,12 +14,12 @@ test('displays ok', function(assert) {
   
   var item = {
     sessionName: sessionName1,
-    id: 1,
+    id: 1
   };
 
   var otherItem = {
     sessionName: sessionName2,
-    id: 2,
+    id: 2
   };
 
   this.set('item', item);
@@ -36,7 +36,7 @@ test('displays ok', function(assert) {
 });
 
   
-test('handles actions ok', function(assert) {
+test('before/after renders action ok', function(assert) {
   
   assert.expect(4);
   
