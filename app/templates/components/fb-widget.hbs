@@ -1,11 +1,11 @@
 <div class="fb-user">
   <p class="fb-image">
-  	<img src={{userImageUrl}}>
+  	<img id='fbImageUrl' src={{userImageUrl}}>
   </p>
-<p class="fb-name">
+<p class="fb-name" id='adminName'>
 	{{adminName}}
 </p>
 </div>
 <div class="fb-logout">
-	  <input type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}}/>
+	  <input id='logoutButton' type='image' src='assets/images/fb-logout-button.png' {{action 'logout'}}/>
 </div>

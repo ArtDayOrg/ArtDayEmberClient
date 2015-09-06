@@ -4,8 +4,7 @@ import ENV from '../../config/environment';
 
 export default Ember.Controller.extend(AdminControllerHooks, {
 
-    searchFilter: '',
-
+    searchFilter: '',    
     filteredStudents: Ember.computed.filter('model.students', function(student) {
 
         var filterString = this.get('searchFilter').toUpperCase();
@@ -41,7 +40,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 var studentJson = {
                     firstName: student[0],
                     lastName: student[1],
-                    grade: student[2],
+                    grade: parseInt(student[2]),
                     locked: false
                 };
                 body.push(studentJson);
