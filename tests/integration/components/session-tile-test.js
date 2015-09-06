@@ -5,33 +5,40 @@ moduleForComponent('session-tile', 'Integration | Component | session tile', {
   integration: true
 });
 
+
+var sessionName1 = 'session name 1';
+var sessionName2 = 'session name 2';
+var description1 = 'description 1';
+var description2 = 'description 2';
+
+
+var item = {
+  sessionName: sessionName1,
+  id: 1,
+  description: description1
+};
+
+var otherItem = {
+  sessionName: sessionName2,
+  id: 2,
+  description: description2
+};
+
 test('before/after displays ok', function(assert) {
 
   assert.expect(4);
 
-  var sessionName1 = 'session name 1';
-  var sessionName2 = 'session name 2';
-  
-  var item = {
-    sessionName: sessionName1,
-    id: 1
-  };
-
-  var otherItem = {
-    sessionName: sessionName2,
-    id: 2
-  };
 
   this.set('item', item);
   this.render(hbs`{{session-tile item=item}}`);
 
-  assert.equal(this.$().find('#name').text().trim(), sessionName1, 'session name renders');
+  assert.equal(this.$().find('#name').text().trim(), sessionName1, 'session name ok');
   assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/1.png', 'image path ok');
 
   this.set('item', otherItem);
 
-  assert.equal(this.$().find('#name').text().trim(), sessionName2, 'session name renders');
-  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/2.png', 'image path ok');
+  assert.equal(this.$().find('#name').text().trim(), sessionName2, 'session name updates');
+  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/2.png', 'image path updates');
 
 });
 
@@ -40,21 +47,6 @@ test('before/after renders action ok', function(assert) {
   
   assert.expect(4);
   
-  var sessionName1 = 'session name 1';
-  var sessionName2 = 'session name 2';
-  var description1 = 'description 1';
-  var description2 = 'description 2';
-
-  var item = {
-    sessionName: sessionName1,
-    description: description1
-  };
-
-  var otherItem = {
-    sessionName: sessionName2,
-    description: description2
-  };
-
   this.set('item', item);
 
   this.render(hbs`{{session-tile item=item changeDescription="outer action"}}`);

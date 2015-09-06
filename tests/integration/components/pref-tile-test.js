@@ -39,34 +39,38 @@ test('renders as session ok', function(assert) {
   assert.expect(4);
 
   this.set('item', item);
-  this.set('index', 1);
+  this.set('index', 0);
 
   this.render(hbs`{{pref-tile item=item index=index}}`);
 
-  assert.equal(this.$().find('#name').text().trim(), 'name 1', 'session name renders');
-  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/1.png', 'image path ok');
+  assert.equal(this.$().find('#name1').text().trim(), 'name 1', 'session name ok');
+  assert.equal(this.$().find('#imageUrl1').attr('src'), 'assets/images/1.png', 'image path ok');
 
   this.set('item', otherItem);
   this.set('index', 5);
 
-  assert.equal(this.$().find('#name').text().trim(), 'name 2', 'session name renders');
-  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/2.png', 'image path ok');
+  assert.equal(this.$().find('#name6').text().trim(), 'name 2', 'session name updates');
+  assert.equal(this.$().find('#imageUrl6').attr('src'), 'assets/images/2.png', 'image path updates');
 });
 
 //test drag and drop in student-preferences-row
 
 test('renders as null ok', function(assert) {
   
-  assert.expect(2);
+  assert.expect(4);
 
   this.set('item', null);
   this.set('index', 3);
 
   this.render(hbs`{{pref-tile item=item index=index}}`);
 
-  assert.equal(this.$().find('#rank').text().trim(), '4', 'null renders as pref drop target with rank');
+  assert.equal(this.$().find('#rank4').text().trim(), '4', 'null renders as pref drop target with rank');
 
   this.set('index', 5);
-  assert.equal(this.$().find('#rank').text().trim(), '6', 'rank responds to change');
+  assert.equal(this.$().find('#rank6').text().trim(), '6', 'rank updates');
 
+  this.set('item', item);
+
+  assert.equal(this.$().find('#name6').text().trim(), 'name 1', 'session name ok after update from null');
+  assert.equal(this.$().find('#imageUrl6').attr('src'), 'assets/images/1.png', 'image path ok after update from null');
 });
