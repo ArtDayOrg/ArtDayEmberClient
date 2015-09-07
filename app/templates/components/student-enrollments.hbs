@@ -1,39 +1,39 @@
 <div class="container-fluid">
-    <div class="row">
-        {{#each sortedItems as |enrollment|}}
-            <div class="col-xs-12">
-                <div class="instructions">
-                    {{session-tile item=enrollment.session changeDescription="changeDescription"}}
-                    <table class="table">
-                        <tr>
-                            <td>
-                                Instructor:
-                            </td>
-                            <td>
-                                {{enrollment.session.instructorName}}
-                            </td>
-                        </tr>
-                        {{#with enrollment.session.instructions}}
-                            <tr>
-                                <td>
-                                    Instructions:
-                                </td>
-                                <td>
-                                    {{{enrollment.session.instructions}}}
-                                </td>
-                            </tr>
-                        {{/with}}
-                        <tr>
-                            <td>
-                                Period:
-                            </td>
-                            <td>
-                                {{enrollment.period}}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        {{/each}}
-    </div>
+  <div class="row">
+    {{#each sortedItems as |enrollment index|}}
+      <div class="col-xs-12">
+        <div class="instructions">
+          {{session-tile item=enrollment.session changeDescription="changeDescription"}}
+          <table class="table">
+            <tr>
+              <td>
+                Instructor:
+              </td>
+              <td class="instructor{{index}}">
+                {{enrollment.session.instructorName}}
+              </td>
+            </tr>
+            {{#with enrollment.session.instructions as |instructions|}}
+              <tr>
+                <td>
+                  Instructions:
+                </td>
+                <td class="instruct{{index}}">
+                  {{{instructions}}}
+                </td>
+              </tr>
+            {{/with}}
+            <tr>
+              <td>
+                  Period:
+              </td>
+              <td class="period{{index}}">
+                {{enrollment.period}}
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    {{/each}}
+  </div>
 </div>

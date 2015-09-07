@@ -1,33 +1,33 @@
 <table class="table">
-    <tr>
-        <td>
-            <p class="nextline">Session Name:</p>
-            (must be unique)
-        </td>
-        <td>{{input type="text" id="session-name-input" value=model.sessionName}}</td>
-    </tr>
-    <tr>
-        <td>Capacity:</td>
-        <td>{{input type="text" value=model.capacity}}</td>
-    </tr>
-    <tr>
-        <td>Instructor:</td>
-        <td>{{input type="text" value=model.instructorName}}</td>
-    </tr>
-    <tr>
-        <td>Location:</td>
-        <td><p>{{input type="text" value=model.location}}</p></td>
-    </tr>
-    <tr>
-        <td valign="top">Description (4 line max)</td>
-        <td>
-            {{textarea value=model.description cols="60" rows="4"}}
-        </td>
-    </tr>
-    <tr>
-        <td valign="top">Instructions</td>
-        <td>                 
-            {{textarea value=model.instructions cols="60" rows="4"}}
-        </td>
-    </tr>
+  <tr>
+    <td>
+      <p class="nextline">Session Name:</p>
+      (must be unique)
+    </td>
+    <td>{{input type="text" id="session-name-input" value=model.sessionName}}</td>
+  </tr>
+  <tr>
+    <td>Capacity:</td>
+      <td>{{input type="text" value=model.capacity}}</td>
+  </tr>
+  <tr>
+    <td>Instructor:</td>
+    <td>{{input type="text" value=model.instructorName}}</td>
+  </tr>
+  <tr>
+    <td>Location:</td>
+    <td><p>{{input type="text" value=model.location}}</p></td>
+  </tr>
+  <tr>
+    <td valign="top">Description (4 line max)</td>
+    <td>
+      {{textarea value=model.description cols="60" rows="4"}}
+    </td>
+  </tr>
+  <tr>
+    <td valign="top">Instructions</td>
+    <td>                 
+      {{textarea value=model.instructions cols="60" rows="4"}}
+    </td>
+  </tr>
 </table>
