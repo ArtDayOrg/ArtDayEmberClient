@@ -23,19 +23,9 @@ test('adminName and imageUrl show up correctly', function(assert) {
 });
 
 test('logout action works', function(assert) {
-
   assert.expect(2);
-
-  var adminName = 'Joe';
-  var imageUrl = 'http://test.com/img.jpg';
     
-  this.set('adminName', adminName);
-  this.set('userImageUrl', imageUrl);
-
-  this.render(hbs`{{fb-widget adminName=adminName userImageUrl=userImageUrl logout='logoutClicked'}}`);
-
-  //assert.equal(this.$().find('#fbImageUrl').attr('src'), imageUrl, 'image path ok');
-  //assert.equal(this.$().find('#adminName').text().trim(), adminName, 'admin name renders');
+  this.render(hbs`{{fb-widget logout='logoutClicked'}}`);
 
   var $button = this.$('#logoutButton');
   assert.equal($button.length, 1, 'logout button exists');
