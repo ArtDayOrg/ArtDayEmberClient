@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('student-enrollments', 'Integration | Component | student enrollments', {
+moduleForComponent('admin-only', 'Integration | Component | admin only', {
   integration: true
 });
 
@@ -11,15 +11,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{student-enrollments}}`);
+  this.render(hbs`{{admin-only}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#student-enrollments}}
+    {{#admin-only}}
       template block text
-    {{/student-enrollments}}
+    {{/admin-only}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

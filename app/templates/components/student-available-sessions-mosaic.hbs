@@ -1,13 +1,13 @@
 {{#draggable-object-target action="sessionDropped" target=0}}
-    <div class="container-fluid">
-        <div class="row">
-            {{#each availableSessions as |availableSession|}}
-                <div class="col-md-2">
-                    {{#draggable-object content=availableSession}}
-                            {{session-tile item=availableSession changeDescription="changeDescription"}}
-                    {{/draggable-object}}
-                </div>
-            {{/each}}
+  <div class="container-fluid">
+    <div class="row">
+      {{#each availableSessions as |availableSession|}}
+        <div class="col-md-2">
+          {{#draggable-object content=availableSession}}
+            {{session-tile item=availableSession changeDescription="changeDescription"}}
+          {{/draggable-object}}
         </div>
+      {{/each}}
     </div>
+  </div>
 {{/draggable-object-target}}

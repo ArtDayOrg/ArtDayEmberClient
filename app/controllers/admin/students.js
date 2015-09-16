@@ -1,11 +1,10 @@
 import Ember from 'ember';
-import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks';
+import AdminControllerHooks from 'art-day/mixins/admin-controller-hooks';
 import ENV from '../../config/environment';
 
 export default Ember.Controller.extend(AdminControllerHooks, {
 
     searchFilter: '',
-
     filteredStudents: Ember.computed.filter('model.students', function(student) {
 
         var filterString = this.get('searchFilter').toUpperCase();
@@ -15,19 +14,19 @@ export default Ember.Controller.extend(AdminControllerHooks, {
         }
 
         if (filterString.length < 3) {
-            return false; 
+            return false;
         }
-        
+
         var regex = new RegExp(filterString, 'i');
         return student.get('firstName').match(regex) || student.get('lastName').match(regex);
     }).property('searchFilter', 'model.students', 'model.students.length'),
 
     actions: {
- 
+
         processKeyUp: function(value) {
             this.set('searchFilter', value);
         },
- 
+
         unlock: function(student) {
             student.set('locked', false);
             student.save();
@@ -41,7 +40,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 var studentJson = {
                     firstName: student[0],
                     lastName: student[1],
-                    grade: student[2],
+                    grade: parseInt(student[2]),
                     locked: false
                 };
                 body.push(studentJson);
@@ -52,9 +51,9 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 url: ENV.APP.host + '/api/students',
                 data: JSON.stringify(body)
             }).done(function(msg) {
-                alert('Data Saved: ' + msg );
+                alert('Data Saved: ' + msg);
                 self.send('refreshAdmin');
             });
         }
     }
-}); 
+});

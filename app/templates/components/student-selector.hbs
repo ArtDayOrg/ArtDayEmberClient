@@ -26,7 +26,7 @@
               </td>
           {{/unless}}
         	  <td>
-              {{#link-to 'student' item}}{{item.firstName}} {{item.lastName}} {{item.grade}}{{/link-to}}
+              {{#link-to 'student' item}} {{#liquid-bind item as |student|}}<span student-id={{item.id}}>{{student.firstName}} {{student.lastName}} {{student.grade}}</span>{{/liquid-bind}}{{/link-to}}
         		</td>
             {{#if isAdmin}}
               <td>

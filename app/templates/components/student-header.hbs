@@ -1,33 +1,37 @@
 <div class="studentName" draggable="false"> 
-    {{item.firstName}} {{item.lastName}} ({{item.grade}})
+  {{#liquid-bind item as |student|}}<span student-id={{student.id}}>{{student.firstName}} {{student.lastName}} ({{student.grade}})</span>{{/liquid-bind}}
 </div>
 <div class="container-fluid">
-    <div class="row student-display">
-        <div class="col-xs-4 student-display-left">
-            <p class="centered">
-            {{#if enrolled}}
-                <button {{action 'printSchedule'}}>Print Schedule</button><br/>
-                <br/>   
-            {{student-print-schedule schedule=schedule locations=locations student=item}}  
-            {{else}}{{#if allPrefsSet}}
-                {{#if item.locked}}
-                    Your preferences are locked.
-                {{else}}
-                    <button {{action 'lockPrefs'}} class="centered-button">
-                        Lock in Preferences
-                    </button>
-                {{/if}}{{else}}
-                    Drag and Drop to set your preferences.
-            {{/if}}{{/if}}
-            </p>
-        </div>
-        <div class="col-xs-8 description-display">
-            <p class="centered">
-                <div class="student-display-h">
-                    {{sessionNameForDisplay}}
-                </div>
-            {{{descriptionForDisplay}}}
-            </p>
-        </div>
+  <div class="row student-display">
+    <div class="col-xs-4 student-display-left">
+      <p class="centered">
+        {{#if enrolled}}
+          <p>
+            <button {{action 'printSchedule'}}>Print Schedule</button>
+          </p>       
+          {{student-print-schedule schedule=schedule locations=locations student=item}}  
+        {{else}}
+          {{#liquid-if allPrefsSet use="toRight"}}
+            {{#liquid-if item.locked use="toRight"}}
+              Your preferences are locked.
+            {{else}}
+              <button {{action 'lockPrefs'}} class="centered-button">
+                Lock in Preferences
+              </button>
+            {{/liquid-if}}
+          {{else}}
+              Drag and Drop to set your preferences.
+          {{/liquid-if}}
+        {{/if}}
+      </p>
     </div>
+    <div class="col-xs-8 description-display">
+      <p class="centered">
+        <div class="student-display-h">
+            {{liquid-bind sessionNameForDisplay use="toRight"}}
+        </div>
+            {{#liquid-bind descriptionForDisplay use="toRight" as |desc|}}{{{desc}}}{{/liquid-bind}}
+      </p>
+    </div>
+  </div>
 </div>

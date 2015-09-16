@@ -1,13 +1,13 @@
 {{#draggable-object-target action="sessionDropped" target=rank}}
-    {{#with item.session as |session|}}
-        {{#draggable-object content=session}}
-            {{#session-tile item=session changeDescription="changeDescription" rank=rank}}{{/session-tile}}  
-        {{/draggable-object}}
-    {{else}}
-        <div class="droptarget">
-            <h3 class="floatcenter">
-                {{rank}}
-            </h3>
-        </div>
-    {{/with}}
+  {{#with item.session as |session|}}
+    {{#draggable-object content=session}}
+      {{session-tile item=session changeDescription="changeDescription" rank=rank}}
+    {{/draggable-object}}
+  {{else}}
+    <div class="droptarget">
+      <h3 class="floatcenter" id="rank{{rank}}">
+        {{rank}}
+      </h3>
+    </div>
+  {{/with}}
 {{/draggable-object-target}}

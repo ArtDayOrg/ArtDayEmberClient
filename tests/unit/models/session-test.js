@@ -1,11 +1,8 @@
-import {
-  moduleForModel,
-  test
-} from 'ember-qunit';
+import { moduleForModel, test } from 'ember-qunit';
 
-moduleForModel('preference', {
+moduleForModel('session', 'Unit | Model | session', {
   // Specify the other units that are required for this test.
-  needs: ['model:session', 'model:student']
+  needs: ['model:preference', 'model:enrollment']
 });
 
 test('it exists', function(assert) {

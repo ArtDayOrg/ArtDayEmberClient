@@ -5,22 +5,65 @@ moduleForComponent('session-tile', 'Integration | Component | session tile', {
   integration: true
 });
 
-test('it renders', function(assert) {
-  assert.expect(2);
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+var sessionName1 = 'session name 1';
+var sessionName2 = 'session name 2';
+var description1 = 'description 1';
+var description2 = 'description 2';
 
-  this.render(hbs`{{session-tile}}`);
 
-  assert.equal(this.$().text().trim(), '');
+var item = {
+  sessionName: sessionName1,
+  id: 1,
+  description: description1
+};
 
-  // Template block usage:
-  this.render(hbs`
-    {{#session-tile}}
-      template block text
-    {{/session-tile}}
-  `);
+var otherItem = {
+  sessionName: sessionName2,
+  id: 2,
+  description: description2
+};
 
-  assert.equal(this.$().text().trim(), 'template block text');
+test('before/after displays ok', function(assert) {
+
+  assert.expect(4);
+
+
+  this.set('item', item);
+  this.render(hbs`{{session-tile item=item}}`);
+
+  assert.equal(this.$().find('#name').text().trim(), sessionName1, 'session name ok');
+  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/1.png', 'image path ok');
+
+  this.set('item', otherItem);
+
+  assert.equal(this.$().find('#name').text().trim(), sessionName2, 'session name updates');
+  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/2.png', 'image path updates');
+
+});
+
+  
+test('before/after renders action ok', function(assert) {
+  
+  assert.expect(4);
+  
+  this.set('item', item);
+
+  this.render(hbs`{{session-tile item=item changeDescription="outer action"}}`);
+
+  this.on('outer action', function (description, sessionName) {
+    assert.equal(description, description1, 'session-tile action sends description');
+    assert.equal(sessionName, sessionName1, 'session-tile action sends session name');
+  });
+  
+  $('.session-tile').click();
+
+  this.set('item', otherItem);
+
+  this.on('outer action', function (description, sessionName) {
+    assert.equal(description, description2, 'session-tile action changes description');
+    assert.equal(sessionName, sessionName2, 'session-tile action changes session name');
+  });
+
+  $('.session-tile').click();
 });
