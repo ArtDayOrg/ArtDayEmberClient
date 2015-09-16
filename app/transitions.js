@@ -7,6 +7,10 @@ export default function() {
       use: ['flyTo', {
         duration: 500
       }]
+    }, {
+      use: ['toUp', {
+        duration: 500
+      }]
     })
   );
 
