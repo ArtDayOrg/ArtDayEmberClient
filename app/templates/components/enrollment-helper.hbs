@@ -1,20 +1,19 @@
-<p>
-	{{admin.hasSetPrefs}} of {{admin.students.length}} students set their preferences.
-</p>
-<p>
-	{{admin.sessions.length}} sessions give {{admin.totalCapacity}} total capacity.
-</p>
-
 {{#if admin.isEnrolled}}
 	<p>
 		{{admin.students.length}} students {{#if admin.enrollmentBegan}}successfully {{/if}}enrolled!
 	</p>
 {{else}}
 	<p>
+		{{admin.hasSetPrefs}} of {{admin.students.length}} students set their preferences.
+	</p>
+	<p>
+		{{admin.sessions.length}} sessions give {{admin.totalCapacity}} total capacity.
+	</p>
+	<p>
 		When the deadline for setting preferences has passed, you can use this page to enroll all students for art day sessions.  Each student will be assigned sessions from their preferences in a way that maximizes satisfaction for the highest possible number of students, and guarentees no two students who set their preferences would want to trade sessions in a single period.  Students in higher grades are given slightly higher priority.  
 	</p>
 	<p>
-		A few students who only prefer popular sessions with low availability will get 1 or 2 random sessions.  Students who did not set preferences will be assigned into random sessions with availability after all students who set their preferences have been placed.  
+		A few students who only prefer popular sessions with low availability may get 1 or 2 random sessions.  Students who did not set preferences will be assigned into random sessions with availability after all students who set their preferences have been placed.  
 	</p>
 {{/if}}
 {{#if admin.enrollmentAvailable}}

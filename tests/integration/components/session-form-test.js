@@ -22,7 +22,7 @@ test('fields show up in form when model populated', function(assert) {
     
   this.set('model', model);
 
-  this.render(hbs`{{session-form model=model}}`);
+  this.render(hbs`{{session-form item=model}}`);
 
   assert.equal(this.$().find('#session-name-input').val(), model.sessionName, 'session name populated');
   assert.equal(this.$().find('#capacity-input').val(), model.capacity, 'capacity populated');
@@ -42,7 +42,7 @@ test('fields do not show up in form when model empty', function(assert) {
   
   this.set('model', model);
 
-  this.render(hbs`{{session-form model=model}}`);
+  this.render(hbs`{{session-form item=model}}`);
 
   assert.equal(this.$().find('#session-name-input').val(), '', 'session name empty');
   assert.equal(this.$().find('#capacity-input').val(), '', 'capacity empty');

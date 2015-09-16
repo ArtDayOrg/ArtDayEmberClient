@@ -2,26 +2,32 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+    appController: Ember.inject.controller('application'),
+    app: Ember.computed.reads('appController'),
+
     descriptionForDisplay: 'Click a session to see details.',
 
     sessionNameForDisplay: '',
 
-    allPrefsSet: function() {
-        if (this.get('model.preferences.length') === 6) {
-            return true;
-        } else {
-            return false;
-        }
+    allPrefsSet: function () {
+        return this.get('model.preferences.length') === 6 ? true : false;
     }.property('model.preferences.length'),
 
-    enrolled: function() {
+    enrolled: function () {
         return this.get('model.enrollments.length') ? true : false;
     }.property('model.enrollments.length'),
+
+    sessionsLoading: function () {
+        console.log('sessions loading')
+        console.log(this.get('app.model'));
+        console.log()
+        return this.get('app.model.length') ? false : true;
+    }.property('app.model.length'),
 
     // this property is an array sorted by rank where unset preferences are represented 
     // by a null element in the array.  rankedOrNullArray[0] is the preference with rank 1 or null.
     // Our template wants to cycle through this and display pref tiles or a drop box when null.
-    rankedOrNullPrefsArray: function() {
+    rankedOrNullPrefsArray: function () {
 
         function sortByRank(pref) {
             if (pref.get('rank') === i) {
@@ -31,20 +37,22 @@ export default Ember.Controller.extend({
 
         var array = this.get('model.preferences');
         var rankedOrNullPrefsArray = [];
-
-        for (var i = 1; i < 7; i++) {
-            var tempPref = 0;
-            array.forEach(sortByRank);
-            if (tempPref !== 0) {
-                rankedOrNullPrefsArray.pushObject(tempPref);
-            } else {
-                rankedOrNullPrefsArray.pushObject(null);
+        if (array) {
+            for (var i = 1; i < 7; i++) {
+                var tempPref = 0;
+                array.forEach(sortByRank);
+                if (tempPref !== 0) {
+                    rankedOrNullPrefsArray.pushObject(tempPref);
+                } else {
+                    rankedOrNullPrefsArray.pushObject(null);
+                }
             }
         }
         return rankedOrNullPrefsArray;
     }.property('model.preferences.@each.rank', 'model.preferences.@each.session', 'model'),
 
     availableSessions: function () {
+        console.log(availableSessions);
         var prefs = this.get('model.preferences');
         var unavailableSessionNames = [];
         var availableSessions = [];
@@ -53,13 +61,13 @@ export default Ember.Controller.extend({
             unavailableSessionNames.pushObject(pref.get('session.sessionName'));
         });
 
-        this.store.peekAll('session').forEach(function (session) {
+        this.get('app.model').forEach(function (session) {
             if (!unavailableSessionNames.contains(session.get('sessionName'))) {
                     availableSessions.pushObject(session);
                 }
         });
         return availableSessions;
-    }.property('model.preferences.@each.rank', 'model.preferences.@each.session', 'model'),
+    }.property('model.preferences.@each.rank', 'model.preferences.@each.session', 'app.model.length', 'app.model', 'model'),
 
     actions: {
 
@@ -70,7 +78,8 @@ export default Ember.Controller.extend({
                     return;
                 }, function (reason) {
                     console.error('failure: ' + reason);
-                }); }
+                }); 
+            }
 
             var oldPrefs = this.get('model.preferences');
          
@@ -99,7 +108,9 @@ export default Ember.Controller.extend({
                 //cycle through the set preferences (they reordered the set prefs by dragging one to a different rank)
                 oldPrefs.forEach(function (oldPref) {
 
-                    if (exit) { return; }
+                    if (exit) { 
+                        return; 
+                    }
 
                     var oldPrefRank = oldPref.get('rank');
                     
@@ -155,13 +166,13 @@ export default Ember.Controller.extend({
                 }
             },
         
-        lockPrefs: function() {
+        lockPrefs: function () {
             var thisStudent = this.get('model');
             thisStudent.set('locked', true);
             thisStudent.save();
         },
         
-        changeDescription: function(description, sessionName) {
+        changeDescription: function (description, sessionName) {
             this.set('descriptionForDisplay', description);
             this.set('sessionNameForDisplay', sessionName);
         }

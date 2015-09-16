@@ -3,9 +3,12 @@ import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks';
 
 export default Ember.Controller.extend(AdminControllerHooks, {  
 
+
     isEditing: false,
     
     isAdding: false,
+
+    imageData: '',
 
     // processes the current models enrollment and
     // returns a sorted array of alphabetized session rosters
@@ -30,6 +33,10 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
     actions: {
         
+        updateImageData: function (imageData) {
+            this.set('model.imageHash', imageData);
+        },
+
         edit: function() {
             this.set('isEditing', true);
         },

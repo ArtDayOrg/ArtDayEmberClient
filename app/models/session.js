@@ -8,7 +8,7 @@ export default DS.Model.extend({
 	location: DS.attr('string'),
   preferences: DS.hasMany('preference', {async: true}),
   enrollments: DS.hasMany('enrollment', {async: true}),
-  imageUrl: DS.attr('string'),
+  imageHash: DS.attr('string'),
   instructions: DS.attr('string'),
 
   toStringExtension: function() {

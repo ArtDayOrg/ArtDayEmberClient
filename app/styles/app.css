@@ -240,3 +240,10 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     display: block;
     margin: auto;
 }
+
+.image-left {
+    border-radius: 20px; 
+    width: 140px;
+    height: 100px;
+    margin: auto;
+}

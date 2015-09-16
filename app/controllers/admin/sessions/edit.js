@@ -1,15 +1,14 @@
 import Ember from 'ember';
-import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks';
 
-export default Ember.Controller.extend(AdminControllerHooks, {
+export default Ember.Controller.extend({
 
-    imageData: '',
+    sessionController: Ember.inject.controller('admin.sessions.session'),
 
     actions: {
 
         updateImageData: function (imageData) {
-            console.log('imageData bubbled to add');
-            this.set('imageData', imageData);
+            console.log('imageData bubbled to edit');
+            sessionController.set('model.imageHash', imageData);
         },
 
         addSession: function() {

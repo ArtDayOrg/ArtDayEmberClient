@@ -3,21 +3,15 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-    
-    init: function() {
-        //FB.logout();
-    },
 
+    //facebook login
     isAdmin: false,
-        
     adminName: null,
-    
     userImageUrl: null,
 
+    //enrollment
     enrollmentBegan: false,
-
     enrollmentSucceeded: false,
-
     enrollmentFailed: false,
     
     isEnrolled: function () {
@@ -55,7 +49,7 @@ export default Ember.Controller.extend({
     actions: {
 
         login: function() {
-            //??? should be Ember.$ ???
+ 
             $('#loginError').hide();
             var self = this;
         
@@ -201,22 +195,6 @@ export default Ember.Controller.extend({
                             "period": enrollment.period
                         };
                         body.push(enrollmentJSON);
-
-                        // var newEnrollment = outerSelf.store.createRecord('enrollment', {
-                        //     student: enrollment.emberStudent,
-                        //     session: enrollment.emberSession,
-                        //     period: index+1
-                        // });
-                        // newEnrollment.save().then(function () {
-                        //     successes += 1;
-                        //     console.log('success '+ successes);
-                        //     if (successes === needed) {
-                        //         outerSelf.set('enrollmentSucceeded', true);
-                        //     }
-                        // }, function (reason) {
-                        //     console.log('failure: ' + reason);
-                        //     outerSelf.set('enrollmentFailed', true);
-                        // });
                     });
                 });
                 Ember.$.ajax({
@@ -225,6 +203,8 @@ export default Ember.Controller.extend({
                     data: JSON.stringify(body)
                 }).done(function() {
                     outerSelf.set('enrollmentSucceeded', true);
+                    
+                    //bubbles from admin/overview/enrollment to routes/admin wheer refreshAdmin lives
                     outerSelf.send('refreshAdmin');
                 });
             }
