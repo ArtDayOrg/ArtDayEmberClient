@@ -11,15 +11,20 @@
     </div>
   </div>
 {{else}}
-    {{student-preferences-row items=rankedOrNullPrefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
+  <div class="animated-tiles">
+  {{#liquid-with bothArrays as |both|}}
+      {{student-preferences-row items=both.rankedOrNullPrefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
     <hr>
-    {{#unless model.locked}}
+    {{#liquid-if model.locked use="toRight"}}
+    {{else}}
       {{#liquid-if sessionsLoading use="fade"}}
         <div class="spinner">
           <img src="assets/images/spinner.gif" draggable="false">
         </div>
       {{else}}
-        {{student-available-sessions-mosaic sessionDropped="sessionDropped" availableSessions=availableSessions changeDescription="changeDescription"}}
+        {{student-available-sessions-mosaic sessionDropped="sessionDropped" availableSessions=both.availableSessions changeDescription="changeDescription"}}
       {{/liquid-if}}
-    {{/unless}}
+    {{/liquid-if}}
+  {{/liquid-with}}
+  </div>
 {{/if}}

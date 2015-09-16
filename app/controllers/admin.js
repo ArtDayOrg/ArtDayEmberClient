@@ -13,15 +13,15 @@ export default Ember.Controller.extend({
     enrollmentBegan: false,
     enrollmentSucceeded: false,
     enrollmentFailed: false,
-    
-    isEnrolled: function () {
+
+    isEnrolled: function() {
         return (this.get('enrollment.length') > 0);
     }.property('enrollment.length'),
-    
-    hasSetPrefs: function () {
+
+    hasSetPrefs: function() {
         var count = 0;
         var students = this.get('students');
-        students.forEach(function (s) {
+        students.forEach(function(s) {
             if (s.get('preferences.length') > 0) {
                 count += 1;
             }
@@ -29,17 +29,17 @@ export default Ember.Controller.extend({
         return count;
     }.property('students.@each.preferences'),
 
-    totalCapacity: function () {
+    totalCapacity: function() {
         var count = 0;
         var sessions = this.get('sessions');
-        sessions.forEach(function (s) {
+        sessions.forEach(function(s) {
             var value = parseInt(count);
             count = value + parseInt(s.get('capacity'));
         });
         return count;
     }.property('sessions.@each.capacity', 'sessions.length'),
 
-    enrollmentAvailable: function () {
+    enrollmentAvailable: function() {
         if (this.get('totalCapacity') >= this.get('students.length')) {
             return true;
         }
@@ -49,43 +49,45 @@ export default Ember.Controller.extend({
     actions: {
 
         login: function() {
- 
+
             $('#loginError').hide();
             var self = this;
-        
+
             FB.login(function(response) {
                 if (response.status === 'connected') {
-        
+
                     var adminList = ['forsmann@frontier.com', 'brian.spencer.king@gmail.com'];
 
-                    FB.api('/me?fields=name,email,picture', function(response){
-        
+                    FB.api('/me?fields=name,email,picture', function(response) {
+
                         if ($.inArray(response.email, adminList) !== -1) {
                             self.set('isAdmin', true);
                             self.set('adminName', response.name);
                             self.set('userImageUrl', response.picture.data.url);
                             self.transitionToRoute('admin');
                         } else {
-        
+
                             // user is logged in, but NOT an admin.
-                            self.set('isAdmin', false);  // should already be false.
+                            self.set('isAdmin', false); // should already be false.
                             $('#loginError').show();
                             FB.logout();
                         }
                     });
                 }
-            }, {scope: 'public_profile,email'});
+            }, {
+                scope: 'public_profile,email'
+            });
         },
-        
+
         logout: function() {
             var self = this;
-            FB.logout(function(){
+            FB.logout(function() {
                 self.set('isAdmin', false);
             });
         },
 
         enroll: function() {
-        
+
             function Enrollment(emberSession, emberStudent, period) {
                 this.emberSession = emberSession;
                 this.emberStudent = emberStudent;
@@ -93,10 +95,11 @@ export default Ember.Controller.extend({
             }
 
             //best performance at shuffling array from http://jsperf.com/array-shuffle-comparator/5
-            Array.prototype.shuffle1 = function () {
+            Array.prototype.shuffle1 = function() {
                 var l = this.length + 1;
                 while (l--) {
-                    var r = ~~(Math.random() * l), o = this[r];
+                    var r = ~~(Math.random() * l),
+                        o = this[r];
                     this[r] = this[0];
                     this[0] = o;
                 }
@@ -108,9 +111,11 @@ export default Ember.Controller.extend({
             //returns an array with all elements of the first array that are not in the second array
             //e.g. [1,2,3].diff([3,4,5]) --> [1,2];
             Array.prototype.diff = function(a) {
-                
+
                 //does not work on IE 8?
-                return this.filter(function(i) {return a.indexOf(i) < 0;});
+                return this.filter(function(i) {
+                    return a.indexOf(i) < 0;
+                });
             };
 
             function loadStudents(outerSelf) {
@@ -128,7 +133,7 @@ export default Ember.Controller.extend({
 
                 var students = [];
                 var studentsFromModel = outerSelf.get('students');
-                studentsFromModel.forEach(function (s) {
+                studentsFromModel.forEach(function(s) {
                     var newStudent = new Student(s);
                     students.push(newStudent);
                 });
@@ -137,7 +142,7 @@ export default Ember.Controller.extend({
             }
 
             function resetStudents(students) {
-                students.forEach(function (s) {
+                students.forEach(function(s) {
                     s.deniedEnrollments.splice(0, s.deniedEnrollments.length);
                     s.priority = s.preferences.length > 0 ? s.grade + (s.bumpCount * 3) : 0;
                     if (s.bumpCount > 4) {
@@ -147,7 +152,7 @@ export default Ember.Controller.extend({
                     }
                     s.enrolled.push(s.proposedEnrollment);
                     s.proposedEnrollment = null;
-                    s.enrolled.forEach(function (e) {
+                    s.enrolled.forEach(function(e) {
                         s.deniedEnrollments.push(e);
                     });
                 });
@@ -159,10 +164,10 @@ export default Ember.Controller.extend({
                     this.sessionName = emberSession.get('sessionName');
                     this.capacity = emberSession.get('capacity');
                     this.proposedEnrollments = [];
-                } 
+                }
                 var sessions = [];
                 var sessionsFromModel = outerSelf.get('sessions');
-                sessionsFromModel.forEach(function (s) {
+                sessionsFromModel.forEach(function(s) {
                     var newSession = new Session(s);
                     sessions.push(newSession);
                 });
@@ -170,7 +175,7 @@ export default Ember.Controller.extend({
             }
 
             function resetSessions(sessions) {
-                sessions.forEach(function (s) {
+                sessions.forEach(function(s) {
                     s.proposedEnrollments.splice(0, s.proposedEnrollments.length);
                 });
             }
@@ -186,8 +191,8 @@ export default Ember.Controller.extend({
 
                 var body = [];
 
-                allEnrollments.forEach(function (enrollmentArray) {
-                    enrollmentArray.forEach(function (enrollment) {
+                allEnrollments.forEach(function(enrollmentArray) {
+                    enrollmentArray.forEach(function(enrollment) {
 
                         var enrollmentJSON = {
                             "studentId": enrollment.emberStudent.get('id'),
@@ -203,7 +208,7 @@ export default Ember.Controller.extend({
                     data: JSON.stringify(body)
                 }).done(function() {
                     outerSelf.set('enrollmentSucceeded', true);
-                    
+
                     //bubbles from admin/overview/enrollment to routes/admin wheer refreshAdmin lives
                     outerSelf.send('refreshAdmin');
                 });
@@ -214,7 +219,7 @@ export default Ember.Controller.extend({
                 //iterates through sessions that have proposed enrollments and returns an array of enrollments for that period
                 function createEnrollments(sessions) {
                     var enrollments = [];
-                    for (var i = 0; i<sessions.length; i++) {
+                    for (var i = 0; i < sessions.length; i++) {
                         var s = sessions.objectAt(i);
                         for (var j = 0; j < s.proposedEnrollments.length; j++) {
                             var enrollment = new Enrollment(s.emberSession, s.proposedEnrollments[j].emberStudent, period);
@@ -228,7 +233,7 @@ export default Ember.Controller.extend({
                 // returns the next unenrolled student if there is one or null
                 function freeStudent(students, sessions) {
                     function denyEnrolledSessionForStudent(student) {
-                        student.enrolled.forEach(function (e) {
+                        student.enrolled.forEach(function(e) {
                             student.deniedEnrollments.push(e);
                         });
                     }
@@ -276,7 +281,7 @@ export default Ember.Controller.extend({
                     }
 
                     function sessionNameFilter(s) {
-                         return student.preferences.objectAt(i).get('session.sessionName') === s.sessionName;
+                        return student.preferences.objectAt(i).get('session.sessionName') === s.sessionName;
                     }
 
                     function availableSessions(sessions, prefs, student) {
@@ -299,7 +304,7 @@ export default Ember.Controller.extend({
                     var prefs = student.preferences;
 
                     //go through preferences and grab the first session they are both eligable and prefer
-                    for (var i = 0; i<prefs.length; i++) {
+                    for (var i = 0; i < prefs.length; i++) {
                         if (prefNotInDenied(prefs[i], nextStudent.deniedEnrollments)) {
                             bestSession = sessions.filter(sessionNameFilter)[0];
                         }
@@ -321,35 +326,35 @@ export default Ember.Controller.extend({
 
                 // while there is a student nextStudent who is free and hasn't attempted enrollment in every class                
                 while (true) {
-                    
+
                     //choose such a student(nextStudent)
                     var nextStudent = freeStudent(students, sessions);
                     var nextStudentsSession;
                     if (nextStudent) {
-                
+
                         //let nextStudentsSession be the highest-ranked session in nextStudents preference list to whom nextStudent has not attempted enrollment
                         nextStudentsSession = bestSessionForStudent(nextStudent, sessions);
 
                     } else {
-                
+
                         //if there are no more students, then the algorithm is complete
                         break;
                     }
 
                     //if there is such a session and there is space in that session
                     if (nextStudentsSession && nextStudentsSession.proposedEnrollments.length < nextStudentsSession.capacity) {
-                    
+
                         //that student proposes to enroll in that session
                         nextStudentsSession.proposedEnrollments.push(nextStudent);
                         nextStudent.proposedEnrollment = nextStudentsSession;
                         nextStudent.deniedEnrollments.push(nextStudentsSession);
-                    
-                    //otherwise, there is such a session but the session is currently full
+
+                        //otherwise, there is such a session but the session is currently full
                     } else if (nextStudentsSession) {
-                        
+
                         //if that session prefers the next student to it's least desired student 
                         //(index 0 of the sorted array)
-                        nextStudentsSession.proposedEnrollments.sort(function (a, b) {
+                        nextStudentsSession.proposedEnrollments.sort(function(a, b) {
                             return a.priority - b.priority;
                         });
                         if (nextStudent.priority > nextStudentsSession.proposedEnrollments[0].priority) {
@@ -362,8 +367,8 @@ export default Ember.Controller.extend({
                             nextStudent.deniedEnrollments.push(nextStudentsSession);
                             nextStudentsSession.proposedEnrollments.shift();
                             nextStudentsSession.proposedEnrollments.push(nextStudent);
-                        
-                        //else the session prefers its lowest enrolled member to nextStudent
+
+                            //else the session prefers its lowest enrolled member to nextStudent
                         } else {
 
                             //the next student is denied enrollment
@@ -371,10 +376,10 @@ export default Ember.Controller.extend({
                             nextStudent.deniedEnrollments.push(nextStudentsSession);
                         }
 
-                    //else the total capacity is less than the total number of students.
-                    //(our app should never enter because we check capacity vs. number of students before giving them the option to enroll)
-                    //if we wanted to allow less capacity than students, leaving the least preferred to be unenrolled, 
-                    //then we would not break here, but we don't allow that.
+                        //else the total capacity is less than the total number of students.
+                        //(our app should never enter because we check capacity vs. number of students before giving them the option to enroll)
+                        //if we wanted to allow less capacity than students, leaving the least preferred to be unenrolled, 
+                        //then we would not break here, but we don't allow that.
                     } else {
                         console.warn('not enough total session capacity for every student');
                         break;
@@ -382,7 +387,7 @@ export default Ember.Controller.extend({
                 }
 
                 //return an array of enrollments for the period
-                return createEnrollments(sessions); 
+                return createEnrollments(sessions);
             }
 
             this.set('enrollmentBegan', true);
@@ -468,7 +473,7 @@ export default Ember.Controller.extend({
         //             console.log('did not set preferences: ' + noPreferences.length);
 
         //             unhappyEnrollments.forEach(function (e) {
-                        
+
         //                 var unhappyStudent = e.get('student.content');
         //                 var jealousArray = [];
         //                 var notJealousArray = [];

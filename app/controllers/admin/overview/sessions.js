@@ -18,7 +18,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 		//if enrollments are set, sort by difference between enrollment and preference 
 		if (this.get('admin.isEnrolled')) {
 			sessionsMetrics.sort(function (a, b) {
-				if (a.enrolled !== 0 && b.enrolled !== 0) {
+				if (a.enrolled !== 0 || b.enrolled !== 0) {
 					return b.preferred/b.enrolled - a.preferred/a.enrolled;
 				} else {
 					return 0;

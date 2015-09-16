@@ -31,6 +31,10 @@ p {
     min-width: 130px;
 }
 
+.hidden {
+    display: none;
+}
+
 /* hide rosters until print, and print with page breaks*/
 @media all {
     .page-break { 
@@ -50,7 +54,9 @@ p {
     }
 }
 
-
+.image-mosaic {
+    margin-top: 10px;
+}
 
 /*
 vertical centering from:;
@@ -246,4 +252,8 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     width: 140px;
     height: 100px;
     margin: auto;
+}
+
+.image-mosaic {
+    margin-top: 10px;
 }

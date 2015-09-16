@@ -1,5 +1,5 @@
 <div class="studentName" draggable="false"> 
-  {{item.firstName}} {{item.lastName}} ({{item.grade}})
+  {{#liquid-bind item as |student|}}<span student-id={{student.id}}>{{student.firstName}} {{student.lastName}} ({{student.grade}})</span>{{/liquid-bind}}
 </div>
 <div class="container-fluid">
   <div class="row student-display">
