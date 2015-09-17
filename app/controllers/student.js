@@ -42,6 +42,7 @@ export default Ember.Controller.extend({
 
         var array = this.get('model.preferences');
         var rankedOrNullPrefsArray = [];
+
         if (array) {
             for (var i = 1; i < 7; i++) {
                 var tempPref = 0;
@@ -57,6 +58,7 @@ export default Ember.Controller.extend({
     }.property('model.preferences.@each.rank', 'model.preferences.@each.session', 'model'),
 
     availableSessions: function() {
+
         Array.prototype.shuffle1 = function() {
             var l = this.length + 1;
             while (l--) {
@@ -67,7 +69,7 @@ export default Ember.Controller.extend({
             }
             return this;
         };
-        console.log(availableSessions);
+
         var prefs = this.get('model.preferences');
         var unavailableSessionNames = [];
         var availableSessions = [];
@@ -82,6 +84,7 @@ export default Ember.Controller.extend({
             }
         });
         return availableSessions.shuffle1();
+
     }.property('model.preferences.@each.session', 'app.model.length', 'app.model', 'model'),
 
     actions: {

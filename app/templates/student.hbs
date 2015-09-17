@@ -13,7 +13,7 @@
 {{else}}
   <div class="animated-tiles">
   {{#liquid-with bothArrays as |both|}}
-      {{student-preferences-row items=both.rankedOrNullPrefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
+    {{student-preferences-row items=both.rankedOrNullPrefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
     <hr>
     {{#liquid-if model.locked use="toRight"}}
     {{else}}

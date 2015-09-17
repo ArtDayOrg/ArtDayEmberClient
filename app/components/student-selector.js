@@ -3,16 +3,20 @@ import StudentFilter from 'art-day/mixins/student-filter';
 
 export default Ember.Component.extend(StudentFilter, {
 
-	classNames: ['student-selector'],
+  classNames: ['student-selector'],
+
+  becomeFocused: function() {
+    this.$('.input').focus()
+  }.on('didInsertElement'),
 
   actions: {
-  	processKeyUp: function(value) {
+    processKeyUp: function(value) {
       this.sendAction('processKeyUp', value);
-      },
-		unlock: function (student) {
-		  this.sendAction('unlock', student);
-		},
-    deleteStudent: function (student) {
+    },
+    unlock: function(student) {
+      this.sendAction('unlock', student);
+    },
+    deleteStudent: function(student) {
       var areTheySure = confirm('Delete student ' + student.get('firstName') + ' ' + student.get('lastName') + '.  This is not reversable');
       if (areTheySure) {
         student.destroyRecord();
@@ -20,5 +24,5 @@ export default Ember.Component.extend(StudentFilter, {
         console.log('Delete cancelled.');
       }
     }
-	}
+  }
 });
