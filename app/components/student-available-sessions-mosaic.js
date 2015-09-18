@@ -2,13 +2,13 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-	actions: {
-		sessionDropped: function (session, ops) {
-			this.sendAction('sessionDropped', session, ops);
-		},
+  actions: {
+    sessionDropped: function(session, ops) {
+      this.sendAction('sessionDropped', session, ops);
+    },
 
-		changeDescription: function (description, sessionName) {
-			this.sendAction('changeDescription', description, sessionName);
-		}
-	}
+    changeDescription: function(description, sessionName) {
+      this.sendAction('changeDescription', description, sessionName);
+    }
+  }
 });

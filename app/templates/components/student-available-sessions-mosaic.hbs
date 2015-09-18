@@ -3,9 +3,7 @@
     <div class="row">
       {{#each availableSessions as |availableSession|}}
         <div class="col-md-2">
-          {{#draggable-object content=availableSession}}
-            {{session-tile item=availableSession changeDescription="changeDescription"}}
-          {{/draggable-object}}
+          {{session-tile-draggable session=availableSession changeDescription="changeDescription"}}
         </div>
       {{/each}}
     </div>

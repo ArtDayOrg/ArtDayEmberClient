@@ -8,11 +8,12 @@ export default function() {
         duration: 500
       }]
     }, {
-      use: ['toUp', {
-        duration: 500
+      use: ['crossFade', {
+        duration: 100
       }]
     })
   );
+
 
   this.transition(
     this.childOf('.animated-tiles'),

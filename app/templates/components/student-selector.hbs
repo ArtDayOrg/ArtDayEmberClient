@@ -1,8 +1,8 @@
-<div class="instructions">
+<div class="instructions student">
 	Enter Name: {{input class="input" key-up="processKeyUp"}}<br/><br/>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid student">
   <div class="row">
     <div class="col-xs-3">
     </div>
@@ -26,7 +26,7 @@
               </td>
           {{/unless}}
         	  <td>
-              {{#link-to 'student' item}} {{#liquid-bind item as |student|}}<span student-id={{item.id}}>{{student.firstName}} {{student.lastName}} {{student.grade}}</span>{{/liquid-bind}}{{/link-to}}
+              {{#link-to 'student' item}} {{#liquid-bind item as |student|}}<span student-id={{item.id}} class="student">{{student.firstName}} {{student.lastName}} {{student.grade}}</span>{{/liquid-bind}}{{/link-to}}
         		</td>
             {{#if isAdmin}}
               <td>

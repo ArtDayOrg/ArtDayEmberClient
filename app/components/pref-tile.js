@@ -7,16 +7,16 @@ export default Ember.Component.extend({
 	classNames: ['pref-tile'],
 
 	//off by one fix from index of @each
-	rank: function () {
-		return this.get('index')+1;
+	rank: function() {
+		return this.get('index') + 1;
 	}.property('index'),
 
 	actions: {
-		sessionDropped: function (session, ops) {
+		sessionDropped: function(session, ops) {
 			this.sendAction("sessionDropped", session, ops);
 		},
 
-		changeDescription: function (description, sessionName) {
+		changeDescription: function(description, sessionName) {
 			this.sendAction('changeDescription', description, sessionName);
 		}
 	}

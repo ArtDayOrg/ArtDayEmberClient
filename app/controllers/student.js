@@ -4,6 +4,7 @@ export default Ember.Controller.extend({
 
     appController: Ember.inject.controller('application'),
     app: Ember.computed.reads('appController'),
+    sessions: Ember.computed.alias('app.model'),
 
     descriptionForDisplay: 'Click a session to see details.',
 
@@ -18,21 +19,21 @@ export default Ember.Controller.extend({
     }.property('model.enrollments.length'),
 
     sessionsLoading: function() {
-        return this.get('app.model.length') ? false : true;
-    }.property('app.model.length'),
+        return this.get('sessions.length') ? false : true;
+    }.property('sessions.length'),
 
-    //trick to avoid duplicate animations by collecting arrays in an object than using liquid-with on the object
+    //trick to avoid duplicating animations by collecting arrays in an object than using liquid-with on the object
     bothArrays: function() {
         return {
-            rankedOrNullPrefsArray: this.get('rankedOrNullPrefsArray'),
+            prefsArray: this.get('prefsArray'),
             availableSessions: this.get('availableSessions')
         }
-    }.property('rankedOrNullPrefsArray', 'availableSessions'),
+    }.property('prefsArray', 'availableSessions'),
 
     // this property is an array sorted by rank where unset preferences are represented 
-    // by a null element in the array.  rankedOrNullArray[0] is the preference with rank 1 or null.
+    // by a null element in the array.  prefsArray[0] is the preference with rank 1 or null.
     // Our template wants to cycle through this and display pref tiles or a drop box when null.
-    rankedOrNullPrefsArray: function() {
+    prefsArray: function() {
 
         function sortByRank(pref) {
             if (pref.get('rank') === i) {
@@ -41,20 +42,20 @@ export default Ember.Controller.extend({
         }
 
         var array = this.get('model.preferences');
-        var rankedOrNullPrefsArray = [];
+        var prefsArray = [];
 
         if (array) {
             for (var i = 1; i < 7; i++) {
                 var tempPref = 0;
                 array.forEach(sortByRank);
                 if (tempPref !== 0) {
-                    rankedOrNullPrefsArray.pushObject(tempPref);
+                    prefsArray.pushObject(tempPref);
                 } else {
-                    rankedOrNullPrefsArray.pushObject(null);
+                    prefsArray.pushObject(null);
                 }
             }
         }
-        return rankedOrNullPrefsArray;
+        return prefsArray;
     }.property('model.preferences.@each.rank', 'model.preferences.@each.session', 'model'),
 
     availableSessions: function() {
@@ -78,14 +79,14 @@ export default Ember.Controller.extend({
             unavailableSessionNames.pushObject(pref.get('session.sessionName'));
         });
 
-        this.get('app.model').forEach(function(session) {
+        this.get('sessions').forEach(function(session) {
             if (!unavailableSessionNames.contains(session.get('sessionName'))) {
                 availableSessions.pushObject(session);
             }
         });
         return availableSessions.shuffle1();
 
-    }.property('model.preferences.@each.session', 'app.model.length', 'app.model', 'model'),
+    }.property('model.preferences.@each.session', 'sessions.length', 'sessions', 'model'),
 
     actions: {
 
@@ -99,7 +100,15 @@ export default Ember.Controller.extend({
                 });
             }
 
+            //the dropped session does not animate since it's animation is in the dragging
+            var droppedSessionDiv = Ember.$('[session-id=' + session.get('id') + ']');
+            droppedSessionDiv.removeAttr('session-id');
+
             var oldPrefs = this.get('model.preferences');
+            var student = this.get('model');
+            var dropSession = session.content;
+            var targetPrefRank = ops.target.target;
+            var newPref;
 
             //Dragging a preferred section back to availabale sessions
             if (ops.target.target === 0) {
@@ -112,17 +121,10 @@ export default Ember.Controller.extend({
                 return;
             }
 
-            var student = this.get('model');
-            var dropSession = session.content;
-            var targetPrefRank = ops.target.target;
-            var newPref;
-
-
             //if the session is dragged to a preference that is already set...
             if (oldPrefs.filterBy('rank', targetPrefRank).length) {
 
                 var exit = false;
-
                 //cycle through the set preferences (they reordered the set prefs by dragging one to a different rank)
                 oldPrefs.forEach(function(oldPref) {
 
@@ -131,7 +133,6 @@ export default Ember.Controller.extend({
                     }
 
                     var oldPrefRank = oldPref.get('rank');
-
                     //check to see if preferences should be switched
                     if (oldPref.get('session.sessionName') === session.get('sessionName')) {
 
