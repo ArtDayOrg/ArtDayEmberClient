@@ -1,6 +1,6 @@
 {{#draggable-object-target action="sessionDropped" target=rank}}
   {{#with item.session as |session|}}
-    {{session-tile-draggable session=session changeDescription="changeDescription" rank=rank}}
+    {{session-tile-draggable item=session changeDescription="changeDescription" rank=rank}}
   {{else}}
     <div class="droptarget">
       <h3 class="floatcenter" id="rank{{rank}}">
