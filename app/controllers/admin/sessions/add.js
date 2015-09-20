@@ -20,7 +20,6 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 location: this.get('model.location'),
                 capacity: this.get('model.capacity'),
                 instructorName: this.get('model.instructorName'),
-                imageUrl: '',
                 description: this.get('model.description'),
                 instructions: this.get('model.instructions')
             };
