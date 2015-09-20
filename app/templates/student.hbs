@@ -12,19 +12,19 @@
   </div>
 {{else}}
   <div class="animated-tiles">
-  {{#liquid-with bothArrays as |both|}}
-    {{student-preferences-row items=both.prefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
-    <hr>
-    {{#liquid-if model.locked use="toRight"}}
-    {{else}}
-      {{#liquid-if sessionsLoading use="fade"}}
-        <div class="spinner">
-          <img src="assets/images/spinner.gif" draggable="false">
-        </div>
+    {{#liquid-with bothArrays as |both|}}
+      {{student-preferences-row items=both.prefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
+      <hr>
+      {{#liquid-if model.locked use="toRight"}}
       {{else}}
-        {{student-available-sessions-mosaic sessionDropped="sessionDropped" availableSessions=both.availableSessions changeDescription="changeDescription"}}
+        {{#liquid-if sessionsLoading use="fade"}}
+          <div class="spinner">
+            <img src="assets/images/spinner.gif" class="image" draggable="false">
+          </div>
+        {{else}}
+          {{student-available-sessions-mosaic sessionDropped="sessionDropped" availableSessions=both.availableSessions changeDescription="changeDescription"}}
+        {{/liquid-if}}
       {{/liquid-if}}
-    {{/liquid-if}}
-  {{/liquid-with}}
+    {{/liquid-with}}
   </div>
 {{/if}}

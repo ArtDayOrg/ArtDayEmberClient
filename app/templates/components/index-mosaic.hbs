@@ -1,0 +1,12 @@
+<h1>
+  Welcome to Art Day
+</h1>
+<div class="container-fluid">
+  <div class="row">
+    {{#each items as |session|}}
+      <div class="col-md-2">
+        {{session-tile item=session}}
+      </div>
+    {{/each}}
+  </div>
+</div>

@@ -6,6 +6,8 @@ export default Ember.Mixin.create({
     if (id) {
       var imagePath = 'http://artday.blob.core.windows.net/images/' + id + '.png';
       return imagePath;
+    } else {
+      return 'assets/images/undefined.png';
     }
   }.property('item')
 });

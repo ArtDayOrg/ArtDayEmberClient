@@ -8,7 +8,6 @@ export default Ember.Controller.extend(AdminControllerHooks, {
     actions: {
 
         updateImageData: function(imageData) {
-            console.log('imageData bubbled to add');
             this.set('imageData', imageData);
         },
 
@@ -29,14 +28,14 @@ export default Ember.Controller.extend(AdminControllerHooks, {
             newSession.save().then(function(response) {
 
                 // handle image upload here
-                // var imageFile = this.get('imageData');
+                // var imageFile = self.get('imageData');
                 // var sessionId = response.session.id;
                 // var imageUpload = {
                 //     id: sessionId
                 //     image: imageFile
                 // };
                 // mime multipart file upload
-                // .then(function response) {
+                // .then(function (response) {
                 //     transitionToRoute('admin.sessions.session', response.id);
                 // }
             }, function(err) {
