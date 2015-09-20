@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks';
+import AdminControllerHooks from 'art-day/mixins/admin-controller-hooks';
 
 export default Ember.Controller.extend(AdminControllerHooks, {
 
@@ -7,7 +7,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
     actions: {
 
-        updateImageData: function (imageData) {
+        updateImageData: function(imageData) {
             console.log('imageData bubbled to add');
             this.set('imageData', imageData);
         },
@@ -20,19 +20,30 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 location: this.get('model.location'),
                 capacity: this.get('model.capacity'),
                 instructorName: this.get('model.instructorName'),
-                imageHash: this.get('imageData'),
+                imageUrl: '',
                 description: this.get('model.description'),
                 instructions: this.get('model.instructions')
             };
 
             var newSession = this.store.createRecord('session', newSessionJson);
-            
-            newSession.save().then(function(newSession) {
-                self.transitionToRoute('admin.sessions.session', newSession.id);
+
+            newSession.save().then(function(response) {
+
+                // handle image upload here
+                // var imageFile = this.get('imageData');
+                // var sessionId = response.session.id;
+                // var imageUpload = {
+                //     id: sessionId
+                //     image: imageFile
+                // };
+                // mime multipart file upload
+                // .then(function response) {
+                //     transitionToRoute('admin.sessions.session', response.id);
+                // }
             }, function(err) {
                 console.error(err);
-                alert('Save session failed. Check the console.');                
+                alert('Save session failed. Check the console.');
             });
-        }        
+        }
     }
 });

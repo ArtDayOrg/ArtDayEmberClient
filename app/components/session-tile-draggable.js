@@ -8,7 +8,6 @@ export default Ember.Component.extend(ImagePath, {
   transparentUrl: "assets/images/transparent.png",
 
   imageUrl: function() {
-    console.log('isTransparent', this.get('imagePath'));
     return this.get('isTransparent') ? this.get('transparentUrl') : this.get('imagePath');
   }.property('imagePath', 'isTransparent'),
 
