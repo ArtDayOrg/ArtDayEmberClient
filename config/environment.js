@@ -3,6 +3,7 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'art-day',
+    podModulePrefix: 'art-day/pods',
     environment: environment,
     baseURL: '/',
     locationType: 'hash',
@@ -18,7 +19,7 @@ module.exports = function(environment) {
       // when it is created
     }
   };
-  
+
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -43,6 +44,6 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.APP.host = 'http://artday.azurewebsites.net';
   }
-  
+
   return ENV;
 };

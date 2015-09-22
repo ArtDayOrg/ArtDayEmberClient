@@ -1,23 +1,23 @@
 import Ember from 'ember';
-import AdminControllerHooks  from 'art-day/mixins/admin-controller-hooks';
+import AdminControllerHooks from 'art-day/mixins/admin-controller-hooks';
 
-export default Ember.Controller.extend(AdminControllerHooks, {  
+export default Ember.Controller.extend(AdminControllerHooks, {
 
 
     isEditing: false,
-    
+
     isAdding: false,
 
     imageData: '',
 
     // processes the current models enrollment and
     // returns a sorted array of alphabetized session rosters
-    rosters: function () {
+    rosters: function() {
         var rosters = [];
         var i;
         var numberOfPeriods;
         var enrollment = this.get('model.enrollments');
-        
+
         if (enrollment.get('length')) {
             numberOfPeriods = enrollment.sortBy('period').reverse().objectAt(0).get('period');
         } else {
@@ -31,16 +31,22 @@ export default Ember.Controller.extend(AdminControllerHooks, {
         return rosters;
     }.property('model', 'model.@each.enrollments'),
 
+    modelDidChange: function() {
+        this.set('isEditing', false);
+        this.set('isAdding', false);
+        this.set('imageData', '');
+    }.observes('model'),
+
     actions: {
-        
-        updateImageData: function (imageData) {
+
+        updateImageData: function(imageData) {
             this.set('model.imageHash', imageData);
         },
 
         edit: function() {
             this.set('isEditing', true);
         },
-        
+
         doneEditing: function() {
             this.set('isEditing', false);
             this.model.save();
@@ -62,6 +68,6 @@ export default Ember.Controller.extend(AdminControllerHooks, {
         doneAdding: function() {
             this.set('isAdding', false);
             this.model.save();
-        } 
+        }
     }
-}); 
+});
