@@ -128,6 +128,10 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     clear: both;
 }
 
+.fb-login-button {
+    margin-left: 20px;
+}
+
 .fb-widget {
     height: 100px;
     width: 20%;
@@ -146,7 +150,6 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
 
 .fb-name {
     line-height: 50px;
-    margin-bottom: 10px;
     vertical-align: middle;
     float: right;
 }

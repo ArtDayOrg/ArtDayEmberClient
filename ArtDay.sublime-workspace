@@ -191,20 +191,21 @@
 	[
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/sessions",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components",
-		"/Users/Dev/Dev/ArtDayEmberClient/config",
-		"/Users/Dev/Dev/ArtDayEmberClient/public"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/fb-widget",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles",
+		"/Users/Dev/Dev/ArtDayEmberClient/public",
+		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit",
+		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/controllers",
+		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/models"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/session-tile-draggable/component.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/session-tile/template.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/fb-widget/template.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
+		"/Users/Dev/Dev/ArtDayEmberClient/public/robots.txt",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/untitled",
 		"/Users/Dev/Dev/ArtDayEmberClient/config/environment.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
@@ -236,7 +237,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/pref-tile.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/transitions.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-selector.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-selector.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-enrollments.js",
@@ -328,11 +328,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview/enrollment.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/admin-controller-hooks.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/sessions.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/overview/students.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/overview/sessions.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/overview/enrollment.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components/not-admin.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/models/student.js"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/overview/students.js"
 	],
 	"find":
 	{
@@ -356,6 +352,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"fb-",
+			"sessionName",
 			"imageUrl",
 			"name",
 			"console",
