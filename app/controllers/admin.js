@@ -4,6 +4,10 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+    //currentPath
+    appController: Ember.inject.controller('application'),
+    app: Ember.computed.reads('appController'),
+
     //facebook login
     isAdmin: false,
     adminName: null,
@@ -45,6 +49,15 @@ export default Ember.Controller.extend({
         }
         return false;
     }.property('totalCapacity', 'students.length'),
+
+    atAdminIndex: function() {
+        console.log(this.get('app.currentPath'))
+        if (this.get('app.currentPath') === 'admin.index') {
+            return true;
+        } else {
+            return false;
+        }
+    }.property('app.currentPath'),
 
     actions: {
 

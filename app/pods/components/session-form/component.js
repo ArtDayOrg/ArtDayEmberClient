@@ -7,7 +7,7 @@ export default Ember.Component.extend(ImagePath, {
 
   imageUrl: function() {
     if (this.get('imageData') !== '') {
-      return 'data:image/png;base64,' + this.get('imageData');
+      return this.get('imageData');
     } else if (this.get('imageExists')) {
       return this.get('imagePath');
     } else {

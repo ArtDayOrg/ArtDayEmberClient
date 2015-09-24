@@ -13,6 +13,10 @@ p {
     padding-top: 10px;
 }
 
+.indent {
+    margin-left:20px;
+}
+
 .nextline {
     padding: 0px;
     margin: 0px;

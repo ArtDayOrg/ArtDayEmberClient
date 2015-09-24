@@ -1,19 +1,17 @@
 {{#admin-only isAdmin=admin.isAdmin}}
-	<div class="student">
-	    <div class="container-fluid">
-	       	<div class="row">
-	        	<div class="col-xs-6">
-		        	<p>
-		        		View, delete or unlock individual students:
-		        	</p>
-							{{student-selector processKeyUp="processKeyUp" unlock="unlock" filteredStudents=filteredStudents isAdmin=admin.isAdmin isEnrolled=admin.isEnrolled}}
-						</div>
-				<div class="col-xs-6">
-					<p>
-						Import Students:
-					</p>
-					{{import-helper doImport="doImport"}}
-				</div>
+	<div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6">
+      	<p>
+      		View, delete or unlock individual students:
+      	</p>
+				{{student-selector processKeyUp="processKeyUp" unlock="unlock" filteredStudents=filteredStudents isAdmin=admin.isAdmin isEnrolled=admin.isEnrolled}}
+			</div>
+			<div class="col-xs-6">
+				<p>
+					Import Students:
+				</p>
+				{{import-helper refreshAdmin="refreshAdmin"}}
 			</div>
 		</div>
 	</div>

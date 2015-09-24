@@ -1,0 +1,46 @@
+<h1>Manage your activity day in 4 simple steps:</h1>
+<div class="indent">
+  <h2>Step 1: Setup your activity day.</h2>
+
+  <div class="indent">
+    <h3>- {{#link-to 'admin.students'}}Import your list of students{{/link-to}}</h3>
+    <div class="indent">
+      <p>Your list of students should have the following format, with one student per line:</p>
+      <div class="indent">
+        <p>firstName,lastName,grade</p>
+      </div>
+      <p>for example, to import two students, a seventh grader named Jane Doe and a 12th grader named Tyrion Lannister:</p>
+      <div class="indent">
+        <p class="nextline">jane,doe,7</p>
+        <p class="nextline">tyrion,lannister,12</p>
+      </div>
+      <p>You may also use this page to add or delete individual students any time before step 3.</p>
+    </div>
+    <h3>- {{#link-to 'admin.sessions'}}Add the sessions{{/link-to}}.</h3> 
+      <div class="indent">
+        <p>Gather instructions, short and consise course descriptions (think 2 tweets, but they may include html links), names, and images from your instructors.  In order to create a session, you will need these, along with a location for the session, an instructor name, and a capacity
+        </p>
+        <p>The images you upload should be PNG files with width of 140 pixels and height of 100 pixels.  (Helpful hint:  On Mac, you can create a 140x100 png by pressing ⌘ + shift + 4 and using the small numbers that appear next to your pointer on the snippet tool to select a 140x100 region.  On Windows, you can use the <a href="http://windows.microsoft.com/en-us/windows/use-snipping-tool-capture-screen-shots#1TC=windows-8">snipping tool</a>.</p>
+      </div>
+  </div>
+  <h2>Step 2: Students set preferences.</h2>
+    <div class="indent">
+      <p>Announce to students that they can set their preferences on the website.  Students have the option to lock their preferences once they are set.  Students should be directed to:</p>
+      <div class="indent">
+        <p>http://artday.azurewebsites.net/#/students</p>
+      </div>
+      <p>Because we do not know student ids, we have no security on the students login.  This means their friends can go in and mess with their settings.  To prevent this, a student can lock their preferences after setting them, but this means a student could also lock out another student.  If a student inadvertantly locks their preferences, (or their friends advertantly do) you can go back to the {{#link-to 'admin.students'}}admins student page{{/link-to}} to unlock their settings</p>
+    </div>
+  <h2>Step 3: Enroll the students.</h2>
+  <div class="indent">
+    <p>Go to the {{#link-to 'admin.overview.enrollment'}}enrollment{{/link-to}} page in the overview to actually enroll the students.  We use an algorithm to sort the students into their preferred sessions.  Our process gaurantees no two students who honestly set their preferences would trade sessions in the same period.  To put it another way, our process maximizes happiness given the constraints of the students preferences and the capacity of the sessions.</p>
+
+    <p>Once enrollments are set, you may go back to the {{#link-to 'admin.overview'}}overview{{/link-to}} to see metrics, like what classes were the most popular or how many students got their preferences.  You may also go to the admins {{#link-to 'admin.sessions'}}session page{{/link-to}} to print the rosters for your activity day.  These rosters have everything your session instructors need for the day.</p>
+
+    <p>Then direct students to return to the activity day page.  They will be able to see and print their schedule for the day.  At this point, students will inevitably start asking about switching classes.  However, we recommend you not allow students to switch, since all students who honestly set their preferences will not have any favorable trades.</p>
+  </div>
+  <h2>Step 4: Enjoy your activity day</h2>
+  <div class="indent">
+    <p>Simply hand out the rosters to the instructors when the day begins</p>
+  </div>
+</div>

@@ -26,18 +26,29 @@ export default Ember.Controller.extend(AdminControllerHooks, {
             var newSession = this.store.createRecord('session', newSessionJson);
 
             newSession.save().then(function(response) {
+                console.log(response);
+                var imageFile = self.get('imageData');
 
-                // handle image upload here
-                // var imageFile = self.get('imageData');
-                // var sessionId = response.session.id;
-                // var imageUpload = {
-                //     id: sessionId
-                //     image: imageFile
-                // };
-                // mime multipart file upload
-                // .then(function (response) {
-                //     transitionToRoute('admin.sessions.session', response.id);
-                // }
+                // <form style='margin-top:100px;' id='myForm' action='http://localhost:51773/api/image' method='POST'>
+                //   <input type='file' id='fileInput' name='fileInput'></input>
+                //   <input type='submit' formenctype='multipart/form-data'>Submit</input>
+                // </form>
+                var sessionId = response.id;
+                var fileName = sessionId + '.png'
+                var data = new FormData();
+                data.append(fileName, imageFile);;
+                Ember.$.ajax({
+                    url: 'http://artday.azurewebsites.net/api/image',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data) {
+                        self.transitionToRoute('admin.sessions.session', response.id);
+                    }
+                });
+
             }, function(err) {
                 console.error(err);
                 alert('Save session failed. Check the console.');

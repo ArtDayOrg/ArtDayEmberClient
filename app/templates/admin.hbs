@@ -1,12 +1,16 @@
 {{#if isAdmin}}
 	<div class="admin-toolbar">
     <div class="admin-functions">
+      {{#unless atAdminIndex}}{{#link-to 'admin.index'}} ← Instructions{{/link-to}} | {{/unless}}
 		  {{#link-to 'admin.students'}}Students{{/link-to}} |  
 		  {{#link-to 'admin.sessions'}}Sessions{{/link-to}} | 
       {{#link-to 'admin.overview'}}Overview{{/link-to}} 
     </div>
-      {{fb-widget adminName=adminName userImageUrl=userImageUrl logout='logout'}}
+    {{fb-widget adminName=adminName userImageUrl=userImageUrl logout='logout'}}
   </div>
+  {{#if atAdminIndex}}
+    {{admin-instructions}}
+  {{/if}}
 {{else}}
   {{fb-login login="login"}}
 {{/if}}

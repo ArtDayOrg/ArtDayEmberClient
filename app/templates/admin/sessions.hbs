@@ -1,26 +1,24 @@
 {{#admin-only isAdmin=admin.isAdmin}}
-    <div class="row">
-        <div class="col-xs-3">
-            <p>
-            {{#link-to 'admin.sessions.add'}}Add New Session{{/link-to}}      
-            </p>
-            {{#if admin.isEnrolled}}
-                <p>
-                    <button {{action 'printRosters'}}>Print All Rosters</button>
-                </p>
-            {{/if}}
-            <p>
-            {{#each admin.sessions as |item|}}
-                <p class="nextline">
-                    {{#link-to 'admin.sessions.session' item}}{{item.sessionName}}{{/link-to}}
-                </p>
-            {{/each}}
-            </p>
-        </div>    
-        <div class="col-xs-9">
-            {{outlet}}
-        </div>    
-    </div> 
-    {{rosters-print-all sessionsPrint=sessionsPrint}}
+  <div class="row">
+    <div class="col-xs-3">
+      <p>
+        {{#link-to 'admin.sessions.add'}}Add New Session{{/link-to}}
+      </p>
+      {{#if admin.isEnrolled}}
+        <p>
+          <button {{action 'printRosters'}}>Print All Rosters</button>
+        </p>
+      {{/if}}
+      {{#each admin.sessions as |item|}}
+        <p class="nextline">
+          {{#link-to 'admin.sessions.session' item}}{{item.sessionName}}{{/link-to}}
+        </p>
+      {{/each}}
+    </div>    
+    <div class="col-xs-9">
+      {{outlet}}
+    </div>    
+  </div> 
+  {{rosters-print-all sessionsPrint=sessionsPrint}}
 {{/admin-only}}
 
