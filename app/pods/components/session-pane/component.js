@@ -4,17 +4,18 @@ import ImagePath from 'art-day/mixins/image-path';
 export default Ember.Component.extend(ImagePath, {
 	classNames: ['session-detail', 'session-pane', 'instructions'],
 
+
 	actions: {
-		isAdding: function () {
+		isAdding: function() {
 			this.sendAction('isAdding');
-		}, 
-		isEditing: function () {
+		},
+		isEditing: function() {
 			this.sendAction('isEditing');
 		},
-		edit: function () {
+		edit: function() {
 			this.sendAction('edit');
 		},
-		delete: function () {
+		delete: function() {
 			this.sendAction('delete');
 		}
 	}

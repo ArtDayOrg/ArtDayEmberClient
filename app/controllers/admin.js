@@ -51,7 +51,6 @@ export default Ember.Controller.extend({
     }.property('totalCapacity', 'students.length'),
 
     atAdminIndex: function() {
-        console.log(this.get('app.currentPath'))
         if (this.get('app.currentPath') === 'admin.index') {
             return true;
         } else {

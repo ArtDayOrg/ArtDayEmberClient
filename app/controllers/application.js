@@ -18,7 +18,6 @@ export default Ember.Controller.extend({
   }.property('model', 'model.length'),
 
   atIndex: function() {
-    console.log(this.get('currentPath'));
     if (this.get('currentPath') === 'index') {
       return true;
     } else {

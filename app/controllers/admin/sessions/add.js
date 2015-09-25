@@ -3,12 +3,12 @@ import AdminControllerHooks from 'art-day/mixins/admin-controller-hooks';
 
 export default Ember.Controller.extend(AdminControllerHooks, {
 
-    imageData: '',
+    imageFile: '',
 
     actions: {
 
-        updateImageData: function(imageData) {
-            this.set('imageData', imageData);
+        updateImageFile: function(imageFile) {
+            this.set('imageFile', imageFile);
         },
 
         addSession: function() {
@@ -26,8 +26,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
             var newSession = this.store.createRecord('session', newSessionJson);
 
             newSession.save().then(function(response) {
-                console.log(response);
-                var imageFile = self.get('imageData');
+                var imageFile = self.get('imageFile');
 
                 // <form style='margin-top:100px;' id='myForm' action='http://localhost:51773/api/image' method='POST'>
                 //   <input type='file' id='fileInput' name='fileInput'></input>

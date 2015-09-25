@@ -8,7 +8,9 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
     isAdding: false,
 
-    imageData: '',
+    imageFile: '',
+
+    imageShouldRefresh: false,
 
     // processes the current models enrollment and
     // returns a sorted array of alphabetized session rosters
@@ -35,12 +37,13 @@ export default Ember.Controller.extend(AdminControllerHooks, {
         this.set('isEditing', false);
         this.set('isAdding', false);
         this.set('imageData', '');
+        this.set('imageShouldRefresh', false)
     }.observes('model'),
 
     actions: {
 
-        updateImageData: function(imageData) {
-            this.set('model.imageHash', imageData);
+        updateImageFile: function(imageFile) {
+            this.set('imageFile', imageFile);
         },
 
         edit: function() {
@@ -50,6 +53,25 @@ export default Ember.Controller.extend(AdminControllerHooks, {
         doneEditing: function() {
             this.set('isEditing', false);
             this.model.save();
+            if (this.get('imageFile')) {
+                var sessionId = this.get('model.id');
+                var fileName = sessionId + '.png';
+                var data = new FormData();
+                var self = this;
+                data.append(fileName, this.get('imageFile'));
+                Ember.$.ajax({
+                    url: 'http://artday.azurewebsites.net/api/image',
+                    data: data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data) {
+                        self.set('imageShouldRefresh', true);
+                        console.log('image updated');
+                    }
+                });
+            }
         },
 
         delete: function() {

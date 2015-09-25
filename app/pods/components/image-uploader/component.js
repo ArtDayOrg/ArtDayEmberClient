@@ -7,16 +7,13 @@ export default EmberUploader.FileField.extend({
   filesDidChange: function(files) {
 
     var file = files[0];
-    console.log(file);
-    this.sendAction('updateImageData', file);
 
-    // var reader = new FileReader();
-    // var self = this;
-    // reader.onload = function(readerEvt) {
-    //   var binaryString = readerEvt.target.result;
-    //   self.set('imageData', btoa(binaryString));
-    //   self.sendAction('updateImageData', btoa(binaryString));
-    // };
-    // reader.readAsBinaryString(file);
+    var reader = new FileReader();
+    var self = this;
+    reader.onload = function(readerEvt) {
+      var binaryString = readerEvt.target.result;
+      self.sendAction('updateImageData', file, btoa(binaryString));
+    };
+    reader.readAsBinaryString(file);
   }
 });

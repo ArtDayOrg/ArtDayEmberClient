@@ -6,7 +6,7 @@
 	    {{partial 'admin/sessions/add'}}
 	    <button {{action 'doneAdding'}}>Done</button>
 	{{else}}
-	    {{session-pane item=model edit="edit" delete="delete" isEditing=isEditing isAdding=isAdding isAdmin=admin.isAdmin isEnrolled=admin.isEnrolled}}
+	    {{session-pane item=model edit="edit" delete="delete" isEditing=isEditing isAdding=isAdding isAdmin=admin.isAdmin isEnrolled=admin.isEnrolled imageShouldRefresh=imageShouldRefresh}}
 	{{/if}}{{/if}}
 	{{#if admin.isEnrolled}}
 		{{roster-session rosters=rosters}}

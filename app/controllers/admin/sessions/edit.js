@@ -6,9 +6,8 @@ export default Ember.Controller.extend({
 
     actions: {
 
-        updateImageData: function (imageData) {
-            console.log('imageData bubbled to edit');
-            sessionController.set('model.imageHash', imageData);
+        updateImagefile: function(imageFile) {
+            sessionController.set('imageFile', imageFile);
         },
 
         addSession: function() {
@@ -25,13 +24,13 @@ export default Ember.Controller.extend({
             };
 
             var newSession = this.store.createRecord('session', newSessionJson);
-            
+
             newSession.save().then(function(newSession) {
                 self.transitionToRoute('admin.sessions.session', newSession.id);
             }, function(err) {
                 console.error(err);
-                alert('Save session failed. Check the console.');                
+                alert('Save session failed. Check the console.');
             });
-        }        
+        }
     }
 });
