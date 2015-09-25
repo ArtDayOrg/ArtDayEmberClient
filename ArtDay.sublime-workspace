@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"im",
+				"imageFile"
+			],
+			[
 				"ranked",
 				"rankedOrNullPrefsArray"
 			],
@@ -191,20 +195,37 @@
 	[
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions"
 	],
 	"file_history":
 	[
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-pane/component.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/session.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/image-path.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-form/component.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/add.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/add.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-form/template.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/edit.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/application.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/edit.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/image-uploader/component.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/students.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/admin-instructions/template.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/import-helper/component.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/add.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/session-form/template.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/session-form/component.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/image-uploader/component.js",
@@ -220,17 +241,14 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/config/environment.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-form.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/sessions/session.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/students-metrics.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/index-mosaic.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/image-path.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/session-tile-draggable.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-tile.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/session-form.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/edit.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/image-uploader.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/app-nav-bar.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-pane.hbs",
@@ -248,7 +266,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-enrollments.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-preferences-row.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/session.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/student-header.hbs",
 		"/Users/Dev/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
@@ -261,9 +278,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/enrollment-helper.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/add.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/edit.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/session.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/tests/integration/components/fb-widget-test.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/image-uploader.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/admin-only.hbs",
@@ -320,11 +334,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/schedule-display.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/schedule-display.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components/enrollment-helper.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/schedule-display-joe.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components/schedule-display-joe.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components/sessions-metrics.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/student-filter.js"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/components/enrollment-helper.js"
 	],
 	"find":
 	{
