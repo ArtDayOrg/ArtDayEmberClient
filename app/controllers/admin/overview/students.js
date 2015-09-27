@@ -172,7 +172,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
 		return grades;
 
-	}.property('admin.enrollment.length', 'admin.students.@each.preferences'),
+	}.property('admin.enrollment.length', 'admin.students.@each.preferences', 'admin.students.length', 'admin.students'),
 
 	metricsOverview: function() {
 		return this.get('admin.students.length');

@@ -13,7 +13,7 @@ export default Ember.Component.extend(ImagePath, {
     } else {
       return 'assets/images/undefined.png';
     }
-  }.property('imageExists', 'imagePath', 'imageData', 'imageShouldRefresh'),
+  }.property('imageExists', 'imagePath', 'imageData'),
 
   imageExists: function() {
     if (this.get('imagePath') === 'assets/images/undefined.png' && this.get('imageData') === '') {

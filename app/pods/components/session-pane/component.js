@@ -4,6 +4,9 @@ import ImagePath from 'art-day/mixins/image-path';
 export default Ember.Component.extend(ImagePath, {
 	classNames: ['session-detail', 'session-pane', 'instructions'],
 
+	refreshingImagePath: function() {
+		return this.get('imagePath') + '?timestamp=' + new Date().getTime()
+	}.property('imagePath', 'shouldRefresh'),
 
 	actions: {
 		isAdding: function() {

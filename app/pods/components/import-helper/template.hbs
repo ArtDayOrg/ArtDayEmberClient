@@ -14,5 +14,12 @@
 	<textarea id='importText' style='width:500px;height:320px'></textarea>
 </div>
 <div>
-	<button {{action 'doImport'}}>Import</button>
+  {{#if importProcessing}}
+    <img src="assets/images/spinner.gif" draggable="false">
+  {{else}}
+  	<button {{action 'doImport'}}>Import</button>
+    {{#if importSuccess}}
+      {{lastImportCount}} students successfully imported.  There are now {{students.length}} students.
+    {{/if}}
+  {{/if}}
 </div>
