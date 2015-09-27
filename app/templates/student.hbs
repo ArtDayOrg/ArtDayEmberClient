@@ -12,7 +12,7 @@
   </div>
 {{else}}
   <div class="animated-tiles">
-    {{#liquid-with bothArrays as |both|}}
+    {{#liquid-bind bothArrays as |both|}}
       {{student-preferences-row items=both.prefsArray changeDescription="changeDescription" sessionDropped="sessionDropped" locked=model.locked}}
       <hr>
       {{#liquid-unless model.locked use="toRight"}}
@@ -24,6 +24,6 @@
           {{student-available-sessions-mosaic sessionDropped="sessionDropped" availableSessions=both.availableSessions changeDescription="changeDescription"}}
         {{/liquid-if}}
       {{/liquid-unless}}
-    {{/liquid-with}}
+    {{/liquid-bind}}
   </div>
 {{/if}}
