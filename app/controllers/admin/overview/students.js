@@ -18,6 +18,10 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 			}
 		};
 
+		function pushSessionNameToEnrollmentStrings(e) {
+			enrollmentStrings.push(e.get('session.sessionName'));
+		};
+
 		function compileMetricsForStudent(s) {
 			prefsGot = 0;
 			if (s.get('preferences.length') !== 0) {
@@ -33,10 +37,6 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 				grade.got[prefsGot] += 1;
 				grade.setPrefs += 1;
 			}
-		};
-
-		function pushSessionNameToEnrollmentStrings(e) {
-			enrollmentStrings.push(e.get('session.sessionName'));
 		};
 
 		//given an array of objects with identical keys and int values
@@ -172,9 +172,5 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
 		return grades;
 
-	}.property('admin.enrollment.length', 'admin.students.@each.preferences', 'admin.students.length', 'admin.students'),
-
-	metricsOverview: function() {
-		return this.get('admin.students.length');
-	}.property('admin.students.length')
+	}.property('admin.enrollment.length', 'admin.students', 'admin.students.@each.preferences', 'admin.students.@each.enrollments', 'admin.enrollment', 'admin.preferences', 'admin.sessions')
 });

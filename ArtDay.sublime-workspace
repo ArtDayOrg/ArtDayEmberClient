@@ -198,21 +198,17 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/pods",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/enrollment-helper",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-pane",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/students-metrics",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/utils"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/utils/enrollment-mesh.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/models/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-pane/template.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-pane/component.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/session.hbs",
@@ -228,7 +224,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/add.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-form/template.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/sessions/edit.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/edit.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/image-uploader/component.js",
@@ -335,9 +330,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-header.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/adapters/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/enrollment.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/roster-period.hbs",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/components/import-helper.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin/overview.hbs"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/roster-period.hbs"
 	],
 	"find":
 	{
@@ -361,6 +354,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"metricsOverview",
 			"imageShouldRefresh",
 			"fb-",
 			"sessionName",
