@@ -193,10 +193,17 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/Dev/Dev/ArtDayEmberClient"
+		"/Users/Dev/Dev/ArtDayEmberClient",
+		"/Users/Dev/Dev/ArtDayEmberClient/app",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/rosters-print-all",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/utils"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/rosters-print-all/template.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/utils/enrollment-mesh.js",
@@ -240,7 +247,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/config/environment.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/session-form.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin/sessions/session.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/students-metrics.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/index-mosaic.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/session-tile-draggable.js",
@@ -323,8 +329,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/student-schedule.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/components/student-header.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/adapters/application.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/enrollment.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/roster-period.hbs"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/enrollment.js"
 	],
 	"find":
 	{

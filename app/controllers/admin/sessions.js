@@ -41,7 +41,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
     return sessionsPrint;
 
-  }.property('admin.enrollment.length'),
+  }.property('admin.enrollment.length', 'admin.sessions.length', 'admin.sessions.@each'),
 
   actions: {
     printRosters: function() {
