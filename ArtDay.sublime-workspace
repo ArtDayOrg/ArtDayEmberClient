@@ -193,19 +193,14 @@
 	},
 	"expanded_folders":
 	[
-		"/Users/Dev/Dev/ArtDayEmberClient",
-		"/Users/Dev/Dev/ArtDayEmberClient/app",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/utils"
+		"/Users/Dev/Dev/ArtDayEmberClient"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/utils/enrollment-mesh.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/student.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/session-pane/template.hbs",
@@ -278,7 +273,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/enrollment-helper.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/tests/integration/components/fb-widget-test.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/image-uploader.hbs",

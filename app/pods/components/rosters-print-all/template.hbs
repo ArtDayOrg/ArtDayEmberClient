@@ -1,14 +1,19 @@
 <div>
+  {{!--padding makes printed pages look better--}}
   <div class="padded">
-{{#each sessionsPrint as |sessionPrint|}}
-	<h3>
-    <p class="nextline">
-  		{{sessionPrint.sessionName}} | {{sessionPrint.sessionInstructor}} | Location: {{sessionPrint.sessionLocation}}
-    </p>
-	</h3>
-	<hr>
-	{{roster-session rosters=sessionPrint.sessionRosters}}
-	<div class="page-break"></div>
-{{/each}}
+    {{#each sessionsPrint as |sessionPrint|}}
+    	<h3>
+        <p class="nextline">
+      		{{sessionPrint.sessionName}} | {{sessionPrint.sessionInstructor}} | Location: {{sessionPrint.sessionLocation}}
+        </p>
+    	</h3>
+    	<hr>
+    	{{roster-session rosters=sessionPrint.sessionRosters}}
+
+      {{!--each roster gets own page, but don't print an extra page.--}}
+      {{#unless @last}}
+      	<div class="page-break"></div>
+      {{/unless}}
+    {{/each}}
   </div>
 </div>
