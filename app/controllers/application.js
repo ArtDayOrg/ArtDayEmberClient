@@ -12,9 +12,9 @@ export default Ember.Controller.extend({
           console.log(imagePath);
           urls.addObject(imagePath);
         }
-      })
+      });
     }
-    return urls
+    return urls;
   }.property('model', 'model.length'),
 
   atIndex: function() {

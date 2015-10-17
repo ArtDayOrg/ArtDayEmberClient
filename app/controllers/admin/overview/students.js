@@ -16,11 +16,11 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 				prefsGot += 1;
 				grade.prefs[p.get('rank')] += 1;
 			}
-		};
+		}
 
 		function pushSessionNameToEnrollmentStrings(e) {
 			enrollmentStrings.push(e.get('session.sessionName'));
-		};
+		}
 
 		function compileMetricsForStudent(s) {
 			prefsGot = 0;
@@ -37,7 +37,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 				grade.got[prefsGot] += 1;
 				grade.setPrefs += 1;
 			}
-		};
+		}
 
 		//given an array of objects with identical keys and int values
 		//if only propName is provided, returns the sum of the values of that key.
@@ -72,34 +72,34 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 				grade: i.toString(),
 				studentCount: studentsForGrade.get('length'),
 				got: {
-					"1": 0,
-					"2": 0,
-					"3": 0,
-					"0": 0
+					'1': 0,
+
+					'3': 0,
+					'0': 0
 				},
 				prefs: {
-					"1": 0,
-					"2": 0,
-					"3": 0,
-					"4": 0,
-					"5": 0,
-					"6": 0
+					'1': 0,
+					'2': 0,
+					'3': 0,
+					'4': 0,
+					'5': 0,
+					'6': 0
 				},
 				setPrefs: 0,
 				gotPercent: {
-					"1": 0,
-					"2": 0,
-					"3": 0,
-					"0": 0
+					'1': 0,
+					'2': 0,
+					'3': 0,
+					'0': 0
 				},
 				setPrefsPercent: 0,
 				prefsPercent: {
-					"1": 0,
-					"2": 0,
-					"3": 0,
-					"4": 0,
-					"5": 0,
-					"6": 0
+					'1': 0,
+					'2': 0,
+					'3': 0,
+					'4': 0,
+					'5': 0,
+					'6': 0
 				}
 			};
 			compileMetricsForGrade(studentsForGrade);
@@ -107,37 +107,37 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 		}
 
 		var overview = {
-			grade: "Overview",
-			studentCount: grades.sumProp("studentCount"),
+			grade: 'Overview',
+			studentCount: grades.sumProp('studentCount'),
 			got: {
-				"1": grades.sumProp("got", "1"),
-				"2": grades.sumProp("got", "2"),
-				"3": grades.sumProp("got", "3"),
-				"0": grades.sumProp("got", "0")
+				'1': grades.sumProp('got', '1'),
+				'2': grades.sumProp('got', '2'),
+				'3': grades.sumProp('got', '3'),
+				'0': grades.sumProp('got', '0')
 			},
 			prefs: {
-				"1": grades.sumProp("prefs", "1"),
-				"2": grades.sumProp("prefs", "2"),
-				"3": grades.sumProp("prefs", "3"),
-				"4": grades.sumProp("prefs", "4"),
-				"5": grades.sumProp("prefs", "5"),
-				"6": grades.sumProp("prefs", "6")
+				'1': grades.sumProp('prefs', '1'),
+				'2': grades.sumProp('prefs', '2'),
+				'3': grades.sumProp('prefs', '3'),
+				'4': grades.sumProp('prefs', '4'),
+				'5': grades.sumProp('prefs', '5'),
+				'6': grades.sumProp('prefs', '6')
 			},
-			setPrefs: grades.sumProp("setPrefs"),
+			setPrefs: grades.sumProp('setPrefs'),
 			gotPercent: {
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"0": 0
+				'1': 0,
+				'2': 0,
+				'3': 0,
+				'0': 0
 			},
 			setPrefsPercent: 0,
 			prefsPercent: {
-				"1": 0,
-				"2": 0,
-				"3": 0,
-				"4": 0,
-				"5": 0,
-				"6": 0
+				'1': 0,
+				'2': 0,
+				'3': 0,
+				'4': 0,
+				'5': 0,
+				'6': 0
 			}
 		};
 

@@ -1,3 +1,4 @@
+//liquid-fire animations
 export default function() {
   this.transition(
     this.fromRoute('students'),
@@ -24,4 +25,4 @@ export default function() {
       }]
     })
   );
-};
+}

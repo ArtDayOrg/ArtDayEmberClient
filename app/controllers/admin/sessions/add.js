@@ -33,9 +33,9 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 //   <input type='submit' formenctype='multipart/form-data'>Submit</input>
                 // </form>
                 var sessionId = response.id;
-                var fileName = sessionId + '.png'
+                var fileName = sessionId + '.png';
                 var data = new FormData();
-                data.append(fileName, imageFile);;
+                data.append(fileName, imageFile);
                 Ember.$.ajax({
                     url: 'http://artday.azurewebsites.net/api/image',
                     data: data,
@@ -43,7 +43,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                     contentType: false,
                     processData: false,
                     type: 'POST',
-                    success: function(data) {
+                    success: function() {
                         self.transitionToRoute('admin.sessions.session', response.id);
                     }
                 });

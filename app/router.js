@@ -5,14 +5,18 @@ var Router = Ember.Router.extend({
   location: config.locationType
 });
 
-export default Router.map(function() {  
+export default Router.map(function() {
   this.route('students');
-  this.route('student', { path: 'students/:id'});
+  this.route('student', {
+    path: 'students/:id'
+  });
   this.route('admin', function() {
     this.route('import');
     this.route('students');
     this.route('sessions', function() {
-      this.route('session', {path: '/:session_id'});
+      this.route('session', {
+        path: '/:session_id'
+      });
       this.route('add');
     });
     this.route('overview', function() {
@@ -21,4 +25,4 @@ export default Router.map(function() {
       this.route('students');
     });
   });
-}); 
+});

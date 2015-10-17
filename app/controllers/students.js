@@ -1,13 +1,12 @@
 import Ember from 'ember';
-import StudentFilter from 'art-day/mixins/student-filter';
 
-export default Ember.Controller.extend(StudentFilter, {
+export default Ember.Controller.extend({
 
     isAdmin: false,
-    
+
     searchFilter: '',
 
-    isEnrolled: function () {
+    isEnrolled: function() {
         return this.get('enrollment.length') > 0;
     }.property('enrollment.length'),
 
@@ -17,10 +16,9 @@ export default Ember.Controller.extend(StudentFilter, {
             return true;
         }
         if (filterString.length < 3) {
-            return false; 
-        }    
-        var regex = new RegExp(filterString, 'i');
-        return student.get('firstName').match(regex) || student.get('lastName').match(regex);
+            return false;
+        }
+        return student.get('firstName').startsWith(filterString) || student.get('lastName').startsWith(filterString);
     }).property('searchFilter', 'students', 'students.length'),
 
     actions: {
@@ -32,4 +30,4 @@ export default Ember.Controller.extend(StudentFilter, {
             student.save();
         }
     }
-}); 
+});

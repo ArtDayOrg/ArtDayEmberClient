@@ -1,6 +1,9 @@
 // session-form tests
 
-import { moduleForComponent, test } from 'ember-qunit';
+import {
+  moduleForComponent, test
+}
+from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('session-form', 'Integration | Component | session form', {
@@ -18,11 +21,11 @@ test('fields show up in form when model populated', function(assert) {
     location: 'location test',
     description: 'description test',
     instructions: 'instruction test'
-  }
-    
+  };
+
   this.set('model', model);
 
-  this.render(hbs`{{session-form item=model}}`);
+  this.render(hbs `{{session-form item=model}}`);
 
   assert.equal(this.$().find('#session-name-input').val(), model.sessionName, 'session name populated');
   assert.equal(this.$().find('#capacity-input').val(), model.capacity, 'capacity populated');
@@ -37,12 +40,11 @@ test('fields show up in form when model populated', function(assert) {
 test('fields do not show up in form when model empty', function(assert) {
   assert.expect(6);
 
-  var model = {
-  }
-  
+  var model = {};
+
   this.set('model', model);
 
-  this.render(hbs`{{session-form item=model}}`);
+  this.render(hbs `{{session-form item=model}}`);
 
   assert.equal(this.$().find('#session-name-input').val(), '', 'session name empty');
   assert.equal(this.$().find('#capacity-input').val(), '', 'capacity empty');

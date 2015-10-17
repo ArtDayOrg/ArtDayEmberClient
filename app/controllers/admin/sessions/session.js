@@ -37,7 +37,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
         this.set('isEditing', false);
         this.set('isAdding', false);
         this.set('imageData', '');
-        this.set('shouldRefresh', false)
+        this.set('shouldRefresh', false);
     }.observes('model'),
 
     actions: {
@@ -66,7 +66,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                     contentType: false,
                     processData: false,
                     type: 'POST',
-                    success: function(data) {
+                    success: function() {
                         self.set('shouldRefresh', true);
                     }
                 });

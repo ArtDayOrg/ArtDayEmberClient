@@ -5,19 +5,14 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 
     searchFilter: '',
     filteredStudents: Ember.computed.filter('model.students', function(student) {
-
         var filterString = this.get('searchFilter').toUpperCase();
-
         if ((student.get('firstName') === filterString) || (student.get('lastName') === filterString)) {
             return true;
         }
-
         if (filterString.length < 3) {
             return false;
         }
-
-        var regex = new RegExp(filterString, 'i');
-        return student.get('firstName').match(regex) || student.get('lastName').match(regex);
+        return student.get('firstName').startsWith(filterString) || student.get('lastName').startsWith(filterString);
     }).property('searchFilter', 'model.students', 'model.students.length'),
 
     actions: {

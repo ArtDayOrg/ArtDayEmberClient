@@ -22,8 +22,7 @@ export default function enrollmentMesh(outerSelf) {
   //returns an array with all elements of the first array that are not in the second array
   //e.g. [1,2,3].diff([3,4,5]) --> [1,2];
   Array.prototype.diff = function(a) {
-
-    //does not work on IE 8?
+    //Breaks in IE 8
     return this.filter(function(i) {
       return a.indexOf(i) < 0;
     });
@@ -35,6 +34,8 @@ export default function enrollmentMesh(outerSelf) {
       this.emberStudent = emberStudent;
       this.grade = emberStudent.get('grade');
       this.preferences = emberStudent.get('preferences').sortBy('rank').reverse();
+
+      //only students who set preferences get priority
       this.priority = this.preferences.length > 0 ? this.grade : 0;
       this.bumpCount = 0;
       this.proposedEnrollment = null;
@@ -55,14 +56,18 @@ export default function enrollmentMesh(outerSelf) {
   function resetStudents(students) {
     students.forEach(function(s) {
       s.deniedEnrollments.splice(0, s.deniedEnrollments.length);
+
+      //students who were bumped from their preferences in earlier rounds get preferred placemnet in later rounds.
       s.priority = s.preferences.length > 0 ? s.grade + (s.bumpCount * 3) : 0;
-      if (s.bumpCount > 4) {
-        s.bumpCount = 2;
-      } else {
-        s.bumpCount = 0;
-      }
+
+      //preserving some bump count for highly bumped students seemed to produce the best results 
+      //through trial and error but could probably be optimized further
+      s.bumpCount = s.bumpCount > 4 ? 2 : 0;
+
       s.enrolled.push(s.proposedEnrollment);
       s.proposedEnrollment = null;
+
+      //students are denied enrollment in sessions they are already enrolled in during a different period
       s.enrolled.forEach(function(e) {
         s.deniedEnrollments.push(e);
       });
@@ -106,9 +111,9 @@ export default function enrollmentMesh(outerSelf) {
       enrollmentArray.forEach(function(enrollment) {
 
         var enrollmentJSON = {
-          "studentId": enrollment.emberStudent.get('id'),
-          "sessionId": enrollment.emberSession.get('id'),
-          "period": enrollment.period
+          'studentId': enrollment.emberStudent.get('id'),
+          'sessionId': enrollment.emberSession.get('id'),
+          'period': enrollment.period
         };
         body.push(enrollmentJSON);
       });
@@ -120,7 +125,7 @@ export default function enrollmentMesh(outerSelf) {
     }).done(function() {
       outerSelf.set('enrollmentSucceeded', true);
 
-      //bubbles from admin/overview/enrollment to routes/admin wheer refreshAdmin lives
+      //bubbles from admin/overview/enrollment to be handled in routes/admin 
       outerSelf.send('refreshAdmin');
     });
   }
@@ -129,11 +134,12 @@ export default function enrollmentMesh(outerSelf) {
 
     //iterates through sessions that have proposed enrollments and returns an array of enrollments for that period
     function createEnrollments(sessions) {
-      var enrollments = [];
-      for (var i = 0; i < sessions.length; i++) {
-        var s = sessions.objectAt(i);
-        for (var j = 0; j < s.proposedEnrollments.length; j++) {
-          var enrollment = new Enrollment(s.emberSession, s.proposedEnrollments[j].emberStudent, period);
+      var enrollments = [],
+        i, s, j, enrollment;
+      for (i = 0; i < sessions.length; i++) {
+        s = sessions.objectAt(i);
+        for (j = 0; j < s.proposedEnrollments.length; j++) {
+          enrollment = new Enrollment(s.emberSession, s.proposedEnrollments[j].emberStudent, period);
           enrollments.push(enrollment);
         }
       }
@@ -143,13 +149,13 @@ export default function enrollmentMesh(outerSelf) {
     // required by our version of Gale-Shapely Algorithm
     // returns the next unenrolled student if there is one or null
     function freeStudent(students, sessions) {
-      function denyEnrolledSessionForStudent(student) {
+      function denyEnrolledSessionsForStudent(student) {
         student.enrolled.forEach(function(e) {
           student.deniedEnrollments.push(e);
         });
       }
-      var student;
-      for (var i = 0; i < students.length; i++) {
+      var student, i;
+      for (i = 0; i < students.length; i++) {
         student = students.objectAt(i);
 
         // handle a special case that was (rarely) causing errors
@@ -158,10 +164,10 @@ export default function enrollmentMesh(outerSelf) {
         // and then is processed late in the last run through, when only the 2 sessions they are already assigned to are available.
         // to handle this special case, we set their denied enrollments to be only those sessions they are enrolled in, 
         // then give them priority over all other students without preferences and try again.  
-        // this ensures no students are orphaned and that no orphan bumps a student who did set their preferences
+        // this ensures both no students are orphaned and that no orphan bumps a student who did set their preferences
         if (student.proposedEnrollment === null && student.deniedEnrollments.length === sessions.length) {
           student.deniedEnrollments = [];
-          denyEnrolledSessionForStudent(student);
+          denyEnrolledSessionsForStudent(student);
           student.priority += 1;
           return student;
         }
@@ -181,9 +187,10 @@ export default function enrollmentMesh(outerSelf) {
     function bestSessionForStudent(student, sessions) {
 
       function prefNotInDenied(pref, denied) {
-        var prefName = pref.get('session.sessionName');
-        for (var i = 0; i < denied.length; i++) {
-          var deniedName = denied[i].sessionName;
+        var prefName = pref.get('session.sessionName'),
+          i, deniedName;
+        for (i = 0; i < denied.length; i++) {
+          deniedName = denied[i].sessionName;
           if (prefName === deniedName) {
             return false;
           }
@@ -196,11 +203,12 @@ export default function enrollmentMesh(outerSelf) {
       }
 
       function availableSessions(sessions, prefs, student) {
-        var notPreferredSessions = [];
-        for (var i = 0; i < sessions.length; i++) {
-          var s = sessions[i];
-          for (var j = 0; j < prefs.length; j++) {
-            var p = prefs[j];
+        var notPreferredSessions = [],
+          i, s, j, p;
+        for (i = 0; i < sessions.length; i++) {
+          s = sessions[i];
+          for (j = 0; j < prefs.length; j++) {
+            p = prefs[j];
             if (p.get('sessionName') === s.sessionName) {
               break;
             }
@@ -211,11 +219,12 @@ export default function enrollmentMesh(outerSelf) {
         return available;
       }
 
-      var bestSession = null;
-      var prefs = student.preferences;
+      var bestSession = null,
+        prefs = student.preferences,
+        i, available;
 
       //go through preferences and grab the first session they are both eligable and prefer
-      for (var i = 0; i < prefs.length; i++) {
+      for (i = 0; i < prefs.length; i++) {
         if (prefNotInDenied(prefs[i], nextStudent.deniedEnrollments)) {
           bestSession = sessions.filter(sessionNameFilter)[0];
         }
@@ -223,7 +232,7 @@ export default function enrollmentMesh(outerSelf) {
 
       //if there is no such session, or if they did not set their preferences, they get a random session chosen from all available sessions
       if (!bestSession) {
-        var available = availableSessions(sessions, prefs, student);
+        available = availableSessions(sessions, prefs, student);
         bestSession = available[Math.floor(Math.random() * available.length)];
       }
 
@@ -231,16 +240,19 @@ export default function enrollmentMesh(outerSelf) {
     }
 
     // Gail-Shapley Algorithm starts here, adopted from Algorithm Design Kleinberg and Tardos
+    //
     // because we process students preferences and not the sessions preferences, we are sure
-    // students cannot cheat by lying about their preferences: http://www.columbia.edu/~js1353/pubs/tst-ipco99.pdf
-    // pgs 432-438 (assume students correspond to men in the discussion in the paper)
+    // students cannot cheat by lying about their preferences, per http://www.columbia.edu/~js1353/pubs/tst-ipco99.pdf
+    // pgs 432-438 (students correspond to men in the discussion in the paper)
 
-    // while there is a student nextStudent who is free and hasn't attempted enrollment in every class                
+    // while there is a student nextStudent who is free and hasn't attempted enrollment in every class    
+
+    var nextStudent, bumpedStudent, nextStudentsSession;
     while (true) {
 
       //choose such a student(nextStudent)
-      var nextStudent = freeStudent(students, sessions);
-      var nextStudentsSession;
+      nextStudent = freeStudent(students, sessions);
+
       if (nextStudent) {
 
         //let nextStudentsSession be the highest-ranked session in nextStudents preference list to whom nextStudent has not attempted enrollment
@@ -271,7 +283,7 @@ export default function enrollmentMesh(outerSelf) {
         if (nextStudent.priority > nextStudentsSession.proposedEnrollments[0].priority) {
 
           //the least desired student is bumped and the next student gets the enrollment
-          var bumpedStudent = nextStudentsSession.proposedEnrollments[0];
+          bumpedStudent = nextStudentsSession.proposedEnrollments[0];
           bumpedStudent.proposedEnrollment = null;
           bumpedStudent.bumpCount += 1;
           nextStudent.proposedEnrollment = nextStudentsSession;
@@ -302,20 +314,22 @@ export default function enrollmentMesh(outerSelf) {
   }
 
   //shuffle students so mesh has no hidden biases
-  var students = loadStudents(outerSelf).shuffle1();
-  var sessions = loadSessions(outerSelf);
-
-  var allEnrollments = [];
+  var students = loadStudents(outerSelf).shuffle1(),
+    sessions = loadSessions(outerSelf),
+    allEnrollments = [],
+    enrollmentsForSinglePeriod, loop;
 
   //3,2,1
-  var loop = 4;
+  loop = 4;
   while (--loop) {
-    var enrollments = mesh(sessions, students, loop);
-    allEnrollments.push(enrollments);
+    enrollmentsForSinglePeriod = mesh(sessions, students, loop);
+    allEnrollments.push(enrollmentsForSinglePeriod);
+
     //if we are going to loop again, reset students and sessions
     if (loop === 1) {
       break;
     }
+
     resetStudents(students);
     resetSessions(sessions);
   }

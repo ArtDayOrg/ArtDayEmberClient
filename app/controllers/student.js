@@ -27,7 +27,7 @@ export default Ember.Controller.extend({
         return {
             prefsArray: this.get('prefsArray'),
             availableSessions: this.get('availableSessions')
-        }
+        };
     }.property('prefsArray', 'availableSessions'),
 
     // this property is an array sorted by rank where unset preferences are represented 

@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
     actions: {
 
         updateImagefile: function(imageFile) {
-            sessionController.set('imageFile', imageFile);
+            this.get('sessionController').set('imageFile', imageFile);
         },
 
         addSession: function() {

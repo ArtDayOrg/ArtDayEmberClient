@@ -13,6 +13,6 @@ export default DS.Model.extend({
   }),
 
   toStringExtension: function() {
-    return "Student: " + this.get('firstName') + ' ' + this.get('lastName');
+    return 'Student: ' + this.get('firstName') + ' ' + this.get('lastName');
   }
 });

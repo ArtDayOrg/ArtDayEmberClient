@@ -15,6 +15,6 @@ export default DS.Model.extend({
   instructions: DS.attr('string'),
 
   toStringExtension: function() {
-    return "sessionName: " + this.get('sessionName');
+    return 'sessionName: ' + this.get('sessionName');
   }
 });
