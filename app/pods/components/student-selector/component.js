@@ -1,12 +1,11 @@
 import Ember from 'ember';
-import StudentFilter from 'art-day/mixins/student-filter';
 
-export default Ember.Component.extend(StudentFilter, {
+export default Ember.Component.extend({
 
   classNames: ['student-selector'],
 
   becomeFocused: function() {
-    this.$('.input').focus()
+    this.$('.input').focus();
   }.on('didInsertElement'),
 
   actions: {
