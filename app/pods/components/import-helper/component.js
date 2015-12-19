@@ -39,7 +39,7 @@ export default Ember.Component.extend({
         method: 'POST',
         url: ENV.APP.host + '/api/students',
         data: JSON.stringify(body)
-      }).done(function(msg) {
+      }).done(function() {
         self.set('importSuccess', true);
         self.set('importBegan', false);
         Ember.$('#importText').val('');

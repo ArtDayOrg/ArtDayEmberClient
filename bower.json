@@ -15,7 +15,7 @@
         "ember-widgets": "~0.2.0",
         "jquery": "^1.11.1",
         "loader.js": "ember-cli/loader.js#3.2.0",
-        "qunit": "~1.17.1",
+        "qunit": "~1.18.0",
         "ember-uploader": "0.3.9"
     },
     "resolutions": {

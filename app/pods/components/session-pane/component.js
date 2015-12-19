@@ -5,7 +5,7 @@ export default Ember.Component.extend(ImagePath, {
 	classNames: ['session-detail', 'session-pane', 'instructions'],
 
 	refreshingImagePath: function() {
-		return this.get('imagePath') + '?timestamp=' + new Date().getTime()
+		return this.get('imagePath') + '?timestamp=' + new Date().getTime();
 	}.property('imagePath', 'shouldRefresh'),
 
 	actions: {

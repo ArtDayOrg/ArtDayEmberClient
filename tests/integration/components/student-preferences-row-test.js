@@ -107,7 +107,8 @@ test('renders prefs set ok', function(assert) {
   var self = this;
   var prefsSetTest = fullTest(6, function(rank) {
     assert.equal(self.$('#name' + rank).text().trim(), 'session ' + rank, 'pref ' + rank + ' session ok');
-    assert.equal(self.$('#imageUrl' + rank).attr('src'), 'assets/images/' + rank + '.png', 'image path ' + rank + ' ok');
+    var tmpRank = rank - 1;
+    assert.equal(self.$('.image:eq(' + tmpRank + ')').attr('src'), 'http://artday.blob.core.windows.net/images/' + rank + '.png', 'image path ' + rank + ' ok');
     self.on('outerAction', function(description) {
       assert.equal(description, 'description ' + rank, 'pref ' + rank + ' sends description ok');
     });

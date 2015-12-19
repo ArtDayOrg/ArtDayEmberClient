@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 export default function enrollmentMesh(outerSelf) {
   function Enrollment(emberSession, emberStudent, period) {
     this.emberSession = emberSession;

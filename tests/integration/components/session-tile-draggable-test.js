@@ -1,4 +1,7 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import {
+  moduleForComponent, test
+}
+from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('session-tile-draggable', 'Integration | Component | session tile draggable', {
@@ -6,21 +9,12 @@ moduleForComponent('session-tile-draggable', 'Integration | Component | session 
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{session-tile-draggable}}`);
+  this.render(hbs `{{session-tile-draggable}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#session-tile-draggable}}
-      template block text
-    {{/session-tile-draggable}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

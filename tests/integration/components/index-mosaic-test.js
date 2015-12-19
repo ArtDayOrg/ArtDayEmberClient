@@ -1,4 +1,7 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import {
+  moduleForComponent, test
+}
+from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('index-mosaic', 'Integration | Component | index mosaic', {
@@ -6,21 +9,12 @@ moduleForComponent('index-mosaic', 'Integration | Component | index mosaic', {
 });
 
 test('it renders', function(assert) {
-  assert.expect(2);
+  assert.expect(1);
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{index-mosaic}}`);
+  this.render(hbs `{{index-mosaic}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#index-mosaic}}
-      template block text
-    {{/index-mosaic}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'Welcome to Art Day');
 });
