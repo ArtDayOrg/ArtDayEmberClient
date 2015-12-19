@@ -1,7 +1,9 @@
 import {
   moduleFor,
   test
-} from 'ember-qunit';
+}
+from 'ember-qunit';
+import Ember from 'ember';
 
 moduleFor('controller:student', {
   // Specify the other units that are required for this test.
@@ -12,7 +14,7 @@ moduleFor('controller:student', {
 test('controller properly backs tooltip', function(assert) {
   var controller = this.subject();
 
-  assert.expect(4)
+  assert.expect(4);
 
   assert.equal(controller.get('descriptionForDisplay'), 'Click a session to see details.', 'descriptionForDisplay initializes to correct default');
   assert.equal(controller.get('sessionNameForDisplay'), '', 'sessionNameForDisplay  initializes to empty');
@@ -20,7 +22,7 @@ test('controller properly backs tooltip', function(assert) {
   var description = 'description for session';
   var sessionName = 'Name of Session';
 
-  Ember.run(function () {
+  Ember.run(function() {
     controller.send('changeDescription', description, sessionName);
   });
 
@@ -33,14 +35,30 @@ test('allPrefsSet ok', function(assert) {
 
   assert.expect(2);
 
-  Ember.run(function () {
-    controller.set('model', Ember.Object.create({preferences: []}));
+  Ember.run(function() {
+    controller.set('model', Ember.Object.create({
+      preferences: []
+    }));
   });
-  
+
   assert.notOk(controller.get('allPrefsSet'), 'allPrefsSet false when no prefs');
 
-  Ember.run(function () {
-    controller.set('model', Ember.Object.create({preferences: [{id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}]}));
+  Ember.run(function() {
+    controller.set('model', Ember.Object.create({
+      preferences: [{
+        id: 1
+      }, {
+        id: 2
+      }, {
+        id: 3
+      }, {
+        id: 4
+      }, {
+        id: 5
+      }, {
+        id: 6
+      }]
+    }));
   });
 
   assert.ok(controller.get('allPrefsSet'), 'allPrefsSet true with six prefs');

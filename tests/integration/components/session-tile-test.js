@@ -1,4 +1,7 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import {
+  moduleForComponent, test
+}
+from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('session-tile', 'Integration | Component | session tile', {
@@ -30,37 +33,37 @@ test('before/after displays ok', function(assert) {
 
 
   this.set('item', item);
-  this.render(hbs`{{session-tile item=item}}`);
+  this.render(hbs `{{session-tile item=item}}`);
 
   assert.equal(this.$().find('#name').text().trim(), sessionName1, 'session name ok');
-  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/1.png', 'image path ok');
+  assert.equal(this.$().find('.image').attr('src'), 'http://artday.blob.core.windows.net/images/1.png', 'image path ok');
 
   this.set('item', otherItem);
 
   assert.equal(this.$().find('#name').text().trim(), sessionName2, 'session name updates');
-  assert.equal(this.$().find('#imageUrl').attr('src'), 'assets/images/2.png', 'image path updates');
+  assert.equal(this.$().find('.image').attr('src'), 'http://artday.blob.core.windows.net/images/2.png', 'image path updates');
 
 });
 
-  
+
 test('before/after renders action ok', function(assert) {
-  
+
   assert.expect(4);
-  
+
   this.set('item', item);
 
-  this.render(hbs`{{session-tile item=item changeDescription="outer action"}}`);
+  this.render(hbs `{{session-tile item=item changeDescription="outer action"}}`);
 
-  this.on('outer action', function (description, sessionName) {
+  this.on('outer action', function(description, sessionName) {
     assert.equal(description, description1, 'session-tile action sends description');
     assert.equal(sessionName, sessionName1, 'session-tile action sends session name');
   });
-  
+
   $('.session-tile').click();
 
   this.set('item', otherItem);
 
-  this.on('outer action', function (description, sessionName) {
+  this.on('outer action', function(description, sessionName) {
     assert.equal(description, description2, 'session-tile action changes description');
     assert.equal(sessionName, sessionName2, 'session-tile action changes session name');
   });

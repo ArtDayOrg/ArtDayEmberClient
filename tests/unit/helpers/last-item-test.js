@@ -1,9 +1,9 @@
 import {
-  lastItem
+    lastItem
 }
 from '../../../helpers/last-item';
 import {
-  module, test
+    module, test
 }
 from 'qunit';
 
@@ -11,9 +11,12 @@ module('Unit | Helper | last item');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  assert.expect(2);
-  var result = lastItem(41, 42);
-  assert.ok(result);
-  result = lastItem(0, 12);
-  assert.notOk(result);
+    assert.expect(2);
+    var input = [41, 42];
+    var result = lastItem(input);
+    assert.ok(result);
+
+    var input2 = [0, 12];
+    result = lastItem(input2);
+    assert.notOk(result);
 });
