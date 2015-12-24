@@ -3,7 +3,7 @@
 var options = {
   modulePrefix: 'art-day',
   filter: '//.*(art-day).*/',
-  antifilter: '//.*(tests|template|transitions|liquid).*/',
+  antifilter: '//.*(tests|template|transitions|liquid|lf-|lm-|art-day.js|initializers|environment).*/',
   loaderExclusions: [],
   enableCoverage: true,
   cliOptions: {

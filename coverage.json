@@ -5,453 +5,405 @@
     "passes": 168,
     "pending": 0,
     "failures": 0,
-    "start": "2015-12-21T17:16:54.948Z",
-    "end": "2015-12-21T17:16:57.455Z"
+    "start": "2015-12-24T15:40:40.130Z",
+    "end": "2015-12-24T15:40:42.481Z"
   },
   "coverage": {
     "total": {
-      "statementsTotal": 9196,
-      "statementsCovered": 3736,
-      "percentage": 40.63
+      "statementsTotal": 836,
+      "statementsCovered": 249,
+      "percentage": 29.78
     },
     "files": [
       {
-        "name": "http://localhost:7357/assets/art-day.js",
-        "statementsTotal": 7422,
-        "statementsCovered": 3286,
-        "percentage": 44.27
-      },
-      {
         "name": "art-day/helpers/last-item",
-        "statementsTotal": 15,
-        "statementsCovered": 15,
+        "statementsTotal": 8,
+        "statementsCovered": 8,
         "percentage": 100
       },
       {
         "name": "art-day/mixins/admin-controller-hooks",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/mixins/image-path",
-        "statementsTotal": 15,
-        "statementsCovered": 15,
+        "statementsTotal": 8,
+        "statementsCovered": 8,
         "percentage": 100
       },
       {
         "name": "art-day/mixins/student-schedule",
-        "statementsTotal": 35,
-        "statementsCovered": 5,
-        "percentage": 14.29
+        "statementsTotal": 18,
+        "statementsCovered": 18,
+        "percentage": 100
       },
       {
         "name": "art-day/utils/enrollment-mesh",
-        "statementsTotal": 319,
-        "statementsCovered": 7,
-        "percentage": 2.19
+        "statementsTotal": 160,
+        "statementsCovered": 4,
+        "percentage": 2.5
       },
       {
         "name": "art-day/router",
-        "statementsTotal": 31,
-        "statementsCovered": 7,
-        "percentage": 22.58
-      },
-      {
-        "name": "art-day/config/environment",
-        "statementsTotal": 15,
-        "statementsCovered": 1,
-        "percentage": 6.67
+        "statementsTotal": 16,
+        "statementsCovered": 4,
+        "percentage": 25
       },
       {
         "name": "art-day/pods/components/admin-only/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/app-nav-bar/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/fb-widget/component",
-        "statementsTotal": 7,
-        "statementsCovered": 7,
+        "statementsTotal": 4,
+        "statementsCovered": 4,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/image-uploader/component",
-        "statementsTotal": 19,
-        "statementsCovered": 5,
-        "percentage": 26.32
+        "statementsTotal": 10,
+        "statementsCovered": 3,
+        "percentage": 30
       },
       {
         "name": "art-day/pods/components/index-mosaic/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/pref-tile/component",
-        "statementsTotal": 11,
-        "statementsCovered": 9,
-        "percentage": 81.82
+        "statementsTotal": 6,
+        "statementsCovered": 5,
+        "percentage": 83.33
       },
       {
         "name": "art-day/components/draggable-object-target",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/session-tile-draggable/component",
-        "statementsTotal": 15,
-        "statementsCovered": 9,
-        "percentage": 60
+        "statementsTotal": 8,
+        "statementsCovered": 5,
+        "percentage": 62.5
       },
       {
         "name": "art-day/components/draggable-object",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/session-tile/component",
-        "statementsTotal": 7,
-        "statementsCovered": 7,
+        "statementsTotal": 4,
+        "statementsCovered": 4,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/roster-period/component",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/pods/components/session-form/component",
-        "statementsTotal": 25,
-        "statementsCovered": 9,
-        "percentage": 36
+        "statementsTotal": 13,
+        "statementsCovered": 5,
+        "percentage": 38.46
       },
       {
         "name": "art-day/pods/components/student-preferences-row/component",
-        "statementsTotal": 9,
-        "statementsCovered": 7,
-        "percentage": 77.78
+        "statementsTotal": 5,
+        "statementsCovered": 4,
+        "percentage": 80
       },
       {
         "name": "art-day/pods/components/admin-instructions/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/controllers/admin/overview/enrollment",
-        "statementsTotal": 9,
-        "statementsCovered": 5,
-        "percentage": 55.56
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
       },
       {
         "name": "art-day/controllers/admin/overview/sessions",
-        "statementsTotal": 31,
-        "statementsCovered": 5,
-        "percentage": 16.13
+        "statementsTotal": 16,
+        "statementsCovered": 3,
+        "percentage": 18.75
       },
       {
         "name": "art-day/controllers/admin/overview/students",
-        "statementsTotal": 121,
-        "statementsCovered": 5,
-        "percentage": 4.13
+        "statementsTotal": 61,
+        "statementsCovered": 3,
+        "percentage": 4.92
       },
       {
         "name": "art-day/controllers/admin/overview",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/controllers/admin/sessions/edit",
-        "statementsTotal": 21,
-        "statementsCovered": 5,
-        "percentage": 23.81
+        "statementsTotal": 11,
+        "statementsCovered": 3,
+        "percentage": 27.27
       },
       {
         "name": "art-day/controllers/admin/sessions",
-        "statementsTotal": 59,
-        "statementsCovered": 5,
-        "percentage": 8.47
+        "statementsTotal": 30,
+        "statementsCovered": 3,
+        "percentage": 10
       },
       {
         "name": "art-day/controllers/application",
-        "statementsTotal": 29,
-        "statementsCovered": 5,
-        "percentage": 17.24
+        "statementsTotal": 15,
+        "statementsCovered": 3,
+        "percentage": 20
       },
       {
         "name": "art-day/controllers/student",
-        "statementsTotal": 167,
-        "statementsCovered": 11,
-        "percentage": 6.59
+        "statementsTotal": 84,
+        "statementsCovered": 6,
+        "percentage": 7.14
       },
       {
         "name": "art-day/models/enrollment",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/models/preference",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/models/student",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/controllers/students",
-        "statementsTotal": 27,
-        "statementsCovered": 27,
+        "statementsTotal": 14,
+        "statementsCovered": 14,
         "percentage": 100
       },
       {
         "name": "art-day/models/session",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/routes/application",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/routes/students",
-        "statementsTotal": 19,
-        "statementsCovered": 5,
-        "percentage": 26.32
+        "statementsTotal": 10,
+        "statementsCovered": 3,
+        "percentage": 30
       },
       {
         "name": "art-day/serializers/enrollment",
-        "statementsTotal": 7,
-        "statementsCovered": 7,
+        "statementsTotal": 4,
+        "statementsCovered": 4,
         "percentage": 100
       },
       {
         "name": "art-day/adapters/application",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/app",
-        "statementsTotal": 11,
-        "statementsCovered": 11,
+        "statementsTotal": 6,
+        "statementsCovered": 6,
         "percentage": 100
-      },
-      {
-        "name": "art-day/initializers/app-version",
-        "statementsTotal": 17,
-        "statementsCovered": 9,
-        "percentage": 52.94
-      },
-      {
-        "name": "art-day/initializers/coordinator-setup",
-        "statementsTotal": 9,
-        "statementsCovered": 5,
-        "percentage": 55.56
       },
       {
         "name": "art-day/models/coordinator",
-        "statementsTotal": 27,
-        "statementsCovered": 5,
-        "percentage": 18.52
+        "statementsTotal": 14,
+        "statementsCovered": 3,
+        "percentage": 21.43
       },
       {
         "name": "art-day/models/obj-hash",
-        "statementsTotal": 37,
-        "statementsCovered": 5,
-        "percentage": 13.51
-      },
-      {
-        "name": "art-day/initializers/export-application-global",
-        "statementsTotal": 33,
-        "statementsCovered": 9,
-        "percentage": 27.27
-      },
-      {
-        "name": "art-day/components/lf-outlet",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
-        "percentage": 100
-      },
-      {
-        "name": "art-day/components/lf-overlay",
-        "statementsTotal": 25,
-        "statementsCovered": 7,
-        "percentage": 28
-      },
-      {
-        "name": "art-day/components/lm-container",
-        "statementsTotal": 63,
-        "statementsCovered": 11,
-        "percentage": 17.46
+        "statementsTotal": 19,
+        "statementsCovered": 3,
+        "percentage": 15.79
       },
       {
         "name": "art-day/components/object-bin",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/controllers/admin/sessions/add",
-        "statementsTotal": 33,
-        "statementsCovered": 5,
-        "percentage": 15.15
+        "statementsTotal": 17,
+        "statementsCovered": 3,
+        "percentage": 17.65
       },
       {
         "name": "art-day/controllers/admin/sessions/session",
-        "statementsTotal": 75,
-        "statementsCovered": 5,
-        "percentage": 6.67
+        "statementsTotal": 38,
+        "statementsCovered": 3,
+        "percentage": 7.89
       },
       {
         "name": "art-day/controllers/admin/students",
-        "statementsTotal": 23,
-        "statementsCovered": 5,
-        "percentage": 21.74
+        "statementsTotal": 12,
+        "statementsCovered": 3,
+        "percentage": 25
       },
       {
         "name": "art-day/controllers/admin",
-        "statementsTotal": 83,
-        "statementsCovered": 5,
-        "percentage": 6.02
+        "statementsTotal": 42,
+        "statementsCovered": 3,
+        "percentage": 7.14
       },
       {
         "name": "art-day/helpers/log",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/enrollment-helper/component",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/pods/components/fb-login/component",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/pods/components/import-helper/component",
-        "statementsTotal": 29,
-        "statementsCovered": 5,
-        "percentage": 17.24
+        "statementsTotal": 15,
+        "statementsCovered": 3,
+        "percentage": 20
       },
       {
         "name": "art-day/pods/components/roster-session/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/rosters-print-all/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/schedule-display/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/session-pane/component",
-        "statementsTotal": 15,
-        "statementsCovered": 5,
-        "percentage": 33.33
+        "statementsTotal": 8,
+        "statementsCovered": 3,
+        "percentage": 37.5
       },
       {
         "name": "art-day/pods/components/sessions-metrics/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/pods/components/student-available-sessions-mosaic/component",
-        "statementsTotal": 9,
-        "statementsCovered": 5,
-        "percentage": 55.56
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
       },
       {
         "name": "art-day/pods/components/student-enrollments/component",
-        "statementsTotal": 9,
-        "statementsCovered": 5,
-        "percentage": 55.56
+        "statementsTotal": 5,
+        "statementsCovered": 3,
+        "percentage": 60
       },
       {
         "name": "art-day/pods/components/student-header/component",
-        "statementsTotal": 27,
-        "statementsCovered": 5,
-        "percentage": 18.52
+        "statementsTotal": 14,
+        "statementsCovered": 3,
+        "percentage": 21.43
       },
       {
         "name": "art-day/pods/components/student-print-schedule/component",
-        "statementsTotal": 21,
-        "statementsCovered": 5,
-        "percentage": 23.81
+        "statementsTotal": 11,
+        "statementsCovered": 3,
+        "percentage": 27.27
       },
       {
         "name": "art-day/pods/components/student-selector/component",
-        "statementsTotal": 19,
-        "statementsCovered": 5,
-        "percentage": 26.32
+        "statementsTotal": 10,
+        "statementsCovered": 3,
+        "percentage": 30
       },
       {
         "name": "art-day/pods/components/students-metrics/component",
-        "statementsTotal": 5,
-        "statementsCovered": 5,
+        "statementsTotal": 3,
+        "statementsCovered": 3,
         "percentage": 100
       },
       {
         "name": "art-day/routes/admin/sessions/add",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/routes/admin/sessions/session",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/routes/admin",
-        "statementsTotal": 25,
-        "statementsCovered": 5,
-        "percentage": 20
+        "statementsTotal": 13,
+        "statementsCovered": 3,
+        "percentage": 23.08
       },
       {
         "name": "art-day/routes/student",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       },
       {
         "name": "art-day/serializers/preference",
-        "statementsTotal": 7,
-        "statementsCovered": 5,
-        "percentage": 71.43
+        "statementsTotal": 4,
+        "statementsCovered": 3,
+        "percentage": 75
       }
     ]
   }
