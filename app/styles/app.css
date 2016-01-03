@@ -13,6 +13,11 @@ p {
     padding-top: 10px;
 }
 
+hr {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
 .indent {
     margin-left:20px;
 }
@@ -238,7 +243,7 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
 }
 
 .student {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 .school-logo {
     width: 70px;
