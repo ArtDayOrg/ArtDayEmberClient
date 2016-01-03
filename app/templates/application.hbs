@@ -4,5 +4,11 @@
 </div>
 
 {{#if atIndex}}
-  {{index-mosaic items=model}}
+<h1 class="centered-text">
+  Welcome to Art Day
+</h1>
+<p class="centered">
+ICS Students {{#link-to "students" class="centered-text"}}Click Here To Set Your Preferences{{/link-to}}
+</p>
+{{index-mosaic items=model}}
 {{/if}}

@@ -215,8 +215,20 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     transform: translateY(-50%);
 }
 
+ul {
+    display: inline-block;
+}
+
+li {
+    text-align: left;
+}
+
 .centered-text {
     text-align: center;
+}
+
+.lowered {
+    margin-top: 30px;
 }
 
 .description-display {
@@ -232,7 +244,7 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
 }
 
 .student-selector {
-    margin-top: 75px;
+    margin-top: 25px;
 }
 
 .sessions-metrics {
