@@ -177,7 +177,6 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     font-family: Helvetica;
     font-size: 20px;
     text-align: center;
-    margin-bottom: 10px;
 }
 
 .sessionName {
@@ -214,6 +213,10 @@ http://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/
     top: 50%;
     position: relative;
     transform: translateY(-50%);
+}
+
+.centered-text {
+    text-align: center;
 }
 
 .description-display {

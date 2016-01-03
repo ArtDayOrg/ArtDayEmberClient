@@ -155,6 +155,25 @@
 	},
 	"buffers":
 	[
+		{
+			"contents": "table, th, td {\n   padding: 4px;\n   width: auto !important;\n}\n\n\ntd {\n    text-align: left;\n    width: auto !important;\n}\n\np {\n    padding-top: 10px;\n}\n\nhr {\n    padding-top: 5px;\n    padding-bottom: 5px;\n}\n\n.indent {\n    margin-left:20px;\n}\n\n.nextline {\n    padding: 0px;\n    margin: 0px;\n\n}\n\n.inline {\n    float: left;\n}\n\n.padded {\n    padding: 10px;\n}\n\n.nocollapse {\n    min-width: 130px;\n}\n\n.hidden {\n    display: none;\n}\n\n/* hide rosters until print, and print with page breaks*/\n@media all {\n    .page-break { \n        display: none; \n    }\n    .printable {\n        display: none;\n    }\n}\n@media print {\n    .page-break { \n        display: block; \n        page-break-before: always; \n    }\n    .printable {\n        display: block !important;\n    }\n}\n\n.image-mosaic {\n    margin-top: 10px;\n}\n\n/*\nvertical centering from:;\nhttp://zerosixthree.se/vertical-align-anything-with-just-3-lines-of-css/\n*/\n.floatcenter {\n    top: 50%;\n    position: relative;\n    transform: translateY(-50%);\n    width: 100%;\n}\n\n.rank {\n    width: 140px;\n    text-align: center;\n}\n\n.exampleImport {\n    font-family: Helvetica;\n    font-size: 16px;\n    margin-left: 20px;\n}\n\n.instructions {\n    font-family: Helvetica;\n    font-size: 16px;\n    text-align: center;\n    margin-bottom: 10px;\n    margin-top: 10px;\n}\n\n.admin-instructions {\n    text-align: left !important;\n}\n\n.roster {\n    font-family: Helvetica;\n    font-size: 10px;\n}\n\n.droptarget {\n    font-family: Helvetica;\n    font-size: 18px;\n    width:140px;\n    height:100px;\n    border:3px dashed black;\n    display: flex;\n    border-radius: 20px;\n    text-align: center;\n}\n\n.admin-toolbar {\n    height: 100px;\n}\n\n.admin-functions {\n    float: left;\n    height: 100px;\n    line-height: 100px;\n    vertical-align: middle;\n    width: 80%;\n    font-family: Helvetica;\n    font-size: 24px;\n}\n\n.admin-enroll {\n    height: 20px;\n    width: 60px;\n    clear: both;\n}\n\n.fb-login-button {\n    margin-left: 20px;\n}\n\n.fb-widget {\n    height: 100px;\n    width: 20%;\n    margin: 0 auto;\n    padding-top:10px;\n    float: right;\n}\n\n.fb-image {\n    float: right;\n    margin-left: 5px;\n    margin-right: 5px;\n    margin-top: 5px;\n    margin-bottom: 0px;\n}\n\n.fb-name {\n    line-height: 50px;\n    vertical-align: middle;\n    float: right;\n}\n\n.fb-logout {\n    clear: both;\n    float: right;\n}\n\n.session-tile {\n    padding:0px;\n    cursor: pointer;\n}\n\n.studentName {\n    font-family: Helvetica;\n    font-size: 20px;\n    text-align: center;\n}\n\n.sessionName {\n    font-family: Helvetica;\n    font-size: 12px;\n    text-align: center;\n    margin-bottom: 12px;\n    margin-top: 6px;\n    width: 100%;\n    height: 17px;\n}\n\n.student-display {\n    height: 110px;\n    padding-bottom: 10px;\n    padding-top: 10px;\n}\n\n.student-display-left {\n    text-align: center;\n    height: inherit;\n    top: 50%;\n    position: relative;\n    transform: translateY(-50%);\n}\n\n.student-display-h {\n    font-size: 16px;\n    font-weight: 500;\n}\n\n.centered {\n    text-align: center;\n    top: 50%;\n    position: relative;\n    transform: translateY(-50%);\n}\n\n.description-display {\n    text-align: center;\n    height: inherit;\n    top: 50%;\n    position: relative;\n    transform: translateY(-50%);\n}\n\n.session-pane {\n    padding: 0px;\n}\n\n.student-selector {\n    margin-top: 75px;\n}\n\n.sessions-metrics {\n    width: 100%;\n    margin: auto;\n}\n\n.grade-metrics {\n    margin-top: 10px;\n    margin-bottom: 20px;\n}\n\n.student {\n    margin-top: 5px;\n}\n.school-logo {\n    width: 70px;\n    height: 50px;\n    margin-right: 10px;   \n    margin-bottom: 5px;\n}\n\n.image {\n    border-radius: 20px; \n    width: 140px;\n    height: 100px;\n    display: block;\n    margin: auto;\n}\n\n.image-left {\n    border-radius: 20px; \n    width: 140px;\n    height: 100px;\n    margin: auto;\n}\n\n.image-mosaic {\n    margin-top: 10px;\n}",
+			"file": "app/styles/app.css",
+			"file_size": 3800,
+			"file_write_time": 130962782650000000,
+			"settings":
+			{
+				"buffer_size": 3775,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/pods/components/student-selector/template.hbs",
+			"settings":
+			{
+				"buffer_size": 1359,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -211,13 +230,13 @@
 	[
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods",
-		"/Users/Dev/Dev/ArtDayEmberClient/tests/integration",
-		"/Users/Dev/Dev/ArtDayEmberClient/tests/integration/components"
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/student-selector",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/styles",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/templates"
 	],
 	"file_history":
 	[
@@ -438,8 +457,69 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "app/styles/app.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3775,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2627,
+								2627
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 2114.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/pods/components/student-selector/template.hbs",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1359,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Handlebars/grammars/Handlebars.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
