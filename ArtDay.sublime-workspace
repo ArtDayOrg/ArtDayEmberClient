@@ -227,13 +227,18 @@
 	[
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/app-nav-bar",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/student-selector",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/styles",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/config"
 	],
 	"file_history":
 	[
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/student-selector/template.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
@@ -241,7 +246,6 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/styles/app.css",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/app-nav-bar/template.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/helpers/last-item.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/routes/application.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/models/session.js",
@@ -360,8 +364,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/import-helper.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/index.html",
 		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/components/session-tile-test.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/models/enrollments-test.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/models/student-test.js"
+		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/models/enrollments-test.js"
 	],
 	"find":
 	{
