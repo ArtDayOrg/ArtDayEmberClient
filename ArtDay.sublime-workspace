@@ -228,17 +228,25 @@
 		"/Users/Dev/Dev/ArtDayEmberClient",
 		"/Users/Dev/Dev/ArtDayEmberClient/app",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/schedule-display",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/student-print-schedule",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/student-selector",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/students-metrics",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/styles",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates",
 		"/Users/Dev/Dev/ArtDayEmberClient/config"
 	],
 	"file_history":
 	[
-		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/student-selector/template.hbs",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/mixins/student-schedule.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/students.js",
+		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/student-selector/template.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/application.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/admin.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/students.hbs",
@@ -272,13 +280,11 @@
 		"/Users/Dev/Library/Application Support/Sublime Text 3/Packages/JSHint Gutter/JSHint.sublime-settings",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/router.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/student.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/tests/integration/components/app-nav-bar-test.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/add.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/edit.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/sessions/session.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/application.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/app/controllers/admin/overview/students.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/helpers/last-item-test.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/pods/components/rosters-print-all/component.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/tests/integration/components/admin-only-test.js",
@@ -363,8 +369,7 @@
 		"/Users/Dev/Dev/ArtDayEmberClient/tests/integration/components/pref-tile-test.js",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/templates/components/import-helper.hbs",
 		"/Users/Dev/Dev/ArtDayEmberClient/app/index.html",
-		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/components/session-tile-test.js",
-		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/models/enrollments-test.js"
+		"/Users/Dev/Dev/ArtDayEmberClient/tests/unit/components/session-tile-test.js"
 	],
 	"find":
 	{
