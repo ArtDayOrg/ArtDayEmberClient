@@ -73,7 +73,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
 				studentCount: studentsForGrade.get('length'),
 				got: {
 					'1': 0,
-
+					'2': 0,
 					'3': 0,
 					'0': 0
 				},
