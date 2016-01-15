@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
             return false;
         }
         return student.get('firstName').startsWith(filterString) || student.get('lastName').startsWith(filterString);
-    }).property('searchFilter', 'model.students', 'model.students.length'),
+    }).property('searchFilter', 'students', 'students.length'),
 
     actions: {
         processKeyUp: function(value) {
