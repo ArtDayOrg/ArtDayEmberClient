@@ -1,23 +1,29 @@
 # Art-day
 
-This web app manages a special event for a school.  An admin uploads a list of students and defines sessions.  The students log in and rank their top 6 preferred sessions.  Once all students set their preferences, the admin sets enrollment.  This runs a customized version of the Gale-Shapley Algorithm, guarenteeing a distribution where no two students would exchange sessions in a single period.  This maximizes happiness for the the highest possible number of students.  
+This web app manages a special event for a school.  It is used in 3 stages.  First, an admin sets up the site by importing a list of students:
 
-This replaces a process where many volunteers would get paper forms from the students, then sit around a table and sort 440 pieces of paper by hand to produce a less than optimal result.  
+Student upload image.
+
+Then the admin sets up the possible sessions:
+
+Session create image.
+
+The students then log in and rank their top 6 preferred sessions, by dragging and dropping tiles representing the sessions. 
+Student Set Preferences image
+
+Once all students set their preferences, the admin sets enrollment.  This runs a customized version of the Gale-Shapley Algorithm, guarenteeing a distribution where no two students would exchange sessions in a single period.  This maximizes happiness for the the highest possible number of students.  This replaces a process where many volunteers would get paper forms from the students, then sit around a table and sort 440 pieces of paper by hand to produce a less than optimal result.  
+
+The students then return to print their schedules:
+
+Student print schedule image
+
+and the admin prints rosters for the instructors of the sessions.
+
+Session roster image
 
 ## Installation
 
-Updating Soon
-
-* `git clone <repository-url>` this repository
-* change into the new directory
-* `npm install`
-* `bower install`
-* 
-* The back end is available at: https://github.com/ArtDayOrg/ArtDayServer
-
-### Deploying
-
-Coming Soon
+We are working on making this app generic enough for other schools with similar needs to use.  Coming soon :)
 
 ### Contributing
 
