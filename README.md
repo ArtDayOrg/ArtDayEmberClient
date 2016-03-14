@@ -8,7 +8,7 @@ Then the admin sets up the possible sessions:
 
 <img src="/screenshots/CreateSessions.png" width="540" />
 
-The students then log in and rank their top 6 preferred sessions, by dragging and dropping tiles representing the sessions. 
+The students then log in and rank their top 6 preferred sessions, by dragging and dropping tiles representing the sessions: 
 <img src="/screenshots/Prefs.png" width="540" />
 
 Once all students set their preferences, the admin sets enrollment.  This runs a customized version of the Gale-Shapley Algorithm, guarenteeing a distribution where no two students would exchange sessions in a single period.  This maximizes happiness for the the highest possible number of students.  This replaces a process where many volunteers would get paper forms from the students, then sit around a table and sort 440 pieces of paper by hand to produce a less than optimal result.  
@@ -17,7 +17,7 @@ The students then return to print their schedules:
 
 <img src="/screenshots/Schedule.png" width="360" />
 
-and the admin prints rosters for the instructors of the sessions.
+and the admin prints rosters for the instructors of the sessions:
 
 <img src="/screenshots/Rosters.png" width="360" />
 
