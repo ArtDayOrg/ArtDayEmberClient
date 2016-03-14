@@ -6,10 +6,10 @@ This web app manages a special event for a school.  It is used in 3 stages.  Fir
 
 Then the admin sets up the possible sessions:
 
-<img src="/screenshots/CreateSessions.png" width="360" />
+<img src="/screenshots/CreateSessions.png" width="540" />
 
 The students then log in and rank their top 6 preferred sessions, by dragging and dropping tiles representing the sessions. 
-<img src="/screenshots/Prefs.png" width="360" />
+<img src="/screenshots/Prefs.png" width="540" />
 
 Once all students set their preferences, the admin sets enrollment.  This runs a customized version of the Gale-Shapley Algorithm, guarenteeing a distribution where no two students would exchange sessions in a single period.  This maximizes happiness for the the highest possible number of students.  This replaces a process where many volunteers would get paper forms from the students, then sit around a table and sort 440 pieces of paper by hand to produce a less than optimal result.  
 
