@@ -60,7 +60,7 @@ export default Ember.Controller.extend(AdminControllerHooks, {
                 var self = this;
                 data.append(fileName, this.get('imageFile'));
                 Ember.$.ajax({
-                    url: window.ArtDay.host + '/api/image',
+                    url: 'http://artday.azurewebsites.net/api/image',
                     data: data,
                     cache: false,
                     contentType: false,
